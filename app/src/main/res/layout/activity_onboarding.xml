@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000941"
-    tools:context=".SplashScreen">
+    tools:context=".Onboarding">
 
     <ImageView
         android:id="@+id/imageView3"
@@ -22,10 +22,12 @@
 
     <Button
         android:id="@+id/but_getS"
-        android:layout_width="126dp"
+        android:layout_width="145dp"
         android:layout_height="66dp"
-        android:backgroundTint="#1A2D6D"
-        android:text="Button"
+        android:backgroundTint="#0026DC"
+        android:fontFamily="@font/inter_font"
+        android:text="Get start"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.463"
