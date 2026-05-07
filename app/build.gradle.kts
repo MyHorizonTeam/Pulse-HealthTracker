@@ -1,17 +1,17 @@
 plugins {
-    alias(libs.plugins.android.application) // Since this here we don't need to add "id("com.android.application")"
+    alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.gms.google-services")
 }
 
 android {
     namespace = "com.example.pulse_healthtracker"
-    compileSdk = 36
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.pulse_healthtracker"
         minSdk = 23
-        targetSdk = 36
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -49,10 +49,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("com.google.firebase:firebase-analytics")
-    implementation(platform("com.google.firebase:firebase-bom:34.12.0"))
-    implementation("com.google.firebase:firebase-auth")
-    implementation("androidx.credentials:credentials:1.3.0")
-    implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
-    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.auth)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.google.id)
 }
