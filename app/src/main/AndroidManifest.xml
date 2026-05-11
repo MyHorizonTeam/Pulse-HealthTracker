@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PulseHealthTracker">
         <activity
+            android:name=".login_test"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -22,19 +25,15 @@
         </activity>
         <activity
             android:name=".Onboarding"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".Login"
             android:exported="false" />
-
         <activity
             android:name=".Register"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"></activity>
         <activity
-        android:name=".medi_home"
+            android:name=".medi_home"
             android:exported="false" />
     </application>
 
