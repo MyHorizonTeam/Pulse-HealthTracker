@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
     id("com.google.gms.google-services")
 }
 
@@ -33,10 +34,6 @@ android {
     buildFeatures {
         viewBinding = true
     }
-}
-
-kotlin {
-    jvmToolchain(11)
 }
 
 dependencies {
