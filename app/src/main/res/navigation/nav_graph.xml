@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/onboardingFragment">
+
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.example.pulse_healthtracker.ui.onboarding.OnboardingFragment"
+        android:label="Onboarding"
+        tools:layout="@layout/fragment_onboarding">
+        <action
+            android:id="@+id/action_onboarding_to_dashboard"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.example.pulse_healthtracker.ui.dashboard.DashboardFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboard_to_findDoctors"
+            app:destination="@id/findDoctorsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/findDoctorsFragment"
+        android:name="com.example.pulse_healthtracker.ui.doctors.FindDoctorsFragment"
+        android:label="Find Doctors"
+        tools:layout="@layout/fragment_find_doctors">
+        <action
+            android:id="@+id/action_findDoctors_to_doctorDetails"
+            app:destination="@id/doctorDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/doctorDetailsFragment"
+        android:name="com.example.pulse_healthtracker.ui.doctors.DoctorDetailsFragment"
+        android:label="Doctor Details"
+        tools:layout="@layout/fragment_doctor_details">
+        <action
+            android:id="@+id/action_doctorDetails_to_chooseDate"
+            app:destination="@id/chooseDateFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/chooseDateFragment"
+        android:name="com.example.pulse_healthtracker.ui.booking.ChooseDateFragment"
+        android:label="Choose Date"
+        tools:layout="@layout/fragment_choose_date">
+        <action
+            android:id="@+id/action_chooseDate_to_registerAppointment"
+            app:destination="@id/registerAppointmentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerAppointmentFragment"
+        android:name="com.example.pulse_healthtracker.ui.booking.RegisterAppointmentFragment"
+        android:label="Register Appointment"
+        tools:layout="@layout/fragment_register_appointment">
+        <action
+            android:id="@+id/action_register_to_success"
+            app:destination="@id/successFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/successFragment"
+        android:name="com.example.pulse_healthtracker.ui.booking.SuccessFragment"
+        android:label="Success"
+        tools:layout="@layout/fragment_success" />
+
+</navigation>
