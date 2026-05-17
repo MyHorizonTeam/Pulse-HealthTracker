@@ -144,6 +144,7 @@
                 android:layout_margin="15dp"
                 app:backgroundTint="#0E164B" /> <!--ems means how long character can fit inside-->
             <TextView
+                android:id="@+id/frgpwd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Forgotten password?"
