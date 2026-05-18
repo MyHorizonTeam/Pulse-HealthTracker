@@ -12,28 +12,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PulseHealthTracker"
         tools:targetApi="31">
-
         <activity
-            android:name=".Onboarding"
+            android:name=".AddMealActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NutStartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".Onboarding"
+            android:exported="false" />
         <activity
             android:name=".SplashActivity"
             android:exported="false" />
-
         <activity
             android:name=".Login"
             android:exported="false" />
-
         <activity
             android:name=".Register"
             android:exported="false" />
-
     </application>
 
 </manifest>
