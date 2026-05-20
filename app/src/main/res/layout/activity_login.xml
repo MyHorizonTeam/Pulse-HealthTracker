@@ -42,115 +42,258 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center|top">
-            <com.google.android.material.button.MaterialButtonToggleGroup
-                android:id="@+id/authToggleGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="18dp"
-                app:selectionRequired="true"
-                app:singleSelection="true">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/logBtn"
-                    android:layout_width="140dp"
-                    android:layout_height="56dp"
-                    android:text="Login"
-                    app:backgroundTint="#4B61F2"
-                    app:cornerRadius="12dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/regBtn"
-                    android:layout_width="140dp"
-                    android:layout_height="56dp"
-                    android:text="Register"
-                    app:cornerRadius="12dp"
-                    app:background="@drawable/btn_border"
-                    app:backgroundTint="#0E164B" />
-
-            </com.google.android.material.button.MaterialButtonToggleGroup>
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnGoogleSignIn"
-                android:layout_width="350dp"
-                android:layout_height="56dp"
-                android:text="Continue With Google"
-                android:textSize="14sp"
-                app:icon="@drawable/ic_google"
-                app:iconTint="@null"
-                app:iconGravity="textStart"
-                app:iconPadding="12dp"
-                app:cornerRadius="8dp"
-                android:backgroundTint="#FFFFFF"
-                android:textColor="#444444"
-                app:strokeColor="#DDDDDD"
-                app:strokeWidth="1dp"
-                android:layout_marginBottom="20dp"/>
-
-            <!-- OR Divider -->
+            <!--Login Layout-->
             <LinearLayout
+                android:id="@+id/logLyt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="20dp">
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"
-                    android:background="@color/black"/>
-
-                <TextView
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:gravity="center|top">
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/authToggleGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="  or continue with email  "
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
+                    android:layout_margin="18dp"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"
-                    android:background="@color/black"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/logBtn"
+                        android:layout_width="140dp"
+                        android:layout_height="56dp"
+                        android:text="Login"
+                        app:backgroundTint="#4B61F2"
+                        app:cornerRadius="12dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/regBtn"
+                        android:layout_width="140dp"
+                        android:layout_height="56dp"
+                        android:text="Register"
+                        app:cornerRadius="12dp"
+                        app:background="@drawable/btn_border"
+                        app:backgroundTint="#0E164B" />
+
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGoogleSignIn"
+                    android:layout_width="350dp"
+                    android:layout_height="56dp"
+                    android:text="Continue With Google"
+                    android:textSize="14sp"
+                    app:icon="@drawable/ic_google"
+                    app:iconTint="@null"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:cornerRadius="8dp"
+                    android:backgroundTint="#FFFFFF"
+                    android:textColor="#444444"
+                    app:strokeColor="#DDDDDD"
+                    app:strokeWidth="1dp"
+                    android:layout_marginBottom="20dp"/>
+
+                <!-- OR Divider -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="20dp">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"
+                        android:background="@color/black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="  or continue with email  "
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"
+                        android:background="@color/black"/>
+                </LinearLayout>
+                <EditText
+                    android:id="@+id/edtxtEmail"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edtxtlog"
+                    android:textSize="20sp"
+                    android:hint="Enter your email"
+                    android:padding="8dp"
+                    android:ems="10"
+                    android:inputType="textEmailAddress" />
+
+                <EditText
+                    android:id="@+id/edtxtPwd"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:background="@drawable/edtxtlog"
+                    android:layout_margin="20dp"
+                    android:padding="8dp"
+                    android:hint="Enter password"
+                    android:ems="10"
+                    android:inputType="textPassword" />
+
+                <Button
+                    android:id="@+id/btnLog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="41dp"
+                    android:background="@drawable/logbtn"
+                    android:text="Log in"
+                    android:layout_margin="15dp"
+                    app:backgroundTint="#0E164B" /> <!--ems means how long character can fit inside-->
+                <TextView
+                    android:id="@+id/frgpwd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Forgotten password?"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/inter_font"/>
             </LinearLayout>
-            <EditText
-                android:id="@+id/edtxtEmail"
-                android:layout_width="330dp"
+                <!--Register Layout-->
+            <LinearLayout
+                android:id="@+id/regLyt"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edtxtlog"
-                android:textSize="20sp"
-                android:hint="Enter your email"
-                android:padding="8dp"
-                android:ems="10"
-                android:inputType="textEmailAddress" />
+                android:visibility="visible"
+                android:orientation="vertical"
+                android:gravity="center|top">
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/authToggleGroupR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="18dp"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
 
-            <EditText
-                android:id="@+id/edtxtPwd"
-                android:layout_width="330dp"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:background="@drawable/edtxtlog"
-                android:layout_margin="20dp"
-                android:padding="8dp"
-                android:hint="Enter password"
-                android:ems="10"
-                android:inputType="textPassword" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/logBtnR"
+                        android:layout_width="140dp"
+                        android:layout_height="56dp"
+                        android:text="Login"
+                        app:background="@drawable/btn_border"
+                        app:backgroundTint="#0E164B"
+                        app:cornerRadius="12dp" />
 
-            <Button
-                android:id="@+id/btnLog"
-                android:layout_width="wrap_content"
-                android:layout_height="41dp"
-                android:background="@drawable/logbtn"
-                android:text="Log in"
-                android:layout_margin="15dp"
-                app:backgroundTint="#0E164B" /> <!--ems means how long character can fit inside-->
-            <TextView
-                android:id="@+id/frgpwd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Forgotten password?"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                android:fontFamily="@font/inter_font"/>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/regBtnR"
+                        android:layout_width="140dp"
+                        android:layout_height="56dp"
+                        app:backgroundTint="#4B61F2"
+                        android:text="Register"
+                        app:cornerRadius="12dp"
+                        />
+
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGoogleSignInR"
+                    android:layout_width="350dp"
+                    android:layout_height="56dp"
+                    android:text="Continue With Google"
+                    android:textSize="14sp"
+                    app:icon="@drawable/ic_google"
+                    app:iconTint="@null"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:cornerRadius="8dp"
+                    android:backgroundTint="#FFFFFF"
+                    android:textColor="#444444"
+                    app:strokeColor="#DDDDDD"
+                    app:strokeWidth="1dp"
+                    android:layout_marginBottom="20dp"/>
+
+                <!-- OR Divider -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="20dp">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"
+                        android:background="@color/black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="  or continue with email  "
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"
+                        android:background="@color/black"/>
+                </LinearLayout>
+                <EditText
+                    android:id="@+id/edtxtName"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edtxtlog"
+                    android:textSize="20sp"
+                    android:hint="Enter your name"
+                    android:layout_marginBottom="10dp"
+                    android:padding="8dp"
+                    android:ems="10"
+                    android:inputType="textEmailAddress" />
+                <EditText
+                    android:id="@+id/edtxtEmailR"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edtxtlog"
+                    android:textSize="20sp"
+                    android:hint="Enter your email"
+                    android:layout_margin="10dp"
+                    android:padding="8dp"
+                    android:ems="10"
+                    android:inputType="textEmailAddress" />
+
+                <EditText
+                    android:id="@+id/edtxtPwdR"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:background="@drawable/edtxtlog"
+                    android:layout_margin="10dp"
+                    android:padding="8dp"
+                    android:hint="Enter password"
+                    android:ems="10"
+                    android:inputType="textPassword" />
+                <EditText
+                    android:id="@+id/edtcnpwd"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textSize="20dp"
+                    android:background="@drawable/edtxtlog"
+                    android:padding="8dp"
+                    android:hint="Confirm password" />
+
+                <Button
+                    android:id="@+id/btnReg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="41dp"
+                    android:background="@drawable/logbtn"
+                    android:text="Register"
+                    android:layout_margin="15dp"
+                    app:backgroundTint="#0E164B" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
     </ScrollView>
