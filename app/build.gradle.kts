@@ -1,14 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    id("com.google.gms.google-services")
 }
 
 android {
     namespace = "com.example.pulse_healthtracker"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.pulse_healthtracker"
@@ -30,16 +28,35 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21)
+        }
+    }
+    buildFeatures {
+        viewBinding = true
     }
 }
 
 dependencies {
+    implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    //Firebase
+    implementation("com.google.firebase:firebase-analytics")
+    implementation(platform("com.google.firebase:firebase-bom:34.12.0"))
+    implementation("com.google.firebase:firebase-auth")
+
+    implementation("androidx.credentials:credentials:1.3.0")
+    implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
 }
