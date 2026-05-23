@@ -1,83 +1,57 @@
 package com.example.pulse_healthtracker
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.util.Patterns
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import android.widget.*
-import android.content.Intent
-import android.view.View
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.android.material.button.MaterialButton
-import com.google.firebase.auth.FirebaseAuth
 import com.google.android.material.button.MaterialButtonToggleGroup
-import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.auth
-import com.google.firebase.Firebase
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-import android.util.Log
-import com.google.firebase.auth.FirebaseUser
-import android.text.TextUtils
-import org.w3c.dom.Text
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 
 class Login : AppCompatActivity() {
 
-    // See: https://developer.android.com/training/basics/intents/result
     private lateinit var auth: FirebaseAuth
+
     private val signInLauncher = registerForActivityResult(
-        FirebaseAuthUIActivityResultContract(),
+        FirebaseAuthUIActivityResultContract()
     ) { res ->
-        this.onSignInResult(res)
-    }
-    private fun createSignInIntent() {
-        val providers = arrayListOf(
-            AuthUI.IdpConfig.EmailBuilder().build(),
-            AuthUI.IdpConfig.GoogleBuilder().build(),
-        )
-        // Create and launch sign-in intent
-        /*btnGoogleSignIn.setOnClickListener {
-        val signInIntent = AuthUI.getInstance()
-            .createSignInIntentBuilder()
-            .setAvailableProviders(providers)
-            .build()
-        signInLauncher.launch(signInIntent)
-    }*/
-
-        val signInIntent = AuthUI.getInstance()
-            .createSignInIntentBuilder()
-            .setAvailableProviders(providers)
-            .build()
-        signInLauncher.launch(signInIntent)
+        onSignInResult(res)
     }
 
+    private lateinit var loginButton: Button
+    private lateinit var registerButton: Button
+    private lateinit var googleLoginButton: MaterialButton
+    private lateinit var googleRegisterButton: MaterialButton
+    private lateinit var forgotPasswordText: TextView
+    private lateinit var toggleGroup: MaterialButtonToggleGroup
+    private lateinit var logLayout: LinearLayout
+    private lateinit var regLayout: LinearLayout
+    private lateinit var loginEmail: EditText
+    private lateinit var loginPassword: EditText
+    private lateinit var regName: EditText
+    private lateinit var regEmail: EditText
+    private lateinit var regPassword: EditText
+    private lateinit var regConfirmPassword: EditText
 
-    private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
-        val response = result.idpResponse
-        if (result.resultCode == RESULT_OK) {
-            // Successfully signed in
-            val user = FirebaseAuth.getInstance().currentUser
-            Toast.makeText(this, "Succesfully signed in", Toast.LENGTH_SHORT).show()
-
-        } else {
-            Toast.makeText(this, "Sign in failed", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-
-    public override fun onStart() {
+    override fun onStart() {
         super.onStart()
-        // Check is the user logged in
-        val currentUser = auth.currentUser
-        if (currentUser!=null){
-            reload()
-            //startActivity(Intent(this, profile_pg::class.java))
-            //finish()
+        if (::auth.isInitialized && auth.currentUser != null) {
+            startActivity(Intent(this, profile_pg::class.java))
+            finish()
         }
     }
 
@@ -85,41 +59,68 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
-        auth = Firebase.auth
-        val lgBtn = findViewById<Button>(R.id.btnLog)
-        val frgpwd = findViewById<TextView>(R.id.frgpwd)
-        val togglegrp = findViewById<MaterialButtonToggleGroup>(R.id.authToggleGroup)
-        val logLyt = findViewById<LinearLayout>(R.id.logLyt)
-        val regLyt = findViewById<LinearLayout>(R.id.regLyt)
-        val regBtn = findViewById<Button>(R.id.btnReg)
-        var name_U = findViewById<EditText>(R.id.edtxtName)
-        val emailNew = findViewById<EditText>(R.id.edtxtEmailR)
-        var pwd_N = findViewById<EditText>(R.id.edtxtPwdR)
-        var pwd_C = findViewById<EditText>(R.id.edtcnpwd)
 
-        lgBtn.setOnClickListener{
+        auth = FirebaseAuth.getInstance()
+
+        loginButton = findViewById(R.id.btnLog)
+        registerButton = findViewById(R.id.btnReg)
+        forgotPasswordText = findViewById(R.id.frgpwd)
+        toggleGroup = findViewById(R.id.authToggleGroup)
+        logLayout = findViewById(R.id.logLyt)
+        regLayout = findViewById(R.id.regLyt)
+        googleLoginButton = findViewById(R.id.btnGoogleSignIn)
+        googleRegisterButton = findViewById(R.id.btnGoogleSignInR)
+        loginEmail = findViewById(R.id.edtxtEmail)
+        loginPassword = findViewById(R.id.edtxtPwd)
+        regName = findViewById(R.id.edtxtName)
+        regEmail = findViewById(R.id.edtxtEmailR)
+        regPassword = findViewById(R.id.edtxtPwdR)
+        regConfirmPassword = findViewById(R.id.edtcnpwd)
+
+        toggleGroup.check(R.id.regswitch)
+        logLayout.visibility = View.GONE
+        regLayout.visibility = View.VISIBLE
+
+        loginButton.setOnClickListener {
             performLogin()
         }
-        regBtn.setOnClickListener{
-            createAccount(name_U,emailNew,pwd_N,pwd_C)
+
+        registerButton.setOnClickListener {
+            createAccount(
+                regName.text.toString().trim(),
+                regEmail.text.toString().trim(),
+                regPassword.text.toString(),
+                regConfirmPassword.text.toString()
+            )
         }
 
-        togglegrp.addOnButtonCheckedListener { group, checkedId, isChecked ->
+        googleLoginButton.setOnClickListener {
+            createSignInIntent()
+        }
+
+        googleRegisterButton.setOnClickListener {
+            createSignInIntent()
+        }
+
+        forgotPasswordText.setOnClickListener {
+            Toast.makeText(this, "Forgot password flow not added yet", Toast.LENGTH_SHORT).show()
+        }
+
+        toggleGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
                 when (checkedId) {
                     R.id.logswitch -> {
-                        logLyt.visibility = View.VISIBLE
-                        regLyt.visibility = View.GONE
+                        logLayout.visibility = View.VISIBLE
+                        regLayout.visibility = View.GONE
                     }
 
                     R.id.regswitch -> {
-                        logLyt.visibility = View.GONE
-                        regLyt.visibility = View.VISIBLE
+                        logLayout.visibility = View.GONE
+                        regLayout.visibility = View.VISIBLE
                     }
                 }
             }
         }
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -127,164 +128,186 @@ class Login : AppCompatActivity() {
             insets
         }
     }
-    // Sign in
-        private fun performLogin(){
-        var emailU = findViewById<EditText>(R.id.edtxtEmail)
-        val emailS = emailU.text.toString().trim()
-        val pwd_U = findViewById<EditText>(R.id.edtxtPwd)
-        val pwd_S = pwd_U.text.toString().trim()
-        if (emailS.isEmpty()){
-            emailU.error = "Email is required"
+
+    private fun createSignInIntent() {
+        val providers = arrayListOf(
+            AuthUI.IdpConfig.EmailBuilder().build(),
+            AuthUI.IdpConfig.GoogleBuilder().build()
+        )
+
+        val signInIntent = AuthUI.getInstance()
+            .createSignInIntentBuilder()
+            .setAvailableProviders(providers)
+            .build()
+
+        signInLauncher.launch(signInIntent)
+    }
+
+    private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
+        if (result.resultCode == RESULT_OK) {
+            saveLoginState()
+            Toast.makeText(this, getString(R.string.successfully_signed_in), Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, profile_pg::class.java))
+            finish()
+        } else {
+            Toast.makeText(this, "Sign in failed", Toast.LENGTH_SHORT).show()
+            Log.w(TAG, "FirebaseUI sign-in failed", result.idpResponse?.error)
+        }
+    }
+
+    private fun performLogin() {
+        val email = loginEmail.text.toString().trim()
+        val password = loginPassword.text.toString()
+
+        if (email.isEmpty()) {
+            loginEmail.error = "Email is required"
+            loginEmail.requestFocus()
             return
         }
-        if (pwd_S.isEmpty()){
-            pwd_U.error="Password is required"
+        if (!isValidEmail(email)) {
+            loginEmail.error = "Please enter a valid email address"
+            loginEmail.requestFocus()
             return
         }
-        val btnLog = findViewById<Button>(R.id.btnLog)
-        btnLog.isEnabled = false
-        btnLog.text = "Loggin in..."
-        auth.signInWithEmailAndPassword(emailS, pwd_S)
+        if (password.isEmpty()) {
+            loginPassword.error = "Password is required"
+            loginPassword.requestFocus()
+            return
+        }
+
+        loginButton.isEnabled = false
+        loginButton.setText(R.string.logging_in)
+
+        auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
-                // Re enable btn
-                btnLog.isEnabled = true
-                btnLog.text = "Log in"
+                loginButton.isEnabled = true
+                loginButton.setText(R.string.log_in)
+
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success")
-                    saveLoginState(true)
-                    //val user = auth.currentUser
-                    val intent = Intent(this, profile_pg::class.java)
-                    startActivity(intent)
+                    saveLoginState()
+                    startActivity(Intent(this, profile_pg::class.java))
                     finish()
                 } else {
-                    // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    // Show user-friendly error message
                     val errorMessage = getFriendlyErrorMessage(task.exception?.message)
-                    Toast.makeText(
-                        this@Login,
-                        errorMessage,
-                        Toast.LENGTH_SHORT,
-                    ).show()
-                    updateUI(null)
+                    Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
                 }
             }
     }
-    //Save Login state
-    private fun saveLoginState(isLoggedIn: Boolean) {
+
+    private fun saveLoginState() {
         val sharedPref = getSharedPreferences("app_prefs", MODE_PRIVATE)
         with(sharedPref.edit()) {
-            putBoolean("is_logged_in", isLoggedIn)
-            if (isLoggedIn) {
-                putString("user_email", auth.currentUser?.email)
-                putString("user_uid", auth.currentUser?.uid)
-            }
+            putBoolean("is_logged_in", true)
+            putString("user_email", auth.currentUser?.email)
+            putString("user_uid", auth.currentUser?.uid)
             apply()
         }
     }
-    // Helper function for user-friendly errors
+
     private fun getFriendlyErrorMessage(errorMessage: String?): String {
         return when {
-            errorMessage?.contains("no user record") == true ->
+            errorMessage?.contains("no user record", ignoreCase = true) == true ->
                 "No account found with this email"
-            errorMessage?.contains("password is invalid") == true ->
+            errorMessage?.contains("password is invalid", ignoreCase = true) == true ->
                 "Incorrect password. Please try again."
-            errorMessage?.contains("network error") == true ->
+            errorMessage?.contains("network error", ignoreCase = true) == true ->
                 "Network error. Check your connection."
             else -> "Authentication failed. Please try again."
         }
     }
-    // Register new user
-    private fun createAccount(fullname:String,email:String,password:String,confirmpassword:String) {
-        // Validation
+
+    private fun isValidEmail(email: String): Boolean {
+        return Patterns.EMAIL_ADDRESS.matcher(email).matches()
+    }
+
+    private fun createAccount(fullname: String, email: String, password: String, confirmPassword: String) {
         when {
-            TextUtils.isEmpty(fullName) -> {
-                etFullName.error = "Full name is required"
-                etFullName.requestFocus()
+            fullname.isBlank() -> {
+                regName.error = "Full name is required"
+                regName.requestFocus()
                 return
             }
-            TextUtils.isEmpty(email) -> {
-                etEmail.error = "Email is required"
-                etEmail.requestFocus()
+
+            email.isBlank() -> {
+                regEmail.error = "Email is required"
+                regEmail.requestFocus()
                 return
             }
+
             !isValidEmail(email) -> {
-                etEmail.error = "Please enter a valid email address"
-                etEmail.requestFocus()
+                regEmail.error = "Please enter a valid email address"
+                regEmail.requestFocus()
                 return
             }
-            TextUtils.isEmpty(password) -> {
-                etPassword.error = "Password is required"
-                etPassword.requestFocus()
+
+            password.isBlank() -> {
+                regPassword.error = "Password is required"
+                regPassword.requestFocus()
                 return
             }
+
             password.length < 6 -> {
-                etPassword.error = "Password must be at least 6 characters"
-                etPassword.requestFocus()
+                regPassword.error = "Password must be at least 6 characters"
+                regPassword.requestFocus()
                 return
             }
-            TextUtils.isEmpty(confirmPassword) -> {
-                etConfirmPassword.error = "Please confirm your password"
-                etConfirmPassword.requestFocus()
+
+            confirmPassword.isBlank() -> {
+                regConfirmPassword.error = "Please confirm your password"
+                regConfirmPassword.requestFocus()
                 return
             }
+
             password != confirmPassword -> {
-                etConfirmPassword.error = "Passwords do not match"
-                etConfirmPassword.requestFocus()
+                regConfirmPassword.error = "Passwords do not match"
+                regConfirmPassword.requestFocus()
                 return
             }
         }
+
+        registerButton.isEnabled = false
+        registerButton.setText(R.string.creating_account)
+
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
+                registerButton.isEnabled = true
+                registerButton.setText(R.string.register)
+
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmail:success")
-                    val user = auth.currentUser
-                    updateUI(user)
+                    val profileUpdates = UserProfileChangeRequest.Builder()
+                        .setDisplayName(fullname)
+                        .build()
+
+                    auth.currentUser?.updateProfile(profileUpdates)
+                        ?.addOnCompleteListener { profileTask ->
+                            if (profileTask.isSuccessful) {
+                                Log.d(TAG, "User profile updated.")
+                            }
+                        }
+
+                    saveLoginState()
+                    sendEmailVerification()
+                    startActivity(Intent(this, profile_pg::class.java))
+                    finish()
                 } else {
-                    // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext,
-                        "Authentication failed.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
-                    updateUI(null)
+                    Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
                 }
             }
-
     }
-    // Email verification
+
     private fun sendEmailVerification() {
-
-        val user = auth.currentUser!!
+        val user = auth.currentUser ?: return
         user.sendEmailVerification()
-            .addOnCompleteListener(this) { task ->
-                // Email Verification sent
+            .addOnCompleteListener(this) {
+                Toast.makeText(this, getString(R.string.verification_email_sent), Toast.LENGTH_SHORT).show()
             }
-
-    }
-    private fun updateUI(user: FirebaseUser?) {
     }
 
-    private fun reload() {
-    }
     companion object {
         private const val TAG = "EmailPassword"
-        private const val RC_SIGN_IN = 100
     }
-
-    private fun signOut() {
-        AuthUI.getInstance()
-            .signOut(this)
-            .addOnCompleteListener {
-                // ...
-            }
-
-    }
-
-
-
-        }
-
+}
