@@ -18,4 +18,6 @@
     <string name="step_prog">5250/10000</string>
     <string name="session">3/5</string>
     <string name="water">5/20</string>
+    <string name="goal">"Goals &amp; target"</string>
+    <string name="privacy">Privacy &amp; Data</string>
 </resources>
