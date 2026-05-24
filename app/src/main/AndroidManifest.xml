@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PulseHealthTracker">
         <activity
+            android:name=".ReminderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditMedicineActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddMedicineActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".medi_splash"
             android:exported="false" />
         <activity
