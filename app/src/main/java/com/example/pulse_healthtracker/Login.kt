@@ -50,7 +50,7 @@ class Login : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         if (::auth.isInitialized && auth.currentUser != null) {
-            startActivity(Intent(this, profile_pg::class.java))
+            startActivity(Intent(this, ProfilePg::class.java))
             finish()
         }
     }
@@ -147,7 +147,7 @@ class Login : AppCompatActivity() {
         if (result.resultCode == RESULT_OK) {
             saveLoginState()
             Toast.makeText(this, getString(R.string.successfully_signed_in), Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, profile_pg::class.java))
+            startActivity(Intent(this, ProfilePg::class.java))
             finish()
         } else {
             Toast.makeText(this, "Sign in failed", Toast.LENGTH_SHORT).show()
@@ -186,7 +186,7 @@ class Login : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Log.d(TAG, "signInWithEmail:success")
                     saveLoginState()
-                    startActivity(Intent(this, profile_pg::class.java))
+                    startActivity(Intent(this, ProfilePg::class.java))
                     finish()
                 } else {
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
@@ -290,7 +290,7 @@ class Login : AppCompatActivity() {
 
                     saveLoginState()
                     sendEmailVerification()
-                    startActivity(Intent(this, profile_pg::class.java))
+                    startActivity(Intent(this, ProfilePg::class.java))
                     finish()
                 } else {
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
