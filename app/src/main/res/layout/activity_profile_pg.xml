@@ -112,10 +112,15 @@
                     <LinearLayout
                         android:layout_width="165dp"
                         android:layout_height="72dp"
-                        android:layout_marginLeft="13dp"
+                        android:layout_marginStart="13dp"
                         android:layout_marginTop="15dp"
                         android:background="@drawable/txtbg"
-                        android:orientation="vertical">
+                        android:orientation="vertical" >
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/txtbg"
+                            android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -126,6 +131,7 @@
                             android:text="@string/weight"
                             android:textColor="@color/white"
                             android:textSize="24sp" />
+                        </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
