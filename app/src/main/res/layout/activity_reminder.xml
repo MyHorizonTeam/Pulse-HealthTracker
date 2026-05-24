@@ -138,7 +138,6 @@
                     android:id="@+id/ivPillIcon1"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:src="@drawable/ic_menu_report_image"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -170,7 +169,6 @@
                     android:id="@+id/ivNotificationBell1"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@drawable/ic_clock"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -200,7 +198,6 @@
                     android:id="@+id/ivPillIcon2"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:src="@drawable/ic_menu_report_image"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -232,7 +229,6 @@
                     android:id="@+id/ivNotificationBell2"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@drawable/ic_clock"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -255,19 +251,19 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <FrameLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1">
-            <ImageView android:layout_width="30dp" android:layout_height="30dp" android:layout_gravity="center" android:src="@drawable/ic_add_white" />
+            <ImageView android:layout_width="30dp" android:layout_height="30dp" android:layout_gravity="center"  />
         </FrameLayout>
         <FrameLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1">
-            <ImageView android:layout_width="30dp" android:layout_height="30dp" android:layout_gravity="center" android:src="@drawable/ic_add_white" />
+            <ImageView android:layout_width="30dp" android:layout_height="30dp" android:layout_gravity="center"  />
         </FrameLayout>
         <FrameLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1">
-            <ImageView android:layout_width="30dp" android:layout_height="30dp" android:layout_gravity="center" android:src="@drawable/ic_add_white" />
+            <ImageView android:layout_width="30dp" android:layout_height="30dp" android:layout_gravity="center"  />
         </FrameLayout>
         <FrameLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1">
-            <ImageView android:layout_width="30dp" android:layout_height="30dp" android:layout_gravity="center" android:src="@drawable/ic_add_white" />
+            <ImageView android:layout_width="30dp" android:layout_height="30dp" android:layout_gravity="center"  />
         </FrameLayout>
         <FrameLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1">
-            <ImageView android:layout_width="30dp" android:layout_height="30dp" android:layout_gravity="center" android:src="@drawable/ic_add_white" />
+            <ImageView android:layout_width="30dp" android:layout_height="30dp" android:layout_gravity="center" />
         </FrameLayout>
 
     </LinearLayout>
