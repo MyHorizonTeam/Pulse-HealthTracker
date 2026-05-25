@@ -63,4 +63,12 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-database")
     implementation("com.google.firebase:firebase-analytics")
+    // Firebase Storage
+    implementation("com.google.firebase:firebase-storage:20.3.0")
+// Firebase Firestore (or Realtime Database)
+    implementation("com.google.firebase:firebase-firestore:24.10.0")
+// Image loading library (Glide)
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+// For cropping image (optional but recommended)
+    implementation("com.github.yalantis:ucrop:2.2.8")
 }
