@@ -21,6 +21,9 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import java.util.UUID
 import android.provider.MediaStore
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.SetOptions
 
 class ProfilePg : AppCompatActivity() {
     private lateinit var lgOut: Button
@@ -31,6 +34,7 @@ class ProfilePg : AppCompatActivity() {
     private lateinit var storageRef: StorageReference
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
+    private lateinit var database: DatabaseReference
 
     private var selectedImageUri: Uri? = null
     private val PICK_IMAGE_REQUEST = 1
@@ -45,6 +49,7 @@ class ProfilePg : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
         storageRef = FirebaseStorage.getInstance().reference.child("profile_pic")
+        database = FirebaseDatabase.getInstance().reference
 
         // Initialize view
         profile_pic = findViewById(R.id.profile_pic)
@@ -142,20 +147,13 @@ class ProfilePg : AppCompatActivity() {
     }
     private fun saveImageUrlToDatabase(userId: String, imageUrl: String) {
         // Save to Firestore
-        val userMap = hashMapOf(
-            "profilePicUrl" to imageUrl,
-            "profilePicUpdatedAt" to System.currentTimeMillis()
-        )
+        database.child("users").child(userId).child("profilePicUrl").setValue(imageUrl).addOnSuccessListener {
+            loadProfilePicture()
+            progressBar.visibility = android.view.View.GONE
+            profile_pic.isEnabled = true
+            Toast.makeText(this, "Profile picture updated!",Toast.LENGTH_SHORT).show()
+        }
 
-        firestore.collection("users").document(userId)
-            .update(userMap)
-            .addOnSuccessListener {
-                // Load image into ImageView
-                loadProfilePicture()
-                progressBar.visibility = android.view.View.GONE
-                profile_pic.isEnabled = true
-                Toast.makeText(this, "Profile picture updated!", Toast.LENGTH_SHORT).show()
-            }
             .addOnFailureListener { e ->
                 progressBar.visibility = android.view.View.GONE
                 profile_pic.isEnabled = true
@@ -165,7 +163,7 @@ class ProfilePg : AppCompatActivity() {
 
     private fun loadProfilePicture() {
         val userId = auth.currentUser?.uid ?: return
-
+        /*
         firestore.collection("users").document(userId)
             .get()
             .addOnSuccessListener { document ->
@@ -185,6 +183,18 @@ class ProfilePg : AppCompatActivity() {
             }
             .addOnFailureListener {
                 profile_pic.setImageResource(R.drawable.default_avatar)
+            } */
+        database.child("users").child(userId).child("profilePicUrl")
+            .get()
+            .addOnSuccessListener { snapshot ->
+                val imageUrl = snapshot.getValue(String::class.java)
+                if (!imageUrl.isNullOrEmpty()) {
+                    Glide.with(this)
+                        .load(imageUrl)
+                        .circleCrop()
+                        .placeholder(R.drawable.default_avatar)
+                        .into(profile_pic)
+                }
             }
     }
 

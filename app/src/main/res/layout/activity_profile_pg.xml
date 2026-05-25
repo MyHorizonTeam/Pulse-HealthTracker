@@ -48,6 +48,7 @@
             android:layout_height="match_parent"
             android:contentDescription="Profile pic"
             tools:srcCompat="@tools:sample/avatars" />
+
     </androidx.cardview.widget.CardView>
 
     <!-- Email — fixed below profile pic -->
@@ -85,34 +86,34 @@
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:fillViewport="true"
         android:background="@drawable/scrv_gradiant"
-        app:layout_constraintTop_toBottomOf="@id/userName"
+        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@id/bottomNavBar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/userName">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <!-- Stat cards row 1 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="12dp">
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="72dp"
-                    android:layout_weight="1"
                     android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:background="@drawable/txtbg"
-                    android:orientation="vertical"
                     android:gravity="center"
+                    android:orientation="vertical"
                     android:padding="8dp">
 
                     <TextView
@@ -121,24 +122,24 @@
                         android:text="@string/weight"
                         android:textColor="@color/white"
                         android:textSize="22sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Weight"
                         android:textColor="@color/white"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="72dp"
-                    android:layout_weight="1"
                     android:layout_marginStart="8dp"
+                    android:layout_weight="1"
                     android:background="@drawable/txtbg"
-                    android:orientation="vertical"
                     android:gravity="center"
+                    android:orientation="vertical"
                     android:padding="8dp">
 
                     <TextView
@@ -147,32 +148,33 @@
                         android:text="@string/steps"
                         android:textColor="@color/white"
                         android:textSize="22sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Steps"
                         android:textColor="@color/white"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
             <!-- Stat cards row 2 -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="12dp">
+                android:layout_marginBottom="12dp"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="72dp"
-                    android:layout_weight="1"
                     android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:background="@drawable/txtbg"
-                    android:orientation="vertical"
                     android:gravity="center"
+                    android:orientation="vertical"
                     android:padding="8dp">
 
                     <TextView
@@ -181,24 +183,24 @@
                         android:text="@string/sleep_hr"
                         android:textColor="@color/white"
                         android:textSize="22sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Avg Sleep"
                         android:textColor="@color/white"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="72dp"
-                    android:layout_weight="1"
                     android:layout_marginStart="8dp"
+                    android:layout_weight="1"
                     android:background="@drawable/txtbg"
-                    android:orientation="vertical"
                     android:gravity="center"
+                    android:orientation="vertical"
                     android:padding="8dp">
 
                     <TextView
@@ -207,14 +209,14 @@
                         android:text="@string/bmi"
                         android:textColor="@color/white"
                         android:textSize="22sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="BMI"
                         android:textColor="@color/white"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -225,7 +227,7 @@
                 android:layout_marginBottom="8dp"
                 android:text="Weekly goal progress"
                 android:textColor="@color/white"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -256,21 +258,21 @@
                             android:max="10000"
                             android:progress="5750"
                             android:progressBackgroundTint="@color/white"
-                            android:progressTint="@color/darkblue"/>
+                            android:progressTint="@color/darkblue" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Steps"
-                            android:textSize="14sp"
-                            android:textColor="@color/white"/>
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/step_prog"
-                            android:textSize="11sp"
-                            android:textColor="@color/white"/>
+                            android:textColor="@color/white"
+                            android:textSize="11sp" />
                     </LinearLayout>
 
                     <!-- Right — horizontal progress bars -->
@@ -286,8 +288,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Workout session"
-                            android:textSize="12sp"
-                            android:textColor="@color/white"/>
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
 
                         <ProgressBar
                             android:id="@+id/progressBar3"
@@ -298,14 +300,14 @@
                             android:max="5"
                             android:progress="3"
                             android:progressBackgroundTint="@color/white"
-                            android:progressTint="@color/darkblue"/>
+                            android:progressTint="@color/darkblue" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Water intake"
-                            android:textSize="12sp"
-                            android:textColor="@color/white"/>
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
 
                         <ProgressBar
                             android:id="@+id/progressBar4"
@@ -315,7 +317,7 @@
                             android:max="20"
                             android:progress="5"
                             android:progressBackgroundTint="@color/white"
-                            android:progressTint="@color/darkblue"/>
+                            android:progressTint="@color/darkblue" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -331,7 +333,7 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 app:backgroundTint="@color/darkblue"
-                app:icon="@drawable/outline_account_circle_24"/>
+                app:icon="@drawable/outline_account_circle_24" />
 
             <Button
                 android:layout_width="match_parent"
@@ -344,7 +346,7 @@
                 android:textStyle="bold"
                 app:backgroundTint="@color/darkblue"
                 app:icon="@drawable/goal"
-                app:iconSize="24dp"/>
+                app:iconSize="24dp" />
 
             <Button
                 android:layout_width="match_parent"
@@ -357,7 +359,7 @@
                 android:textStyle="bold"
                 app:backgroundTint="@color/darkblue"
                 app:icon="@drawable/settings"
-                app:iconSize="24dp"/>
+                app:iconSize="24dp" />
 
             <Button
                 android:layout_width="match_parent"
@@ -370,7 +372,7 @@
                 android:textStyle="bold"
                 app:backgroundTint="@color/darkblue"
                 app:icon="@drawable/privacy"
-                app:iconSize="24dp"/>
+                app:iconSize="24dp" />
 
         </LinearLayout>
     </ScrollView>
@@ -472,5 +474,19 @@
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBarL"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="184dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.826"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.254"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
