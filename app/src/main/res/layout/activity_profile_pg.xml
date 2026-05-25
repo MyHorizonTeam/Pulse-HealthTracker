@@ -52,7 +52,7 @@
 
     <!-- Email — fixed below profile pic -->
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/email_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
@@ -67,7 +67,7 @@
 
     <!-- Name — fixed below email -->
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -78,7 +78,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView2" />
+        app:layout_constraintTop_toBottomOf="@id/email_1" />
 
     <!-- ScrollView — fills space between name and bottom nav -->
     <ScrollView
@@ -87,7 +87,7 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         android:background="@drawable/scrv_gradiant"
-        app:layout_constraintTop_toBottomOf="@id/textView3"
+        app:layout_constraintTop_toBottomOf="@id/userName"
         app:layout_constraintBottom_toTopOf="@id/bottomNavBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -400,7 +400,7 @@
                 app:backgroundTint="@color/litebg"
                 app:icon="@drawable/medication"
                 app:iconGravity="textStart"
-                app:iconSize="30dp"
+                app:iconSize="40dp"
                 app:iconTint="@color/black"
                 app:strokeColor="@color/black"
                 app:strokeWidth="1dp"/>
@@ -413,7 +413,7 @@
                 app:backgroundTint="@color/litebg"
                 app:icon="@drawable/activity"
                 app:iconGravity="textStart"
-                app:iconSize="30dp"
+                app:iconSize="40dp"
                 app:iconTint="@color/black"
                 app:strokeColor="@color/black"
                 app:strokeWidth="1dp"/>
@@ -426,7 +426,7 @@
                 app:backgroundTint="@color/litebg"
                 app:icon="@drawable/nutrition"
                 app:iconGravity="textStart"
-                app:iconSize="30dp"
+                app:iconSize="40dp"
                 app:iconTint="@color/black"
                 app:strokeColor="@color/black"
                 app:strokeWidth="1dp"/>
@@ -439,7 +439,7 @@
                 app:backgroundTint="@color/litebg"
                 app:icon="@drawable/doc"
                 app:iconGravity="textStart"
-                app:iconSize="30dp"
+                app:iconSize="40dp"
                 app:iconTint="@color/black"
                 app:strokeColor="@color/black"
                 app:strokeWidth="1dp"/>
@@ -452,7 +452,7 @@
                 app:backgroundTint="@color/litebg"
                 app:icon="@drawable/mental_icon"
                 app:iconGravity="textStart"
-                app:iconSize="30dp"
+                app:iconSize="40dp"
                 app:iconTint="@color/black"
                 app:strokeColor="@color/black"
                 app:strokeWidth="1dp"/>
@@ -465,7 +465,7 @@
                 app:backgroundTint="@color/litebg"
                 app:icon="@drawable/outline_account_circle_24"
                 app:iconGravity="textStart"
-                app:iconSize="30dp"
+                app:iconSize="40dp"
                 app:iconTint="@color/black"
                 app:strokeColor="@color/black"
                 app:strokeWidth="1dp"/>
