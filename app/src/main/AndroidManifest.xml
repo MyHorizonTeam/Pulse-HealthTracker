@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PulseHealthTracker">
         <activity
+            android:name=".Privacy"
+            android:exported="false" />
+        <activity
             android:name=".Settings"
             android:exported="false" />
         <activity
