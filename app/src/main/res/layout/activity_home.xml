@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_mood">
+
+    <!-- Scrollable content -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layoutForYou"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- ===== HEADER SECTION ===== -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="@drawable/bg_header_blue"
+                android:padding="20dp">
+
+                <ImageView
+                    android:id="@+id/ivMenu"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:src="@drawable/ic_menu"
+                    app:tint="#FFFFFF" />
+
+                <ImageView
+                    android:id="@+id/ivAvatar"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/bg_avatar_border"
+                    android:src="@drawable/ic_profile"
+                    android:scaleType="centerCrop" />
+
+                <TextView
+                    android:id="@+id/tvGreeting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ivMenu"
+                    android:layout_marginTop="24dp"
+                    android:text="Good morning,"
+                    android:textColor="#CCFFFFFF"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvGreeting"
+                    android:text="User !"
+                    android:textColor="#FFFFFF"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <!-- ===== HOW ARE YOU FEELING CARD ===== -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="-24dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/dark_card_bg">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="How are you feeling Today?"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="16dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <TextView android:id="@+id/emoji1" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="😢" android:textSize="32sp" />
+                        <TextView android:id="@+id/emoji2" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="😥" android:textSize="32sp" />
+                        <TextView android:id="@+id/emoji3" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="😵" android:textSize="32sp" />
+                        <TextView android:id="@+id/emoji4" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="🙂" android:textSize="32sp" />
+                        <TextView android:id="@+id/emoji5" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="😊" android:textSize="32sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- ===== MOOD INSIGHTS SECTION ===== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mood Insights"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Feb 4 - 10"
+                    android:textColor="#4CAF93"
+                    android:textSize="13sp"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Bar Chart Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:orientation="horizontal"
+                    android:gravity="bottom">
+                    <!-- Sa -->
+                    <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="bottom|center_horizontal">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🙂" android:textSize="14sp" android:layout_marginBottom="4dp"/>
+                        <View android:layout_width="18dp" android:layout_height="70dp" android:background="@drawable/bar_peach" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sa" android:textSize="12sp" android:textColor="@color/text_secondary" android:layout_marginTop="6dp"/>
+                    </LinearLayout>
+                    <!-- Su -->
+                    <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="bottom|center_horizontal">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😢" android:textSize="14sp" android:layout_marginBottom="4dp"/>
+                        <View android:layout_width="18dp" android:layout_height="90dp" android:background="@drawable/bar_red" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Su" android:textSize="12sp" android:textColor="@color/text_secondary" android:layout_marginTop="6dp"/>
+                    </LinearLayout>
+                    <!-- Mo -->
+                    <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="bottom|center_horizontal">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🙂" android:textSize="14sp" android:layout_marginBottom="4dp"/>
+                        <View android:layout_width="18dp" android:layout_height="80dp" android:background="@drawable/bar_teal" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mo" android:textSize="12sp" android:textColor="@color/text_secondary" android:layout_marginTop="6dp"/>
+                    </LinearLayout>
+                    <!-- Tu -->
+                    <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="bottom|center_horizontal">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😊" android:textSize="14sp" android:layout_marginBottom="4dp"/>
+                        <View android:layout_width="18dp" android:layout_height="55dp" android:background="@drawable/bar_green" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Tu" android:textSize="12sp" android:textColor="@color/text_secondary" android:layout_marginTop="6dp"/>
+                    </LinearLayout>
+                    <!-- We -->
+                    <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="bottom|center_horizontal">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😊" android:textSize="14sp" android:layout_marginBottom="4dp"/>
+                        <View android:layout_width="18dp" android:layout_height="65dp" android:background="@drawable/bar_purple" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="We" android:textSize="12sp" android:textColor="@color/text_secondary" android:layout_marginTop="6dp"/>
+                    </LinearLayout>
+                    <!-- Th -->
+                    <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="bottom|center_horizontal">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🙂" android:textSize="14sp" android:layout_marginBottom="4dp"/>
+                        <View android:layout_width="18dp" android:layout_height="75dp" android:background="@drawable/bar_blue" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Th" android:textSize="12sp" android:textColor="@color/text_secondary" android:layout_marginTop="6dp"/>
+                    </LinearLayout>
+                    <!-- Fr -->
+                    <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="bottom|center_horizontal">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="😊" android:textSize="14sp" android:layout_marginBottom="4dp"/>
+                        <View android:layout_width="18dp" android:layout_height="60dp" android:background="@drawable/bar_indigo" />
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fr" android:textSize="12sp" android:textColor="@color/text_secondary" android:layout_marginTop="6dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- ===== MY ACTIVITY (TASKS) SECTION ===== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="My Activity"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvTasks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+
+                <View android:layout_width="match_parent" android:layout_height="80dp" /> <!-- Spacer at bottom -->
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- FAB for Add Task -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/layoutForYou"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_add"
+        app:tint="@color/white"
+        app:backgroundTint="#7E57C2"
+        android:contentDescription="Add Task" />
+
+    <!-- ===== STICKY BOTTOM SECTION ("For you") ===== -->
+    <LinearLayout
+        android:id="@+id/layoutForYou"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bg_mood"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:elevation="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="For you"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="Library"
+                android:textColor="#4CAF93"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
+                <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/bg_tip_teal">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Meditation" android:textColor="#FFFFFF" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" android:layout_marginBottom="12dp" android:textSize="12sp" android:textStyle="bold"/>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
+                <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/bg_tip_green">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Reduce Anxiety" android:textColor="#FFFFFF" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" android:layout_marginBottom="12dp" android:textSize="12sp" android:textStyle="bold"/>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
+                <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/bg_tip_blue">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Manage Stress" android:textColor="#FFFFFF" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" android:layout_marginBottom="12dp" android:textSize="12sp" android:textStyle="bold"/>
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
