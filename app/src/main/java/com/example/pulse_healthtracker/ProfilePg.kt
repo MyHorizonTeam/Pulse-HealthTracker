@@ -104,6 +104,21 @@ class ProfilePg : AppCompatActivity() {
                 }
             }
         }
+        val btn_edtpf = findViewById<Button>(R.id.edtpf)
+        btn_edtpf.setOnClickListener {
+            val intent= Intent(this, EditProfileActivity::class.java)
+        }
+        val btn_goal = findViewById<Button>(R.id.goal)
+        // Need to create page
+
+        val btn_set = findViewById<Button>(R.id.settings)
+        btn_set.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+        }
+        val btn_pri = findViewById<Button>(R.id.privacy)
+        btn_pri.setOnClickListener {
+            val intent = Intent(this, PrivacyActivity::class.java)
+        }
 
 
         lgOut.setOnClickListener {
