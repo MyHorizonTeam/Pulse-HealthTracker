@@ -84,6 +84,7 @@ class ProfilePg : AppCompatActivity() {
         nutSwitch = findViewById(R.id.nut_switch)
         mentalSwitch = findViewById(R.id.mental_switch)
         userSwitch = findViewById(R.id.user_switch)
+        docSwitch = findViewById(R.id.doc_switch)
 
         val toggleGroup = findViewById<MaterialButtonToggleGroup>(R.id.navgrp)
 
@@ -99,6 +100,10 @@ class ProfilePg : AppCompatActivity() {
                     R.id.user_switch -> {
                         // Navigate to Profile page
                         val intent = Intent(this, ProfilePg::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.doc_switch->{
+                        val intent = Intent(this, DashboardActivity::class.java)
                         startActivity(intent)
                     }
                 }
