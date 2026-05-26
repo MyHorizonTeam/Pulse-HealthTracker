@@ -172,7 +172,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                app:layout_alignBaseline="@id/lblDose"
+                app:layout_constraintBaseline_toBaselineOf="@id/lblDose"
                 app:layout_constraintStart_toStartOf="@+id/etTime"
                 app:layout_constraintTop_toTopOf="@+id/lblDose" />
 
@@ -185,7 +185,6 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
-                android:drawableEnd="@drawable/ic_clock"
                 android:paddingEnd="8dp"
                 android:paddingStart="4dp"
                 android:text="08:00 AM"
@@ -203,6 +202,8 @@
                 android:background="@drawable/bg_input_field"
                 android:paddingHorizontal="16dp"
                 android:singleLine="true"
+                android:gravity="center_vertical"
+                android:text="Before eat"
                 android:textColor="#000000"
                 android:textColorHint="#B0B0B0"
                 android:textSize="14sp"
@@ -228,8 +229,7 @@
 
                 <ImageView
                     android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:src="@drawable/ic_add_white" />
+                    android:layout_height="12dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
