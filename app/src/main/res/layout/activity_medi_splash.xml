@@ -19,8 +19,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextText2"
+    <TextView
+        android:id="@+id/title_med"
         android:layout_width="324dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_header_pill"
