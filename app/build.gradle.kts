@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.example.pulse_healthtracker"
-    compileSdk = 35
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.example.pulse_healthtracker"
         minSdk = 23
-        targetSdk = 35
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -8,92 +7,174 @@
     android:layout_height="match_parent"
     tools:context=".medi_splash">
 
+    <!-- Full screen background image -->
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        app:srcCompat="@drawable/_1cd3217cca59863b7fd72cc13e9747e3fde0f364__2_"
-        app:layout_bottomToBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/_1cd3217cca59863b7fd72cc13e9747e3fde0f364__2_" />
+
+    <!-- Dark gradient overlay -->
+
+    <!-- App logo icon ✅ correct position -->
+    <View
+        android:id="@+id/gradientOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_overlay"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="52dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_app_logo" />
+
+    <!-- Skip button - top right -->
+    <TextView
+        android:id="@+id/tvSkip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_skip_button"
+        android:clickable="true"
+        android:focusable="true"
+        android:fontFamily="@font/inter_semibold"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:text="Skip"
+        android:textColor="#CCFFFFFF"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextText2"
-        android:layout_width="324dp"
+    <!-- App title -->
+    <TextView
+        android:id="@+id/tvAppTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:background="@drawable/bg_header_pill"
-        android:ems="10"
-        android:focusable="false"
-        android:clickable="false"
         android:fontFamily="@font/inter_semibold"
         android:gravity="center"
-        android:paddingVertical="16dp"
+        android:letterSpacing="0.02"
+        android:paddingHorizontal="28dp"
+        android:paddingVertical="14dp"
         android:text="Medication\nManagement"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="26sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08" />
+        app:layout_constraintTop_toBottomOf="@id/ivLogo" />
 
+    <!-- Bottom card container -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottomContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="350dp"
         android:background="@drawable/vector_3277"
-        android:paddingHorizontal="32dp"
-        android:paddingBottom="36dp"
+        android:paddingHorizontal="28dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
+        <!-- Main heading -->
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="90dp"
             android:fontFamily="@font/inter_font"
-            android:lineSpacingMultiplier="1.1"
+            android:letterSpacing="0.01"
+            android:lineSpacingMultiplier="1.2"
             android:text="Never miss\nyour pills again"
             android:textColor="#FFFFFF"
-            android:textSize="26sp"
+            android:textSize="28sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="32dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- Description text -->
+
+        <!-- Page indicator dots -->
         <TextView
             android:id="@+id/tvDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/inter_semibold"
-            android:lineSpacingMultiplier="1.2"
-            android:text="Stay on top of your healthcare with timely dose reminders pills track medication"
-            android:textColor="#D1D5DB"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle"
-            tools:layout_editor_absoluteX="32dp" />
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/inter_font"
+            android:lineSpacingMultiplier="1.5"
+            android:text="Stay on top of your health with timely reminders and smart medication tracking."
+            android:textColor="#B0C4D8"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
+        <LinearLayout
+            android:id="@+id/llDots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvDescription">
+
+            <View
+                android:layout_width="24dp"
+                android:layout_height="8dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/dot_active" />
+
+            <View
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/dot_inactive" />
+
+            <View
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/dot_inactive" />
+
+        </LinearLayout>
+
+        <!-- Next button -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnNext"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="12dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/bg_button_rounded"
-            android:text="Next ➔"
+            android:elevation="8dp"
+            android:letterSpacing="0.03"
+            android:text="Get Started  →"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
-            android:textSize="18sp"
+            android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/tvDescription" />
-
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/llDots" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
