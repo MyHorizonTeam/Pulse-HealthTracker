@@ -70,5 +70,5 @@ dependencies {
 // Image loading library (Glide)
     implementation("com.github.bumptech.glide:glide:4.16.0")
 // For cropping image (optional but recommended)
-    implementation("com.github.yalantis:ucrop:2.2.8")
+    implementation("com.github.yalantis:ucrop:2.2.11")
 }

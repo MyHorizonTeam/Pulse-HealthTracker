@@ -24,6 +24,7 @@ import android.provider.MediaStore
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.SetOptions
+import java.io.File
 
 class ProfilePg : AppCompatActivity() {
     private lateinit var lgOut: Button
@@ -196,6 +197,27 @@ class ProfilePg : AppCompatActivity() {
                         .into(profile_pic)
                 }
             }
+    }
+    private fun startCrop(uri:Uri){
+        val destinationUri = Uri.fromFile(File(cacheDir, "cropped_${System.currentTimeMillis()}.jpg"))
+
+        UCrop.of(uri, destinationUri)
+            .withAspectRatio(1f, 1f)  // Square crop
+            .withMaxResultSize(500, 500)
+            .start(this)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
+            val sourceUri = data.data
+            startCrop(sourceUri!!)
+        } else if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
+            val resultUri = UCrop.getOutput(data!!)
+            selectedImageUri = resultUri
+            uploadImageToFirebase()
+        }
     }
 
     private fun signOut() {
