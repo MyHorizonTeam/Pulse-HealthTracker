@@ -25,6 +25,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.SetOptions
 import java.io.File
+import com.yalantis.ucrop.UCrop
+
 
 class ProfilePg : AppCompatActivity() {
     private lateinit var lgOut: Button
@@ -206,20 +208,6 @@ class ProfilePg : AppCompatActivity() {
             .withMaxResultSize(500, 500)
             .start(this)
     }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
-            val sourceUri = data.data
-            startCrop(sourceUri!!)
-        } else if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
-            val resultUri = UCrop.getOutput(data!!)
-            selectedImageUri = resultUri
-            uploadImageToFirebase()
-        }
-    }
-
     private fun signOut() {
         AuthUI.getInstance()
             .signOut(this)
@@ -244,6 +232,9 @@ class ProfilePg : AppCompatActivity() {
     private fun clearUserSession() {
         // Clear SharedPreferences if you're storing user data
         val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
-        prefs.edit().clear().apply()
+        prefs.edit().apply {
+            clear()
+            apply()
+        }
     }
 }
