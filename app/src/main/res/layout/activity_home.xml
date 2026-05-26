@@ -22,13 +22,16 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
         android:text="Medication Management"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@+id/viewHeaderBg"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/viewHeaderBg"
+        app:layout_constraintVertical_bias="0.008" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvProfile"
@@ -80,16 +83,18 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/bg_search_bar"
-        android:drawableEnd="@drawable/ic_search"
         android:hint="Search for the pill"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:singleLine="true"
         android:textColorHint="#7A7A7A"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivAvatar" />
+        app:layout_constraintTop_toBottomOf="@+id/ivAvatar"
+        app:layout_constraintVertical_bias="0.005" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -107,7 +112,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:drawableEnd="@drawable/ic_arrow_down"
             android:drawablePadding="6dp"
             android:text="January 2026"
             android:textColor="#000000"
@@ -132,7 +136,7 @@
             <ImageView
                 android:layout_width="14dp"
                 android:layout_height="14dp"
-                android:src="@drawable/ic_add" />
+                android:src="@drawable/add_circle_svgrepo_com" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -186,19 +190,12 @@
                     android:padding="16dp"
                     android:layout_marginBottom="12dp">
 
-                    <ImageView
-                        android:id="@+id/ivToggle1"
-                        android:layout_width="38dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_toggle_on"
-                        android:layout_alignParentStart="true"/>
-
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_toEndOf="@id/ivToggle1"
                         android:layout_marginStart="12dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -215,6 +212,7 @@
                             android:layout_marginTop="4dp"/>
                     </LinearLayout>
 
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -226,7 +224,7 @@
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_notification_bell"
+                        android:src="@drawable/notifcation"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentBottom="true"
                         android:layout_marginTop="45dp"/>
@@ -234,7 +232,9 @@
                     <ImageView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:src="@drawable/ic_delete"
+                        android:src="@drawable/delete_1487_svgrepo_com"
+                        android:backgroundTint="@color/white"
+                        android:background="@null"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"/>
                 </RelativeLayout>
@@ -246,18 +246,10 @@
                     android:padding="16dp"
                     android:layout_marginBottom="12dp">
 
-                    <ImageView
-                        android:id="@+id/ivToggle2"
-                        android:layout_width="38dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_toggle_on"
-                        android:layout_alignParentStart="true"/>
-
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_toEndOf="@id/ivToggle2"
                         android:layout_marginStart="12dp">
                         <TextView
                             android:layout_width="wrap_content"
@@ -286,7 +278,7 @@
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_notification_bell"
+                        android:src="@drawable/notifcation"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentBottom="true"
                         android:layout_marginTop="45dp"/>
@@ -294,9 +286,10 @@
                     <ImageView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:src="@drawable/ic_delete"
+                        android:src="@drawable/delete_1487_svgrepo_com"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"/>
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -306,18 +299,10 @@
                     android:padding="16dp"
                     android:layout_marginBottom="12dp">
 
-                    <ImageView
-                        android:id="@+id/ivToggle3"
-                        android:layout_width="38dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_toggle_off"
-                        android:layout_alignParentStart="true"/>
-
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:layout_toEndOf="@id/ivToggle3"
                         android:layout_marginStart="12dp">
                         <TextView
                             android:layout_width="wrap_content"
@@ -346,7 +331,7 @@
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_notification_bell"
+                        android:src="@drawable/notifcation"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentBottom="true"
                         android:layout_marginTop="45dp"/>
@@ -354,13 +339,15 @@
                     <ImageView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:src="@drawable/ic_delete"
+                        android:src="@drawable/delete_1487_svgrepo_com"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"/>
                 </RelativeLayout>
 
             </LinearLayout>
         </ScrollView>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -375,23 +362,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:background="@drawable/bg_selected_tab"
-                android:padding="8dp"
-                android:src="@drawable/ic_tab_medication" />
-        </FrameLayout>
-
-        <ImageView android:layout_width="0dp" android:layout_height="32dp" android:layout_weight="1" android:src="@drawable/ic_tab_walk" />
-        <ImageView android:layout_width="0dp" android:layout_height="32dp" android:layout_weight="1" android:src="@drawable/ic_tab_food" />
-        <ImageView android:layout_width="0dp" android:layout_height="32dp" android:layout_weight="1" android:src="@drawable/ic_tab_doctor" />
-        <ImageView android:layout_width="0dp" android:layout_height="32dp" android:layout_weight="1" android:src="@drawable/ic_tab_heart" />
 
     </LinearLayout>
 
