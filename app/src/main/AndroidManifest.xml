@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PulseHealthTracker">
         <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".ReminderActivity"
             android:exported="false" />
         <activity
@@ -27,16 +36,13 @@
             android:name=".medi_splash"
             android:exported="false" />
         <activity
-            android:name=".medi_home"
+            android:name=".PrivacyActivity"
             android:exported="false" />
         <activity
-            android:name=".Privacy"
+            android:name=".SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".Settings"
-            android:exported="false" />
-        <activity
-            android:name=".Edit_profile"
+            android:name=".EditProfileActivity"
             android:exported="false" />
     </application>
 
