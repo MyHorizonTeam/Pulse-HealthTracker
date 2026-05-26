@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -19,6 +20,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
 import com.firebase.ui.auth.AuthUI
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -41,6 +44,14 @@ class ProfilePg : AppCompatActivity() {
     private lateinit var storageRef: StorageReference
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
+    // Define navigation button bottom
+    public lateinit var mediSwitch: MaterialButton
+    public lateinit var actSwitch: MaterialButton
+    public lateinit var nutSwitch: MaterialButton
+    public lateinit var docSwitch: MaterialButton
+    public lateinit var mentalSwitch: MaterialButton
+    public lateinit var userSwitch: MaterialButton
+
 
     private var selectedImageUri: Uri? = null
     private val PICK_IMAGE_REQUEST = 1
@@ -67,6 +78,33 @@ class ProfilePg : AppCompatActivity() {
         loadProfilePicture()
 
         profilePic.setOnClickListener { showImagePickerDialog() }
+
+        mediSwitch = findViewById(R.id.medi_switch)
+        actSwitch = findViewById(R.id.act_switch)
+        nutSwitch = findViewById(R.id.nut_switch)
+        mentalSwitch = findViewById(R.id.mental_switch)
+        userSwitch = findViewById(R.id.user_switch)
+
+        val toggleGroup = findViewById<MaterialButtonToggleGroup>(R.id.navgrp)
+
+        toggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
+            if (isChecked) {
+                when (checkedId) {
+                    R.id.medi_switch -> {
+                        // Navigate to Medication page
+                        val intent = Intent(this, HomeActivity::class.java)
+                        startActivity(intent)
+                    }
+
+                    R.id.user_switch -> {
+                        // Navigate to Profile page
+                        val intent = Intent(this, ProfilePg::class.java)
+                        startActivity(intent)
+                    }
+                }
+            }
+        }
+
 
         lgOut.setOnClickListener {
             lgOut.isEnabled = false
