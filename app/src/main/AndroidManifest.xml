@@ -12,15 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PulseHealthTracker">
         <activity
-            android:name=".Privacy"
-            android:exported="false" />
-        <activity
-            android:name=".Settings"
-            android:exported="false" />
-        <activity
-            android:name=".Edit_profile"
-            android:exported="false" />
-        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -31,13 +22,16 @@
         </activity>
         <activity
             android:name=".Onboarding"
-            android:exported="false" />
+            android:exported="false">
+        </activity>
         <activity
             android:name=".Login"
             android:exported="false" />
+
+
         <activity
-            android:name=".Register"
-            android:exported="false" />
+        android:name=".Mental_jou_home"
+        android:exported="false" />
         <activity
             android:name=".medi_home"
             android:exported="false" />
@@ -52,6 +46,15 @@
             android:exported="false" />
         <activity
             android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Privacy"
+            android:exported="false" />
+        <activity
+            android:name=".Settings"
+            android:exported="false" />
+        <activity
+            android:name=".Edit_profile"
             android:exported="false" />
     </application>
 
