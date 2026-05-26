@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PulseHealthTracker">
-
+        <activity
+            android:name=".ProfilePg"
+            android:exported="false" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">
@@ -23,17 +25,19 @@
         </activity>
         <activity
             android:name=".Onboarding"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".Login"
             android:exported="false" />
-        <activity
-            android:name=".Register"
-            android:exported="false">
-        </activity>
+
         <activity
             android:name=".medi_home"
+            android:exported="false" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:hardwareAccelerated="true"
             android:exported="false" />
     </application>
 

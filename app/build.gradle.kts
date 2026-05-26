@@ -43,6 +43,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.cardview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -53,10 +54,21 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     //Firebase
     implementation("com.google.firebase:firebase-analytics")
-    implementation(platform("com.google.firebase:firebase-bom:34.12.0"))
+    implementation(platform("com.google.firebase:firebase-bom:34.13.0"))
     implementation("com.google.firebase:firebase-auth")
-
+    implementation("com.firebaseui:firebase-ui-auth:9.1.1")
     implementation("androidx.credentials:credentials:1.3.0")
     implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
     implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-database")
+    implementation("com.google.firebase:firebase-analytics")
+    // Firebase Storage
+    implementation("com.google.firebase:firebase-storage:20.3.0")
+// Firebase Firestore (or Realtime Database)
+    implementation("com.google.firebase:firebase-firestore:24.10.0")
+// Image loading library (Glide)
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+// For cropping image (optional but recommended)
+    implementation("com.github.yalantis:ucrop:2.2.11")
 }

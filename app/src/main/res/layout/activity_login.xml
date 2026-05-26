@@ -27,16 +27,16 @@
 
     <ScrollView
         android:layout_width="370dp"
-        android:layout_height="525dp"
+        android:layout_height="0dp"
         android:background="@drawable/scrv_gradiant"
         android:fillViewport="true"
+        android:layout_marginTop="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.815">
-
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0" >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                 app:singleSelection="true">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/logBtn"
+                    android:id="@+id/logswitch"
                     android:layout_width="140dp"
                     android:layout_height="56dp"
                     android:text="Login"
@@ -59,7 +59,7 @@
                     app:cornerRadius="12dp" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/regBtn"
+                    android:id="@+id/regswitch"
                     android:layout_width="140dp"
                     android:layout_height="56dp"
                     android:text="Register"
@@ -68,92 +68,214 @@
                     app:backgroundTint="#0E164B" />
 
             </com.google.android.material.button.MaterialButtonToggleGroup>
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnGoogleSignIn"
-                android:layout_width="350dp"
-                android:layout_height="56dp"
-                android:text="Continue With Google"
-                android:textSize="14sp"
-                app:icon="@drawable/ic_google"
-                app:iconTint="@null"
-                app:iconGravity="textStart"
-                app:iconPadding="12dp"
-                app:cornerRadius="8dp"
-                android:backgroundTint="#FFFFFF"
-                android:textColor="#444444"
-                app:strokeColor="#DDDDDD"
-                app:strokeWidth="1dp"
-                android:layout_marginBottom="20dp"/>
-
-            <!-- OR Divider -->
+            <!--Login Layout-->
             <LinearLayout
+                android:id="@+id/logLyt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="20dp">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:gravity="center|top">
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"
-                    android:background="@color/black"/>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGoogleSignIn"
+                    android:layout_width="350dp"
+                    android:layout_height="56dp"
+                    android:text="Continue With Google"
+                    android:textSize="14sp"
+                    app:icon="@drawable/ic_google"
+                    app:iconTint="@null"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:cornerRadius="8dp"
+                    android:backgroundTint="#FFFFFF"
+                    android:textColor="#444444"
+                    app:strokeColor="#DDDDDD"
+                    app:strokeWidth="1dp"
+                    android:layout_marginBottom="20dp"/>
 
+                <!-- OR Divider -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="20dp">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"
+                        android:background="@color/black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="  or continue with email  "
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"
+                        android:background="@color/black"/>
+                </LinearLayout>
+                <EditText
+                    android:id="@+id/edtxtEmail"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edtxtlog"
+                    android:textSize="20sp"
+                    android:hint="Enter your email"
+                    android:padding="8dp"
+                    android:ems="10"
+                    android:inputType="textEmailAddress" />
+
+                <EditText
+                    android:id="@+id/edtxtPwd"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:background="@drawable/edtxtlog"
+                    android:layout_margin="20dp"
+                    android:padding="8dp"
+                    android:hint="Enter password"
+                    android:ems="10"
+                    android:inputType="textPassword" />
+
+                <Button
+                    android:id="@+id/btnLog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="41dp"
+                    android:background="@drawable/logbtn"
+                    android:text="Log in"
+                    android:layout_margin="15dp"
+                    app:backgroundTint="#0E164B" /> <!--ems means how long character can fit inside-->
                 <TextView
+                    android:id="@+id/frgpwd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="  or continue with email  "
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1"
-                    android:background="@color/black"/>
+                    android:text="Forgotten password?"
+                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/inter_font"/>
             </LinearLayout>
-            <EditText
-                android:id="@+id/edtxtEmail"
-                android:layout_width="330dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edtxtlog"
-                android:textSize="20sp"
-                android:hint="Enter your email"
-                android:padding="8dp"
-                android:ems="10"
-                android:inputType="textEmailAddress" />
 
-            <EditText
-                android:id="@+id/edtxtPwd"
-                android:layout_width="330dp"
+            <!--Register Layout-->
+            <LinearLayout
+                android:id="@+id/regLyt"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:background="@drawable/edtxtlog"
-                android:layout_margin="20dp"
-                android:padding="8dp"
-                android:hint="Enter password"
-                android:ems="10"
-                android:inputType="textPassword" />
+                android:visibility="visible"
+                android:orientation="vertical"
+                android:gravity="center|top">
 
-            <Button
-                android:id="@+id/btnLog"
-                android:layout_width="wrap_content"
-                android:layout_height="41dp"
-                android:background="@drawable/logbtn"
-                android:text="Log in"
-                android:layout_margin="15dp"
-                app:backgroundTint="#0E164B" /> <!--ems means how long character can fit inside-->
-            <TextView
-                android:id="@+id/frgpwd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Forgotten password?"
-                android:textSize="16sp"
-                android:textColor="@color/white"
-                android:fontFamily="@font/inter_font"/>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnGoogleSignInR"
+                    android:layout_width="350dp"
+                    android:layout_height="56dp"
+                    android:text="Continue With Google"
+                    android:textSize="14sp"
+                    app:icon="@drawable/ic_google"
+                    app:iconTint="@null"
+                    app:iconGravity="textStart"
+                    app:iconPadding="12dp"
+                    app:cornerRadius="8dp"
+                    android:backgroundTint="#FFFFFF"
+                    android:textColor="#444444"
+                    app:strokeColor="#DDDDDD"
+                    app:strokeWidth="1dp"
+                    android:layout_marginBottom="20dp"/>
+
+                <!-- OR Divider -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="20dp">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"
+                        android:background="@color/black"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="  or continue with email  "
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"
+                        android:background="@color/black"/>
+                </LinearLayout>
+                <EditText
+                    android:id="@+id/edtxtName"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edtxtlog"
+                    android:textSize="20sp"
+                    android:hint="Enter your name"
+                    android:layout_marginBottom="10dp"
+                    android:padding="8dp"
+                    android:ems="10"
+                    android:inputType="textEmailAddress" />
+                <EditText
+                    android:id="@+id/edtxtEmailR"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/edtxtlog"
+                    android:textSize="20sp"
+                    android:hint="Enter your email"
+                    android:layout_margin="10dp"
+                    android:padding="8dp"
+                    android:ems="10"
+                    android:inputType="textEmailAddress" />
+
+                <EditText
+                    android:id="@+id/edtxtPwdR"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:background="@drawable/edtxtlog"
+                    android:layout_margin="10dp"
+                    android:padding="8dp"
+                    android:hint="Enter password"
+                    android:ems="10"
+                    android:inputType="textPassword" />
+                <EditText
+                    android:id="@+id/edtcnpwd"
+                    android:layout_width="330dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:textSize="20dp"
+                    android:background="@drawable/edtxtlog"
+                    android:padding="8dp"
+                    android:hint="Confirm password" />
+
+                <Button
+                    android:id="@+id/btnReg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="41dp"
+                    android:background="@drawable/logbtn"
+                    android:text="Register"
+                    android:layout_margin="15dp"
+                    app:backgroundTint="#0E164B" />
+            </LinearLayout>
+
+
         </LinearLayout>
-
     </ScrollView>
+
+
+
+
 
     <ImageView
         android:id="@+id/imageView"

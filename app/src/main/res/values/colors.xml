@@ -10,4 +10,7 @@
     <color name="white">#FFFFFF</color>
     <color name="red_pink">#FF6B6B</color>
     <color name="darkblue">#0E164B</color>
+    <color name="bgBlue">#121995</color>
+    <color name="litebg">#BAC9FE</color>
+    <color name="ucrop_color">#4ECDC4</color>
 </resources>
