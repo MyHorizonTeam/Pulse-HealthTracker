@@ -1,93 +1,86 @@
 package com.example.pulse_healthtracker
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.view.View
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.firebase.ui.auth.AuthUI
-import android.widget.*
-import android.content.Intent
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
-import android.app.Activity.RESULT_OK
-import android.net.Uri
-import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
+import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.installations.installations
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import java.util.UUID
-import android.provider.MediaStore
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.firestore.SetOptions
-import java.io.File
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.yalantis.ucrop.UCrop
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.util.UUID
 
 
 class ProfilePg : AppCompatActivity() {
     private lateinit var lgOut: Button
-    public lateinit var userName: TextView
-    public lateinit var profile_pic : ImageView
-    private lateinit var email_1 : TextView
+    private lateinit var userName: TextView
+    private lateinit var profilePic: ImageView
+    private lateinit var emailText: TextView
     private lateinit var progressBar: ProgressBar
+
     private lateinit var storageRef: StorageReference
     private lateinit var auth: FirebaseAuth
-    private lateinit var firestore: FirebaseFirestore
     private lateinit var database: DatabaseReference
 
     private var selectedImageUri: Uri? = null
     private val PICK_IMAGE_REQUEST = 1
+    private val UCROP_REQUEST = UCrop.REQUEST_CROP
 
-    // Main function start
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_profile_pg)
 
-        // Initialize firebase
+        // Firebase init
         auth = FirebaseAuth.getInstance()
-        firestore = FirebaseFirestore.getInstance()
-        storageRef = FirebaseStorage.getInstance().reference.child("profile_pic")
+        storageRef = FirebaseStorage.getInstance().reference.child("profile_pics")
         database = FirebaseDatabase.getInstance().reference
 
-        // Initialize view
-        profile_pic = findViewById(R.id.profile_pic)
+        // Views
+        profilePic = findViewById(R.id.profile_pic)
         progressBar = findViewById(R.id.progressBarL)
+        lgOut = findViewById(R.id.lgOut)
+        userName = findViewById(R.id.userName)
+        emailText = findViewById(R.id.email_1)
 
+        // Load existing profile image
         loadProfilePicture()
 
-        profile_pic.setOnClickListener {
-            showImagePickerDialog()
-        }
+        profilePic.setOnClickListener { showImagePickerDialog() }
 
-
-        lgOut = findViewById(R.id.lgOut)
-        lgOut.isEnabled = false
-        lgOut.text = "Signing out..."
         lgOut.setOnClickListener {
+            lgOut.isEnabled = false
+            lgOut.text = "Signing out..."
             signOut()
         }
-        val user = Firebase.auth.currentUser
-        if (user !=null){
-            userName = findViewById(R.id.userName)
-            profile_pic = findViewById(R.id.profile_pic)
-            email_1 = findViewById(R.id.email_1)
 
-            userName.text = user.displayName
-            email_1.text = user.email
-            if (user.photoUrl != null) {
-                // Load the profile picture using an image loading library like Glide or Picasso
-                // For example, using Glide:
-                // Glide.with(this).load(user.photoUrl).into(profile_pic)
-            }
-            else {
-
-            }
+        // Fill name/email if user present
+        val user = auth.currentUser
+        user?.let {
+            userName.text = it.displayName ?: getString(R.string.user_Name)
+            emailText.text = it.email ?: getString(R.string.pf_email)
         }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -95,98 +88,144 @@ class ProfilePg : AppCompatActivity() {
         }
     }
 
-    private fun showImagePickerDialog(){
-        val options = arrayOf("Take Photo","Choose from Gallery","Cancel")
-        AlertDialog.Builder(this).setTitle("Select Profile Picture")
-            .setItems(options){_,which ->
-                when(which){
+    private fun showImagePickerDialog() {
+        val options = arrayOf("Take Photo", "Choose from Gallery", "Cancel")
+        AlertDialog.Builder(this)
+            .setTitle("Select Profile Picture")
+            .setItems(options) { _, which ->
+                when (which) {
                     0 -> openCamera()
                     1 -> openGallery()
-
                 }
             }
             .show()
     }
-    private fun openCamera(){
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(intent,PICK_IMAGE_REQUEST)
-    }
-    private fun openGallery(){
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent,PICK_IMAGE_REQUEST)
-    }
-    override fun onActivityResult(requestCode: Int, resultCode:Int, data:Intent?){
-        super.onActivityResult(requestCode,resultCode, data)
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null) {
-            selectedImageUri = data.data
-            uploadImageToFirebase()
+    private fun openCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        try {
+            startActivityForResult(intent, PICK_IMAGE_REQUEST)
+        } catch (e: Exception) {
+            Toast.makeText(this, "Cannot open camera: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
-    private fun uploadImageToFirebase(){
-        if(selectedImageUri == null) return
 
-        //Show progress
-        progressBar.visibility = android.view.View.VISIBLE
-        profile_pic.isEnabled = false
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(intent, PICK_IMAGE_REQUEST)
+    }
 
-        val userId = auth.currentUser?.uid ?: return
-        val fileRef = storageRef.child("$userId/${UUID.randomUUID()}.jpg")
-
-        fileRef.putFile(selectedImageUri!!)
-            .addOnSuccessListener { taskSnapshot ->
-                // Get download URL
-                fileRef.downloadUrl.addOnSuccessListener { uri ->
-                    val imageUrl = uri.toString()
-                    saveImageUrlToDatabase(userId, imageUrl)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+            val uriFromGallery = data?.data
+            if (uriFromGallery != null) {
+                startCrop(uriFromGallery)
+            } else {
+                val bitmap = data?.extras?.get("data") as? Bitmap
+                if (bitmap != null) {
+                    val tempUri = saveBitmapToCache(bitmap)
+                    if (tempUri != null) startCrop(tempUri) else
+                        Toast.makeText(this, "Failed to save camera image", Toast.LENGTH_SHORT).show()
                 }
             }
-
-            .addOnFailureListener{ exception ->
-                progressBar.visibility = android.view.View.GONE
-                profile_pic.isEnabled = true
-                Toast.makeText(this, "Upload failed: ${exception.message}", Toast.LENGTH_SHORT).show()
+        } else if (requestCode == UCROP_REQUEST) {
+            if (resultCode == Activity.RESULT_OK && data != null) {
+                val resultUri = UCrop.getOutput(data)
+                if (resultUri != null) {
+                    selectedImageUri = resultUri
+                    uploadImageToFirebase()
+                }
+            } else if (resultCode == UCrop.RESULT_ERROR) {
+                val cropError = data?.let { UCrop.getError(it) }
+                Toast.makeText(this, "Crop failed: ${cropError?.message}", Toast.LENGTH_SHORT).show()
             }
+        }
     }
-    private fun saveImageUrlToDatabase(userId: String, imageUrl: String) {
-        // Save to Firestore
-        database.child("users").child(userId).child("profilePicUrl").setValue(imageUrl).addOnSuccessListener {
-            loadProfilePicture()
-            progressBar.visibility = android.view.View.GONE
-            profile_pic.isEnabled = true
-            Toast.makeText(this, "Profile picture updated!",Toast.LENGTH_SHORT).show()
+
+    private fun startCrop(uri: Uri) {
+        val destinationUri = Uri.fromFile(File(cacheDir, "cropped_${UUID.randomUUID()}.jpg"))
+        val options = UCrop.Options().apply {
+            setCompressionQuality(90)
+            setHideBottomControls(false)
+            setFreeStyleCropEnabled(false)
+        }
+        UCrop.of(uri, destinationUri)
+            .withAspectRatio(1f, 1f)
+            .withMaxResultSize(800, 800)
+            .withOptions(options)
+            .start(this)
+    }
+
+    private fun saveBitmapToCache(bitmap: Bitmap): Uri? {
+        val file = File(cacheDir, "camera_${UUID.randomUUID()}.jpg")
+        var fos: FileOutputStream? = null
+        return try {
+            fos = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fos)
+            fos.flush()
+            Uri.fromFile(file)
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        } finally {
+            try {
+                fos?.close()
+            } catch (ignored: IOException) {
+            }
+        }
+    }
+
+    private fun uploadImageToFirebase() {
+        val uri = selectedImageUri ?: run {
+            Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show()
+            return
+        }
+        val userId = auth.currentUser?.uid ?: run {
+            Toast.makeText(this, "No authenticated user", Toast.LENGTH_SHORT).show()
+            return
         }
 
+        progressBar.visibility = View.VISIBLE
+        profilePic.isEnabled = false
+
+        val fileRef = storageRef.child("$userId/${UUID.randomUUID()}.jpg")
+        fileRef.putFile(uri)
+            .addOnSuccessListener {
+                fileRef.downloadUrl.addOnSuccessListener { downloadUri ->
+                    val imageUrl = downloadUri.toString()
+                    saveImageUrlToDatabase(userId, imageUrl)
+                }.addOnFailureListener { e ->
+                    progressBar.visibility = View.GONE
+                    profilePic.isEnabled = true
+                    Toast.makeText(this, "Failed to get download URL: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
             .addOnFailureListener { e ->
-                progressBar.visibility = android.view.View.GONE
-                profile_pic.isEnabled = true
+                progressBar.visibility = View.GONE
+                profilePic.isEnabled = true
+                Toast.makeText(this, "Upload failed: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun saveImageUrlToDatabase(userId: String, imageUrl: String) {
+        database.child("users").child(userId).child("profilePicUrl")
+            .setValue(imageUrl)
+            .addOnSuccessListener {
+                loadProfilePicture()
+                progressBar.visibility = View.GONE
+                profilePic.isEnabled = true
+                Toast.makeText(this, "Profile picture updated!", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e ->
+                progressBar.visibility = View.GONE
+                profilePic.isEnabled = true
                 Toast.makeText(this, "Failed to save URL: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 
     private fun loadProfilePicture() {
         val userId = auth.currentUser?.uid ?: return
-        /*
-        firestore.collection("users").document(userId)
-            .get()
-            .addOnSuccessListener { document ->
-                val imageUrl = document.getString("profilePicUrl")
-                if (!imageUrl.isNullOrEmpty()) {
-                    // Load image using Glide
-                    Glide.with(this)
-                        .load(imageUrl)
-                        .circleCrop()  // Makes it circular
-                        .placeholder(R.drawable.default_avatar)  // While loading
-                        .error(R.drawable.default_avatar)  // If error
-                        .into(profile_pic)
-                } else {
-                    // Set default avatar
-                    profile_pic.setImageResource(R.drawable.default_avatar)
-                }
-            }
-            .addOnFailureListener {
-                profile_pic.setImageResource(R.drawable.default_avatar)
-            } */
         database.child("users").child(userId).child("profilePicUrl")
             .get()
             .addOnSuccessListener { snapshot ->
@@ -196,29 +235,25 @@ class ProfilePg : AppCompatActivity() {
                         .load(imageUrl)
                         .circleCrop()
                         .placeholder(R.drawable.default_avatar)
-                        .into(profile_pic)
+                        .error(R.drawable.default_avatar)
+                        .into(profilePic)
+                } else {
+                    profilePic.setImageResource(R.drawable.default_avatar)
                 }
             }
+            .addOnFailureListener {
+                profilePic.setImageResource(R.drawable.default_avatar)
+            }
     }
-    private fun startCrop(uri:Uri){
-        val destinationUri = Uri.fromFile(File(cacheDir, "cropped_${System.currentTimeMillis()}.jpg"))
 
-        UCrop.of(uri, destinationUri)
-            .withAspectRatio(1f, 1f)  // Square crop
-            .withMaxResultSize(500, 500)
-            .start(this)
-    }
     private fun signOut() {
         AuthUI.getInstance()
             .signOut(this)
             .addOnCompleteListener { task ->
-                lgOut = findViewById(R.id.lgOut)
                 lgOut.isEnabled = true
                 lgOut.text = "Log out"
                 if (task.isSuccessful) {
-                    // Clear any saved user data
                     clearUserSession()
-
                     val intent = Intent(this, Login::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
@@ -230,11 +265,7 @@ class ProfilePg : AppCompatActivity() {
     }
 
     private fun clearUserSession() {
-        // Clear SharedPreferences if you're storing user data
         val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
-        prefs.edit().apply {
-            clear()
-            apply()
-        }
+        prefs.edit().clear().apply()
     }
 }
