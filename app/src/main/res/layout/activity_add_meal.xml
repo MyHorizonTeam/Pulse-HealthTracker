@@ -80,13 +80,20 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="5dp"
                 tools:ignore="HardcodedText" />
-            <Spinner
-                android:id="@+id/spinnerMealType"
+
+            <EditText
+                android:id="@+id/etMealType"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="@android:color/white"
+                android:hint="Enter meal type"
+                android:padding="10dp"
+                android:textColor="#000000"
+                android:inputType="text"
                 android:layout_marginBottom="15dp"
-                android:backgroundTint="@null"
-                android:background="@android:color/white" />
+                android:importantForAutofill="no"
+                tools:ignore="HardcodedText" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -110,6 +117,7 @@
                         android:textStyle="bold"
                         android:layout_marginBottom="5dp"
                         tools:ignore="HardcodedText" />
+
                     <EditText
                         android:id="@+id/etDate"
                         android:layout_width="match_parent"
@@ -117,10 +125,13 @@
                         android:background="@android:color/white"
                         android:hint="04/24/2026"
                         android:padding="10dp"
-                        android:focusable="false"
                         android:textColor="#000000"
                         android:importantForAutofill="no"
                         android:inputType="date"
+                        android:drawableEnd="@drawable/baseline_date"
+                        android:drawablePadding="10dp"
+                        android:focusable="false"
+                        android:clickable="true"
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
 
@@ -139,6 +150,7 @@
                         android:textStyle="bold"
                         android:layout_marginBottom="5dp"
                         tools:ignore="HardcodedText" />
+
                     <EditText
                         android:id="@+id/etTime"
                         android:layout_width="match_parent"
@@ -147,12 +159,20 @@
                         android:hint="08:00 AM"
                         android:padding="10dp"
                         android:focusable="false"
+                        android:clickable="true"
                         android:textColor="#000000"
                         android:importantForAutofill="no"
                         android:inputType="time"
+                        android:drawableEnd="@drawable/outline_timer"
+                        android:drawablePadding="10dp"
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/foodContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
 
             <Button
                 android:id="@+id/btnAddFoodItem"
@@ -208,6 +228,7 @@
                         android:textStyle="bold"
                         android:layout_marginBottom="5dp"
                         tools:ignore="HardcodedText" />
+
                     <EditText
                         android:id="@+id/etQuantity"
                         android:layout_width="match_parent"
@@ -216,7 +237,10 @@
                         android:padding="10dp"
                         android:inputType="number"
                         android:importantForAutofill="no"
-                        android:textColor="#000000" />
+                        android:textColor="#000000"
+                        android:textColorHint="#808080"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -232,8 +256,8 @@
                         android:text="Calories"
                         android:textColor="#FFFFFF"
                         android:textStyle="bold"
-                        android:layout_marginBottom="5dp"
-                        tools:ignore="HardcodedText" />
+                        android:layout_marginBottom="5dp" />
+
                     <EditText
                         android:id="@+id/etCalories"
                         android:layout_width="match_parent"
@@ -241,8 +265,11 @@
                         android:background="@android:color/white"
                         android:padding="10dp"
                         android:inputType="number"
-                        android:importantForAutofill="no"
-                        android:textColor="#000000" />
+                        android:textColor="#000000"
+                        android:textColorHint="#808080"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:clickable="true" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -267,16 +294,21 @@
                         android:textColor="#FFFFFF"
                         android:textSize="12sp"
                         android:textStyle="bold"
-                        android:layout_marginBottom="5dp"
-                        tools:ignore="HardcodedText" />
+                        android:layout_marginBottom="5dp" />
+
                     <EditText
                         android:id="@+id/etCarbs"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@android:color/white"
+                        android:padding="10dp"
                         android:inputType="number"
-                        android:importantForAutofill="no"
-                        android:textColor="#000000" />
+                        android:textColor="#000000"
+                        android:textColorHint="#808080"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:clickable="true"
+                        android:importantForAutofill="no" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -292,16 +324,21 @@
                         android:textColor="#FFFFFF"
                         android:textSize="12sp"
                         android:textStyle="bold"
-                        android:layout_marginBottom="5dp"
-                        tools:ignore="HardcodedText" />
+                        android:layout_marginBottom="5dp" />
+
                     <EditText
                         android:id="@+id/etProtein"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@android:color/white"
+                        android:padding="10dp"
                         android:inputType="number"
-                        android:importantForAutofill="no"
-                        android:textColor="#000000" />
+                        android:textColor="#000000"
+                        android:textColorHint="#808080"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:clickable="true"
+                        android:importantForAutofill="no" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -318,16 +355,21 @@
                         android:textColor="#FFFFFF"
                         android:textSize="12sp"
                         android:textStyle="bold"
-                        android:layout_marginBottom="5dp"
-                        tools:ignore="HardcodedText" />
+                        android:layout_marginBottom="5dp" />
+
                     <EditText
                         android:id="@+id/etFat"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@android:color/white"
+                        android:padding="10dp"
                         android:inputType="number"
-                        android:importantForAutofill="no"
-                        android:textColor="#000000" />
+                        android:textColor="#000000"
+                        android:textColorHint="#808080"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:clickable="true"
+                        android:importantForAutofill="no" />
                 </LinearLayout>
             </LinearLayout>
 

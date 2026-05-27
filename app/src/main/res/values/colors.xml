@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="dash_bg">#0A1128</color>
+    <color name="card_bg_dark">#1C2541</color>
+    <color name="tab_bg">#3A506B</color>
+    <color name="protein_color">#FF7043</color>
+    <color name="carbs_color">#FFCA28</color>
+    <color name="fat_color">#29B6F6</color>
+    <color name="meal_text_dark">#4A1515</color>
+    <color name="btn_edit_bg">#9DB2BF</color>
 </resources>

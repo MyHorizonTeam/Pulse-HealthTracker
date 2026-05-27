@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:backgroundTint="#5A4FCF"
-                android:text="btnGetStarted"
+                android:text="Get Started"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:textStyle="bold"
