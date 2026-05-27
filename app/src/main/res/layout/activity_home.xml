@@ -261,6 +261,7 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardArticles"
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_marginEnd="8dp"
@@ -268,7 +269,7 @@
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp">
                 <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent" android:background="@drawable/bg_tip_teal">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Meditation" android:textColor="#FFFFFF" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" android:layout_marginBottom="12dp" android:textSize="12sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Articles" android:textColor="#FFFFFF" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" android:layout_marginBottom="12dp" android:textSize="12sp" android:textStyle="bold"/>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 

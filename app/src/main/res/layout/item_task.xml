@@ -70,7 +70,7 @@
             app:layout_constraintEnd_toStartOf="@+id/viewColorTag"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="#FF8A80"
-            android:contentDescription="Delete Task" />
+            android:contentDescription="@string/desc_delete_task" />
 
         <View
             android:id="@+id/viewColorTag"

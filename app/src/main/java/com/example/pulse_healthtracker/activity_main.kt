@@ -65,6 +65,10 @@ class MainActivity : AppCompatActivity() {
             etAddTask.requestFocus()
         }
 
+        findViewById<androidx.cardview.widget.CardView>(R.id.cardArticles).setOnClickListener {
+            startActivity(android.content.Intent(this, ArticlesActivity::class.java))
+        }
+
         updateProgress()
     }
 
@@ -84,6 +88,6 @@ class MainActivity : AppCompatActivity() {
         val total = tasks.size
         val pct = if (total > 0) (done * 100) / total else 0
         progressBar.progress = pct
-        tvProgress.text = "$done / $total tasks done"
+        tvProgress.text = getString(R.string.tasks_done_format, done, total)
     }
 }

@@ -50,7 +50,9 @@ class home : AppCompatActivity() {
         taskAdapter.notifyDataSetChanged()
     }
 
-    private fun setupFab() {
+    private fun setupFab() {findViewById<androidx.cardview.widget.CardView>(R.id.cardArticles).setOnClickListener {
+        startActivity(android.content.Intent(this, ArticlesActivity::class.java))
+    }
         val fab = findViewById<FloatingActionButton>(R.id.fabAddTask)
         fab.setOnClickListener {
             val newTask = Task(
