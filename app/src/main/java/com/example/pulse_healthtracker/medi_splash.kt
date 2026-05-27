@@ -17,12 +17,12 @@ class medi_splash : AppCompatActivity() {
         setContentView(R.layout.activity_medi_splash)
 
         findViewById<Button>(R.id.btnNext).setOnClickListener {
-            startActivity(Intent(this, HomeActivity::class.java))
+            startActivity(Intent(this, HomeMed::class.java))
             finish()
         }
 
         findViewById<TextView>(R.id.tvSkip).setOnClickListener {
-            startActivity(Intent(this, HomeActivity::class.java))
+            startActivity(Intent(this, HomeMed::class.java))
             finish()
         }
 

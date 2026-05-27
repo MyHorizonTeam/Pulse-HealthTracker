@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PulseHealthTracker">
         <activity
+            android:name=".Home_MJ"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -30,7 +33,7 @@
             android:name=".AddMedicineActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".HomeMed"
             android:exported="false" />
         <activity
             android:name=".medi_splash"
@@ -50,33 +53,24 @@
         <activity
             android:name=".ProfilePg"
             android:exported="false" />
-        <activity android:name=".DashboardActivity"
-            android:exported="false"/>
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".DashboardActivity"
             android:exported="false" />
-        <activity android:name=".Onboarding"
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Onboarding"
             android:exported="false" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="false"
             android:hardwareAccelerated="true"
-            android:exported="false" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".ArticlesActivity" />
         <activity android:name=".LibraryActivity" />
-        <activity android:name=".WebViewActivity" />
-
-        <activity android:name=".MainActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".home"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".WebViewActivity"></activity>
     </application>
 
 </manifest>

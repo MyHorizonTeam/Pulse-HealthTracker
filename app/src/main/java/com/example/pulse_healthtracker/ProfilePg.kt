@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -93,7 +92,7 @@ class ProfilePg : AppCompatActivity() {
                 when (checkedId) {
                     R.id.medi_switch -> {
                         // Navigate to Medication page
-                        val intent = Intent(this, HomeActivity::class.java)
+                        val intent = Intent(this, HomeMed::class.java)
                         startActivity(intent)
                     }
 
