@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PulseHealthTracker">
         <activity
-            android:name=".SplashScreen"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,12 +21,47 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ReminderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditMedicineActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddMedicineActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".medi_splash"
+            android:exported="false" />
+        <activity
+            android:name=".PrivacyActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".Login"
             android:exported="false" />
         <activity
-            android:name=".Register"
-            android:exported="false">
-        </activity>
+            android:name=".ProfilePg"
+            android:exported="false" />
+        <activity android:name=".DashboardActivity"
+            android:exported="false"/>
+        <activity android:name=".MainActivity"
+            android:exported="false" />
+        <activity android:name=".Onboarding"
+            android:exported="false" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:hardwareAccelerated="true"
+            android:exported="false" />
     </application>
 
 </manifest>
