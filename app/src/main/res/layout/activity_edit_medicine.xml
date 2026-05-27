@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A129C"
+    tools:context=".EditMedicineActivity">
+
+    <View
+        android:id="@+id/viewHeaderBg"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="#0D1647"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/bg_back_button"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="6dp"
+        android:text="&lt; Back"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/viewHeaderBg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/viewHeaderBg" />
+
+    <TextView
+        android:id="@+id/tvHeaderTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Medicine"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/viewHeaderBg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/viewHeaderBg" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewHeaderBg">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvPillImage"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="70dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ee3919aad04b84d34bab824999ca2a961984078b" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/lblPillName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="sans-serif"
+                android:text="Pill Name"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cvPillImage" />
+
+            <EditText
+                android:id="@+id/etPillName"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="Panadol"
+                android:paddingHorizontal="16dp"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textColorHint="#B0B0B0"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblPillName" />
+
+            <TextView
+                android:id="@+id/lblDiseases"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Diseases"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etPillName" />
+
+            <EditText
+                android:id="@+id/spDiseases"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="8dp"
+                android:hint="Fever"
+                android:background="@drawable/bg_input_field"
+                android:paddingHorizontal="16dp"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textColorHint="#B0B0B0"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblDiseases" />
+
+            <TextView
+                android:id="@+id/lblDose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Dose"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spDiseases" />
+
+            <TextView
+                android:id="@+id/lblTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/etTime1"
+                app:layout_constraintTop_toTopOf="@+id/lblDose" />
+
+            <EditText
+                android:id="@+id/etDose1"
+                android:layout_width="75dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input_field"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="1"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblDose" />
+
+            <TextView
+                android:id="@+id/etTime1"
+                android:layout_width="100dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/bg_input_field"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:paddingEnd="8dp"
+                android:paddingStart="4dp"
+                android:text="08:00 AM"
+                android:textColor="#000000"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/etDose1"
+                app:layout_constraintStart_toEndOf="@+id/etDose1"
+                app:layout_constraintTop_toTopOf="@+id/etDose1" />
+
+            <TextView
+                android:id="@+id/spFoodRelation1"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/bg_input_field"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_vertical"
+                android:text="Before eat"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/etTime1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/etTime1"
+                app:layout_constraintTop_toTopOf="@+id/etTime1" />
+
+            <EditText
+                android:id="@+id/etDose2"
+                android:layout_width="75dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_input_field"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="1"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etDose1" />
+
+            <TextView
+                android:id="@+id/etTime2"
+                android:layout_width="100dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/bg_input_field"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:paddingEnd="8dp"
+                android:paddingStart="4dp"
+                android:text="02:00 PM"
+                android:textColor="#000000"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/etDose2"
+                app:layout_constraintStart_toEndOf="@+id/etDose2"
+                app:layout_constraintTop_toTopOf="@+id/etDose2" />
+
+            <TextView
+                android:id="@+id/spFoodRelation2"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/bg_input_field"
+                android:paddingHorizontal="16dp"
+                android:gravity="center_vertical"
+                android:text="Before eat"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/etTime2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/etTime2"
+                app:layout_constraintTop_toTopOf="@+id/etTime2" />
+
+            <LinearLayout
+                android:id="@+id/btnAddTimes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_add_times_btn"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etDose2">
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="Add times"
+                    android:textColor="#C5C9FF"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/lblNotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Notes (Optional)"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnAddTimes" />
+
+            <EditText
+                android:id="@+id/etNotes"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input_field"
+                android:gravity="top|start"
+                android:hint="This medicine i am taking for fever prescription"
+                android:padding="12dp"
+                android:textColor="#000000"
+                android:textColorHint="#B0B0B0"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblNotes" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSaveMedicine"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="40dp"
+                android:background="@drawable/bg_submit_button"
+                android:text="Save Medicine"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etNotes" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRemoveMedicine"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginBottom="16dp"
+                android:background="#FF1744"
+                android:text="Remove medicine"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnSaveMedicine" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Pulse-HealthTracker</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="logging_in">Logging in...</string>
+    <string name="log_in">Log in</string>
+    <string name="creating_account">Creating account...</string>
+    <string name="register">Register</string>
+    <string name="forgot_password_not_implemented">Forgot password flow not added yet</string>
+    <string name="verification_email_sent">Verification email sent</string>
+    <string name="successfully_signed_in">Successfully signed in</string>
+    <string name="pf_email">test1@outlook.com</string>
+    <string name="user_Name">Musharraf</string>
+    <string name="weight">65Kg</string>
+    <string name="steps">1300</string>
+    <string name="sleep_hr">5hr</string>
+    <string name="bmi">7.25</string>
+    <string name="step_prog">5250/10000</string>
+    <string name="session">3/5</string>
+    <string name="water">5/20</string>
+    <string name="goal">"Goals &amp; target"</string>
+    <string name="privacy">Privacy &amp; Data</string>
 </resources>

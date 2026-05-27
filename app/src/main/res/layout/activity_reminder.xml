@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A129C"
+    tools:context=".ReminderActivity">
+
+    <!-- Header Background -->
+    <View
+        android:id="@+id/viewHeaderBg"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:background="#0D1647"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Back Button -->
+    <TextView
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/bg_back_button"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="6dp"
+        android:text="Back"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/viewHeaderBg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/viewHeaderBg" />
+
+    <!-- Header Title -->
+    <TextView
+        android:id="@+id/tvHeaderTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pill Reminder"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/viewHeaderBg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/viewHeaderBg" />
+
+    <!-- User Profile Image -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvUserProfile"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="22.5dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/viewHeaderBg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/viewHeaderBg">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/_9c9d613dab41a8421e763d50f46ac1f09b4b0ee3" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- Main Body Container -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/containerBody"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:background="#152F63"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewHeaderBg">
+
+        <!-- Background Artwork Inside Body -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.5"
+            android:scaleType="centerCrop"
+            android:src="@drawable/f29972c8626ea693cf52c41f2c72366072298d8e" />
+
+        <!-- Alarm Clock Illustration Container -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvAlarmClock"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_marginTop="32dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/f9cca7fe5588634385ce2c36fcd838feb5489aa1" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Alert Title Text -->
+        <TextView
+            android:id="@+id/tvTimeForPill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Time for your pill"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cvAlarmClock" />
+
+        <!-- Medicine Card 1 (Paracetamol) -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardMedicine1"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_marginHorizontal="28dp"
+            android:layout_marginTop="24dp"
+            app:cardBackgroundColor="#B2E7B0"
+            app:cardCornerRadius="40dp"
+            app:cardElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTimeForPill">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="24dp">
+
+                <ImageView
+                    android:id="@+id/ivPillIcon1"
+                    android:src="@drawable/ic_pills"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvPillName1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="14dp"
+                    android:text="Paracetamol"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/ivPillIcon1"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvPillDesc1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="02 pills  |  After food"
+                    android:textColor="#333333"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/tvPillName1"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPillName1" />
+
+                <ImageView
+                    android:id="@+id/ivNotificationBell1"
+                    android:src="@drawable/ic_reminder"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Medicine Card 2 (Eye Drops) -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardMedicine2"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_marginHorizontal="28dp"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="#B2E7B0"
+            app:cardCornerRadius="40dp"
+            app:cardElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardMedicine1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="24dp">
+
+                <ImageView
+                    android:id="@+id/ivPillIcon2"
+                    android:src="@drawable/ic_drop2"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvPillName2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="14dp"
+                    android:text="Eye drops"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/ivPillIcon2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvPillDesc2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Before bed"
+                    android:textColor="#333333"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/tvPillName2"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPillName2" />
+
+                <ImageView
+                    android:id="@+id/ivNotificationBell2"
+                    android:src="@drawable/ic_reminder"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
