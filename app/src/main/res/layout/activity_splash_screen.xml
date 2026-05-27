@@ -21,11 +21,13 @@
         app:srcCompat="@drawable/logo_2nd_bgr" />
 
     <Button
-        android:id="@+id/but_getS"
+        android:id="@+id/btn_getS"
         android:layout_width="126dp"
         android:layout_height="66dp"
-        android:backgroundTint="#1A2D6D"
-        android:text="Button"
+        android:backgroundTint="#1502F2"
+        android:background="@drawable/btn_edit"
+        android:text="Get in"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.463"
