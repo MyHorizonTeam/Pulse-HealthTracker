@@ -65,6 +65,14 @@ class home : AppCompatActivity() {
             startActivity(Intent(this, ArticlesActivity::class.java))
         }
 
+        findViewById<androidx.cardview.widget.CardView>(R.id.cardDeepTimer).setOnClickListener {
+            openWebPage("https://www.deeptimer.io/?utm_source=chatgpt.com")
+        }
+
+        findViewById<androidx.cardview.widget.CardView>(R.id.cardChatWithGPT).setOnClickListener {
+            openWebPage("https://chatgpt.com/")
+        }
+
         val etAddTask = findViewById<EditText>(R.id.etAddTask)
         val btnAddTask = findViewById<MaterialButton>(R.id.btnAddTask)
 
@@ -78,6 +86,11 @@ class home : AppCompatActivity() {
                 true
             } else false
         }
+    }
+
+    private fun openWebPage(url: String) {
+        val intent = android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url))
+        startActivity(intent)
     }
 
     private fun addCustomTask(et: EditText) {
