@@ -31,7 +31,7 @@ class home : AppCompatActivity() {
 
         setupRecyclerView()
         setupPredefinedTasks()
-        setupFabAndInputs()
+        setupInputs()
         updateProgress()
     }
 
@@ -60,7 +60,7 @@ class home : AppCompatActivity() {
         taskAdapter.notifyDataSetChanged()
     }
 
-    private fun setupFabAndInputs() {
+    private fun setupInputs() {
         findViewById<androidx.cardview.widget.CardView>(R.id.cardArticles).setOnClickListener {
             startActivity(Intent(this, ArticlesActivity::class.java))
         }
@@ -77,11 +77,6 @@ class home : AppCompatActivity() {
                 addCustomTask(etAddTask)
                 true
             } else false
-        }
-
-        val fab = findViewById<FloatingActionButton>(R.id.fabAddTask)
-        fab.setOnClickListener {
-            etAddTask.requestFocus()
         }
     }
 
