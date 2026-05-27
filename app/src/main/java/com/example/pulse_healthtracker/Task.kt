@@ -2,7 +2,7 @@ package com.example.pulse_healthtracker
 
 data class Task(
     val id: Long = System.currentTimeMillis(),
-    val title: String,
+    var title: String,
     val description: String = "",
     val time: String = "",
     var isCompleted: Boolean = false,

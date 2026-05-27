@@ -1,38 +1,48 @@
 package com.example.pulse_healthtracker
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class home : AppCompatActivity() {
 
     private lateinit var taskAdapter: TaskAdapter
     private val taskList = mutableListOf<Task>()
+    private lateinit var progressBar: ProgressBar
+    private lateinit var tvProgress: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_home)
 
+        progressBar = findViewById(R.id.progressBar)
+        tvProgress = findViewById(R.id.tvProgress)
+
         setupRecyclerView()
         setupPredefinedTasks()
-        setupFab()
+        setupFabAndInputs()
+        updateProgress()
     }
 
     private fun setupRecyclerView() {
         val rvTasks = findViewById<RecyclerView>(R.id.rvTasks)
         taskAdapter = TaskAdapter(taskList, 
-            onTaskChanged = { task ->
-                val status = if (task.isCompleted) "Completed" else "Pending"
-                Toast.makeText(this, "${task.title} is $status", Toast.LENGTH_SHORT).show()
-            },
+            onTaskChanged = { updateProgress() },
             onTaskDeleted = { position ->
                 taskList.removeAt(position)
                 taskAdapter.notifyItemRemoved(position)
+                updateProgress()
                 Toast.makeText(this, "Task Deleted", Toast.LENGTH_SHORT).show()
             }
         )
@@ -50,22 +60,55 @@ class home : AppCompatActivity() {
         taskAdapter.notifyDataSetChanged()
     }
 
-    private fun setupFab() {findViewById<androidx.cardview.widget.CardView>(R.id.cardArticles).setOnClickListener {
-        startActivity(android.content.Intent(this, ArticlesActivity::class.java))
-    }
+    private fun setupFabAndInputs() {
+        findViewById<androidx.cardview.widget.CardView>(R.id.cardArticles).setOnClickListener {
+            startActivity(Intent(this, ArticlesActivity::class.java))
+        }
+
+        val etAddTask = findViewById<EditText>(R.id.etAddTask)
+        val btnAddTask = findViewById<MaterialButton>(R.id.btnAddTask)
+
+        btnAddTask.setOnClickListener {
+            addCustomTask(etAddTask)
+        }
+
+        etAddTask.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                addCustomTask(etAddTask)
+                true
+            } else false
+        }
+
         val fab = findViewById<FloatingActionButton>(R.id.fabAddTask)
         fab.setOnClickListener {
+            etAddTask.requestFocus()
+        }
+    }
+
+    private fun addCustomTask(et: EditText) {
+        val text = et.text.toString().trim()
+        if (text.isNotEmpty()) {
             val newTask = Task(
                 System.currentTimeMillis(),
-                "New Task",
-                "Description for the task",
-                "12:00 PM",
+                text,
+                "Custom task",
+                "Now",
                 false,
                 "#7E57C2"
             )
             taskList.add(newTask)
             taskAdapter.notifyItemInserted(taskList.size - 1)
+            updateProgress()
+            et.text.clear()
             findViewById<RecyclerView>(R.id.rvTasks).smoothScrollToPosition(taskList.size - 1)
         }
+    }
+
+    private fun updateProgress() {
+        val done = taskList.count { it.isCompleted }
+        val total = taskList.size
+        val pct = if (total > 0) (done * 100) / total else 0
+        progressBar.progress = pct
+        tvProgress.text = "$done / $total tasks done"
     }
 }

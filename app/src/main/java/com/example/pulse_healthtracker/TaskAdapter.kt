@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 
 class TaskAdapter(
@@ -23,6 +25,7 @@ class TaskAdapter(
         val tvDesc: TextView = view.findViewById(R.id.tvTaskDesc)
         val viewColor: View = view.findViewById(R.id.viewColorTag)
         val ivDelete: ImageView = view.findViewById(R.id.ivDeleteTask)
+        val ivEdit: ImageView = view.findViewById(R.id.ivEditTask)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -37,7 +40,9 @@ class TaskAdapter(
         holder.tvDesc.text = task.description
         
         try {
-            holder.viewColor.setBackgroundColor(Color.parseColor(task.color))
+            val colorInt = Color.parseColor(task.color)
+            holder.viewColor.setBackgroundColor(colorInt)
+            holder.cbTask.buttonTintList = android.content.res.ColorStateList.valueOf(colorInt)
         } catch (e: Exception) {
             holder.viewColor.setBackgroundColor(Color.RED)
         }
@@ -55,6 +60,29 @@ class TaskAdapter(
         holder.ivDelete.setOnClickListener {
             onTaskDeleted(holder.bindingAdapterPosition)
         }
+
+        holder.ivEdit.setOnClickListener {
+            showRenameDialog(holder.itemView.context, task, holder.bindingAdapterPosition)
+        }
+    }
+
+    private fun showRenameDialog(context: android.content.Context, task: Task, position: Int) {
+        val editText = EditText(context)
+        editText.setText(task.title)
+        
+        AlertDialog.Builder(context)
+            .setTitle("Rename Task")
+            .setView(editText)
+            .setPositiveButton("Save") { _, _ ->
+                val newTitle = editText.text.toString().trim()
+                if (newTitle.isNotEmpty()) {
+                    task.title = newTitle
+                    notifyItemChanged(position)
+                    onTaskChanged(task)
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 
     private fun updateTextStyle(textView: TextView, isCompleted: Boolean) {
