@@ -12,6 +12,7 @@
         android:theme="@style/Theme.PulseHealthTracker">
 
         <activity android:name=".ArticlesActivity" />
+        <activity android:name=".LibraryActivity" />
 
         <activity android:name=".MainActivity"
             android:exported="false" />

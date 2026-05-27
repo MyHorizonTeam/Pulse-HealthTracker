@@ -1,5 +1,6 @@
 package com.example.pulse_healthtracker
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
@@ -32,6 +33,7 @@ class home : AppCompatActivity() {
         setupRecyclerView()
         setupPredefinedTasks()
         setupInputs()
+        setupMoodClicks()
         updateProgress()
     }
 
@@ -65,6 +67,10 @@ class home : AppCompatActivity() {
             startActivity(Intent(this, ArticlesActivity::class.java))
         }
 
+        findViewById<TextView>(R.id.tvLibrary).setOnClickListener {
+            startActivity(Intent(this, LibraryActivity::class.java))
+        }
+
         findViewById<androidx.cardview.widget.CardView>(R.id.cardDeepTimer).setOnClickListener {
             openWebPage("https://www.deeptimer.io/?utm_source=chatgpt.com")
         }
@@ -88,9 +94,28 @@ class home : AppCompatActivity() {
         }
     }
 
-    private fun openWebPage(url: String) {
-        val intent = android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url))
-        startActivity(intent)
+    private fun setupMoodClicks() {
+        val emojis = listOf(
+            findViewById<TextView>(R.id.emoji1) to "Sad",
+            findViewById<TextView>(R.id.emoji2) to "Anxious",
+            findViewById<TextView>(R.id.emoji3) to "Overwhelmed",
+            findViewById<TextView>(R.id.emoji4) to "Okay",
+            findViewById<TextView>(R.id.emoji5) to "Happy"
+        )
+
+        emojis.forEach { (view, mood) ->
+            view.setOnClickListener {
+                saveMood(mood)
+                Toast.makeText(this, "Mood '$mood' saved to Library!", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun saveMood(mood: String) {
+        val prefs = getSharedPreferences("PulseHealth", Context.MODE_PRIVATE)
+        val savedMoods = prefs.getStringSet("saved_moods", mutableSetOf())?.toMutableSet() ?: mutableSetOf()
+        savedMoods.add("${System.currentTimeMillis()}|$mood")
+        prefs.edit().putStringSet("saved_moods", savedMoods).apply()
     }
 
     private fun addCustomTask(et: EditText) {
@@ -118,5 +143,10 @@ class home : AppCompatActivity() {
         val pct = if (total > 0) (done * 100) / total else 0
         progressBar.progress = pct
         tvProgress.text = "$done / $total tasks done"
+    }
+
+    private fun openWebPage(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(url))
+        startActivity(intent)
     }
 }
