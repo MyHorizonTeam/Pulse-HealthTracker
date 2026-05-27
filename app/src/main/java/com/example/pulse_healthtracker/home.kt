@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class home : AppCompatActivity() {
 
@@ -72,11 +71,11 @@ class home : AppCompatActivity() {
         }
 
         findViewById<androidx.cardview.widget.CardView>(R.id.cardDeepTimer).setOnClickListener {
-            openWebPage("https://www.deeptimer.io/?utm_source=chatgpt.com")
+            openInWebView("https://www.deeptimer.io/?utm_source=chatgpt.com", "Deep Timer")
         }
 
         findViewById<androidx.cardview.widget.CardView>(R.id.cardChatWithGPT).setOnClickListener {
-            openWebPage("https://chatgpt.com/")
+            openInWebView("https://chatgpt.com/", "Chat with GPT")
         }
 
         val etAddTask = findViewById<EditText>(R.id.etAddTask)
@@ -92,6 +91,13 @@ class home : AppCompatActivity() {
                 true
             } else false
         }
+    }
+
+    private fun openInWebView(url: String, title: String) {
+        val intent = Intent(this, WebViewActivity::class.java)
+        intent.putExtra("url", url)
+        intent.putExtra("title", title)
+        startActivity(intent)
     }
 
     private fun setupMoodClicks() {
@@ -143,10 +149,5 @@ class home : AppCompatActivity() {
         val pct = if (total > 0) (done * 100) / total else 0
         progressBar.progress = pct
         tvProgress.text = "$done / $total tasks done"
-    }
-
-    private fun openWebPage(url: String) {
-        val intent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(url))
-        startActivity(intent)
     }
 }
