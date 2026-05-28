@@ -11,9 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PulseHealthTracker">
-        <activity
-            android:name=".MainMJ"
-            android:exported="false" />
+
         <activity
             android:name=".Home_MJ"
             android:exported="false" />
