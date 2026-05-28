@@ -5,12 +5,11 @@ import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class MainActivity : AppCompatActivity() {
+class MainMJ : AppCompatActivity() {
 
     private lateinit var adapter: TaskAdapter
     private lateinit var progressBar: ProgressBar
@@ -27,12 +26,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main_mj)
 
         progressBar = findViewById(R.id.progressBar)
         tvProgress = findViewById(R.id.tvProgress)
 
-        adapter = TaskAdapter(tasks, 
+        adapter = TaskAdapter(tasks,
             onTaskChanged = { updateProgress() },
             onTaskDeleted = { position ->
                 tasks.removeAt(position)

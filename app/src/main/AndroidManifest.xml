@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PulseHealthTracker">
         <activity
+            android:name=".MainMJ"
+            android:exported="false" />
+        <activity
             android:name=".Home_MJ"
             android:exported="false" />
         <activity
@@ -70,7 +73,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".ArticlesActivity" />
         <activity android:name=".LibraryActivity" />
-        <activity android:name=".WebViewActivity"></activity>
+        <activity android:name=".WebViewActivity" />
     </application>
 
 </manifest>
