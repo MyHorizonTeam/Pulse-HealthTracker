@@ -7,7 +7,6 @@ espressoCore = "3.7.0"
 appcompat = "1.7.1"
 material = "1.13.0"
 constraintlayout = "2.2.1"
-kotlin = "2.3.10"
 coreKtxVersion = "1.18.0"
 activity = "1.12.4"
 firebaseAuth = "24.1.0"
@@ -40,5 +39,4 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
