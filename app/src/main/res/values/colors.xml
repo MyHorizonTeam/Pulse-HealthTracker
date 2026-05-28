@@ -19,4 +19,19 @@
     <color name="card_bg_light">#E3E8FF</color>
     <color name="cyan_accent">#00E5FF</color>
     <color name="text_gray">#7E8BAB</color>
+    <color name="bg_mood">#0A1628</color>
+    <color name="dark_card_bg">#0F1E36</color>
+    <color name="card_mid_blue">#112040</color>
+    <color name="accent_blue">#378ADD</color>
+    <color name="text_primary">#E8F0FE</color>
+    <color name="text_secondary">#7BA3CC</color>
+    <color name="teal_green">#4CAF93</color>
+    <color name="border_blue">#1A3260</color>
+    <color name="bar_peach_color">#F4978E</color>
+    <color name="bar_red_color">#E25B5B</color>
+    <color name="bar_teal_color">#1D9E75</color>
+    <color name="bar_green_color">#4CAF50</color>
+    <color name="bar_blue_color">#378ADD</color>
+    <color name="bar_purple_color">#7E57C2</color>
+    <color name="bar_indigo_color">#5C8EE6</color>
 </resources>

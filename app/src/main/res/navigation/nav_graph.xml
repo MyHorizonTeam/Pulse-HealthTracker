@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/onboardingFragment">
+    app:startDestination="@id/dashboardFragment">
 
-    <fragment
+    <!--<fragment
         android:id="@+id/onboardingFragment"
         android:name="com.example.pulse_healthtracker.ui.onboarding.OnboardingFragment"
         android:label="Onboarding"
@@ -13,7 +13,7 @@
         <action
             android:id="@+id/action_onboarding_to_dashboard"
             app:destination="@id/dashboardFragment" />
-    </fragment>
+    </fragment> -->
 
     <fragment
         android:id="@+id/dashboardFragment"
