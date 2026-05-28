@@ -21,5 +21,16 @@
     <color name="bar_green_color">#4CAF50</color>
     <color name="bar_blue_color">#378ADD</color>
     <color name="bar_purple_color">#7E57C2</color>
-    <color name="bar_indigo_color">#5C8EE6</color>
+  <color name="bar_indigo_color">#5C8EE6</color>
+    <color name="red_pink">#FF6B6B</color>
+    <color name="darkblue">#0E164B</color>
+    <color name="bgBlue">#121995</color>
+    <color name="litebg">#BAC9FE</color>
+    <color name="ucrop_color">#4ECDC4</color>
+    <color name="bg_dark_blue">#0A1172</color>
+    <color name="bg_light_blue">#1F2CB8</color>
+    <color name="card_bg_dark">#121B4E</color>
+    <color name="card_bg_light">#E3E8FF</color>
+    <color name="cyan_accent">#00E5FF</color>
+    <color name="text_gray">#7E8BAB</color>
 </resources>
