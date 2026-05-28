@@ -10,8 +10,8 @@ class ArticlesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_articles)
 
         findViewById<android.widget.Button>(R.id.btnBack).setOnClickListener {
-            val intent = android.content.Intent(this, home::class.java)
-            startActivity(intent)
+            //val intent = android.content.Intent(this, ProfilePg::class.java)
+            //startActivity(intent)
             finish()
         }
 
