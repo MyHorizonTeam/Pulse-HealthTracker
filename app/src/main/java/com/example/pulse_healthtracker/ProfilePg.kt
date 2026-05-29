@@ -106,7 +106,11 @@ class ProfilePg : AppCompatActivity() {
                         startActivity(intent)
                     }
                     R.id.mental_switch->{
-                        val intent = Intent(this, MainMJ::class.java)
+                        val intent = Intent(this, Home_MJ::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.nut_switch->{
+                        val intent = Intent(this, DashboardActivity_Nut::class.java)
                         startActivity(intent)
                     }
                 }

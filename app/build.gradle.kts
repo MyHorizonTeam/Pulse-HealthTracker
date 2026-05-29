@@ -1,7 +1,7 @@
 plugins {
-    alias(libs.plugins.android.application) // Since this here we don't need to add "id("com.android.application")"
+    alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("com.google.gms.google-services")
+    alias(libs.plugins.google.gms.services)
 }
 
 android {
@@ -49,31 +49,25 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation("androidx.cardview:cardview:1.0.0")
-    implementation("com.google.firebase:firebase-analytics")
-    implementation(platform("com.google.firebase:firebase-bom:34.12.0"))
-    implementation("com.google.firebase:firebase-auth")
-    implementation("androidx.credentials:credentials:1.3.0")
-    implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
-    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
-    implementation("com.firebaseui:firebase-ui-auth:9.1.1")
-    implementation("com.google.firebase:firebase-auth")
-    implementation("com.google.firebase:firebase-database")
-    implementation("com.google.firebase:firebase-analytics")
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    // Firebase Storage
-    implementation("com.google.firebase:firebase-storage:20.3.0")
-// Firebase Firestore (or Realtime Database)
-    implementation("com.google.firebase:firebase-firestore:24.10.0")
-// Image loading library (Glide)
-    implementation("com.github.bumptech.glide:glide:4.16.0")
-// For cropping image (optional but recommended)
-    implementation("com.github.yalantis:ucrop:2.2.11")
+    implementation(libs.androidx.cardview)
 
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.database)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.storage)
+    implementation(libs.firebase.ui.auth)
+
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation(libs.glide)
+    implementation(libs.ucrop)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }

@@ -42,7 +42,6 @@
                     android:id="@+id/tvGreeting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/ivMenu"
                     android:layout_marginTop="24dp"
                     android:text="@string/good_morning"
                     android:textColor="#CCFFFFFF"

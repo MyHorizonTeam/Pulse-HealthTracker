@@ -60,5 +60,9 @@
     <string name="day_we">We</string>
     <string name="day_th">Th</string>
     <string name="day_fr">Fr</string>
+    <string name="breakfast_macros">400 Cal | 20g P | 45g C | 10g F</string>
+    <string name="lunch_macros">550 Cal | 35g P | 60g C | 10g F</string>
+    <string name="dinner_macros">300 Cal | 15g P | 40g C | 8g F</string>
+    <string name="snack_macros">200 Cal | 5g P | 25g C | 8g F</string>
 
 </resources>
