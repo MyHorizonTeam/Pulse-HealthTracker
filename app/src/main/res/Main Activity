@@ -1,0 +1,159 @@
+package com.example.pulse_healthtracker
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+class MainActivity : ComponentActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setContent {
+            NutritionWelcomeScreen()
+        }
+    }
+}
+
+@Composable
+fun NutritionWelcomeScreen() {
+
+    val darkBlue = Color(0xFF0D1341)
+    val purpleButton = Color(0xFF6C63FF)
+
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+
+        // Background Image
+        Image(
+            painter = painterResource(id = R.drawable.bg_fruit),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            // Top Title Box
+            Box(
+                modifier = Modifier
+                    .padding(top = 35.dp)
+                    .clip(RoundedCornerShape(20.dp))
+                    .width(230.dp)
+                    .height(75.dp),
+                contentAlignment = Alignment.Center
+            ) {
+
+                Surface(
+                    color = darkBlue
+                ) {
+
+                    Text(
+                        text = "Nutrition & diet\nlog",
+                        color = Color.White,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(10.dp)
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            // Bottom Curved Section
+            Surface(
+                color = darkBlue,
+                shape = RoundedCornerShape(
+                    topStart = 90.dp,
+                    topEnd = 0.dp
+                ),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+
+                Column(
+                    modifier = Modifier.padding(
+                        start = 18.dp,
+                        end = 18.dp,
+                        top = 40.dp,
+                        bottom = 25.dp
+                    )
+                ) {
+
+                    Text(
+                        text = "Never miss\nyour pills again",
+                        color = Color.White,
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.Bold,
+                        lineHeight = 28.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(15.dp))
+
+                    Text(
+                        text = "Stay on top of your healthcare with timely dose reminders pills track medication",
+                        color = Color.White,
+                        fontSize = 14.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(18.dp))
+
+                    // Button
+                    Button(
+                        onClick = { },
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = purpleButton
+                        ),
+                        shape = RoundedCornerShape(50),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(48.dp)
+                    ) {
+
+                        Text(
+                            text = "Get start by sign up",
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    // Bottom Text
+                    TextButton(
+                        onClick = { },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+
+                        Text(
+                            text = "I already have an account",
+                            color = Color.White,
+                            textDecoration = TextDecoration.Underline,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
+            }
+        }
+    }
+}

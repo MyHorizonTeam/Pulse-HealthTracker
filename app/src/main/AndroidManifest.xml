@@ -11,7 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PulseHealthTracker">
-
         <activity
             android:name=".Home_MJ"
             android:exported="false" />
@@ -70,6 +69,29 @@
         <activity android:name=".ArticlesActivity" />
         <activity android:name=".LibraryActivity" />
         <activity android:name=".WebViewActivity" />
+
+        <activity
+            android:name=".LunchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditMealActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Breakfast"
+            android:exported="false" />
+        <activity
+            android:name=".NutStartActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".DashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddMealActivity"
+            android:exported="false" />
+
+
+
     </application>
 
 </manifest>
