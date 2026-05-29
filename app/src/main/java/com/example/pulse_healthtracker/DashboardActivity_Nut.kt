@@ -7,7 +7,7 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 
-class DashboardActivity : AppCompatActivity() {
+class DashboardActivity_Nut : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

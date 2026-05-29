@@ -84,7 +84,7 @@
             android:exported="false">
         </activity>
         <activity
-            android:name=".DashboardActivity"
+            android:name=".DashboardActivity_Nut"
             android:exported="false" />
         <activity
             android:name=".AddMealActivity"

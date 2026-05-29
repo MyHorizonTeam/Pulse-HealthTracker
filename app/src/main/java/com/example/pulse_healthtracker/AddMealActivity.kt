@@ -150,7 +150,7 @@ class AddMealActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
 
-            val intent = Intent(this, DashboardActivity::class.java)
+            val intent = Intent(this, DashboardActivity_Nut::class.java)
             startActivity(intent)
         }
         val btnAddFoodItem = findViewById<Button>(R.id.btnAddFoodItem)

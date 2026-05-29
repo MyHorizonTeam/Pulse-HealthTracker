@@ -1,1 +1,8 @@
 /build
+google-services.json
+
+*.jks
+*.keystore
+local.properties
+secrets.properties
+debug.keystore

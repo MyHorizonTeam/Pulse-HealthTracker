@@ -109,6 +109,9 @@ class ProfilePg : AppCompatActivity() {
                         val intent = Intent(this, Home_MJ::class.java)
                         startActivity(intent)
                     }
+                    R.id.nut_switch->{
+                        val intent = Intent(this, DashboardActivity_Nut::class.java)
+                    }
                 }
             }
         }
