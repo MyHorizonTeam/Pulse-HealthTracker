@@ -8,13 +8,8 @@
         android:id="@+id/imgBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bg_nut" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#73000000" />
+        android:src="@drawable/bg_nut"
+        android:scaleType="centerCrop" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardTitle"
@@ -31,7 +26,7 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="36dp"
             android:paddingVertical="14dp"
-            android:text="Nutrition &amp; diet\nlog"
+            android:text="Nutrition &amp; diet&#10;log"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="28sp"
@@ -43,8 +38,7 @@
         android:layout_height="380dp"
         android:layout_alignParentBottom="true"
         app:cardBackgroundColor="#0B1A5E"
-        app:cardCornerRadius="40dp"
-        app:cardElevation="0dp">
+        app:cardCornerRadius="40dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,11 +49,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Eat smart, live\nbetter"
+                android:text="Eat smart, live better"
                 android:textColor="#FFFFFF"
                 android:textSize="32sp"
-                android:textStyle="bold"
-                android:lineSpacingMultiplier="1.1" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -67,23 +60,20 @@
                 android:layout_marginTop="16dp"
                 android:text="Track your daily meals, monitor nutrients, and build healthier eating habits"
                 android:textColor="#8E9BB0"
-                android:textSize="16sp"
-                android:lineSpacingMultiplier="1.2" />
+                android:textSize="16sp" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnGetStarted"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:backgroundTint="#5A4FCF"
                 android:text="Get Started"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold"
+                android:backgroundTint="#5A4FCF"
                 app:cornerRadius="14dp" />
 
             <TextView
@@ -95,6 +85,9 @@
                 android:text="I already have an account"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp" />
+
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
+
 </RelativeLayout>
