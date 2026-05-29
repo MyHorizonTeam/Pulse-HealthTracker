@@ -66,10 +66,12 @@
             android:hardwareAccelerated="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".ArticlesActivity" />
-        <activity android:name=".LibraryActivity" />
-        <activity android:name=".WebViewActivity" />
-
+        <activity android:name=".ArticlesActivity"
+            android:exported="false"/>
+        <activity android:name=".LibraryActivity"
+            android:exported="false"/>
+        <activity android:name=".WebViewActivity"
+            android:exported="false"/>
         <activity
             android:name=".LunchActivity"
             android:exported="false" />
