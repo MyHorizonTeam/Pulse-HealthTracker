@@ -114,7 +114,11 @@ class HomeMed : AppCompatActivity() {
         val datePickerDialog = android.app.DatePickerDialog(
             this,
             { _, selectedYear, selectedMonth, _ ->
-                currentMonthCalendar.set(selectedYear, selectedMonth, 1)
+                currentMonthCalendar.apply {
+                    set(Calendar.YEAR, selectedYear)
+                    set(Calendar.MONTH, selectedMonth)
+                    set(Calendar.DAY_OF_MONTH, 1)
+                }
                 updateMonthDisplay()
                 generateDatesForMonth()
             },
@@ -156,8 +160,7 @@ class HomeMed : AppCompatActivity() {
         val tempCal = currentMonthCalendar.clone() as Calendar
         tempCal.set(Calendar.DAY_OF_MONTH, 1)
         
-        val firstDayOfWeek = tempCal[Calendar.DAY_OF_WEEK]
-        val offset = when(firstDayOfWeek) {
+        val offset = when (tempCal[Calendar.DAY_OF_WEEK]) {
             Calendar.MONDAY -> 0
             Calendar.TUESDAY -> 1
             Calendar.WEDNESDAY -> 2
@@ -179,8 +182,8 @@ class HomeMed : AppCompatActivity() {
         repeat(maxDays) {
             val date = tempCal.time
             val isToday = (tempCal[Calendar.YEAR] == today[Calendar.YEAR] &&
-                tempCal[Calendar.MONTH] == today[Calendar.MONTH] &&
-                tempCal[Calendar.DAY_OF_MONTH] == today[Calendar.DAY_OF_MONTH])
+                (tempCal[Calendar.MONTH] == today[Calendar.MONTH]) &&
+                (tempCal[Calendar.DAY_OF_MONTH] == today[Calendar.DAY_OF_MONTH]))
 
             if (isToday) {
                 defaultSelectionIndex = calendarDates.size
@@ -324,7 +327,7 @@ class HomeMed : AppCompatActivity() {
             .update("isTaken", newStatus)
             .addOnSuccessListener {
                 if (newStatus) {
-                    ReminderManager.setReminder(this, medicine.copy(isTaken = newStatus))
+                    ReminderManager.setReminder(this, medicine.copy(isTaken = true))
                     Toast.makeText(this, "Reminder set for ${medicine.pillName}", Toast.LENGTH_SHORT).show()
                 } else {
                     ReminderManager.cancelReminder(this, medicine)

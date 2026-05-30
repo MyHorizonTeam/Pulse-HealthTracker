@@ -12,7 +12,7 @@ class MedicineAdapter(
     private var medicines: List<Medicine>,
     private val onToggleClick: (Medicine) -> Unit,
     private val onItemClick: (Medicine) -> Unit,
-    private val onDeleteClick: (Medicine) -> Unit
+    private val onDeleteClick: (Medicine) -> Unit,
 ) : RecyclerView.Adapter<MedicineAdapter.MedicineViewHolder>() {
 
     class MedicineViewHolder(view: View) : RecyclerView.ViewHolder(view) {

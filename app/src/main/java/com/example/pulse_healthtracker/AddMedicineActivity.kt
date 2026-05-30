@@ -48,10 +48,7 @@ class AddMedicineActivity : AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
     private lateinit var storage: FirebaseStorage
 
-    private var editingMedicineId: String? = null
-    private var currentIsTaken = false
     private var selectedImageUri: Uri? = null
-    private var currentImageUrl: String = ""
 
     private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         if (uri != null) {
@@ -75,13 +72,8 @@ class AddMedicineActivity : AppCompatActivity() {
         initializeFirebase()
         setupClickListeners()
 
-        val medicineId = intent.getStringExtra("medicineId")
         val preSelectedDate = intent.getStringExtra("selectedDate")
-        
-        if (medicineId != null) {
-            editingMedicineId = medicineId
-            loadMedicineData(medicineId)
-        } else if (preSelectedDate != null) {
+        if (preSelectedDate != null) {
             selectedDate = preSelectedDate
             etDate.text = selectedDate
         }
@@ -117,35 +109,6 @@ class AddMedicineActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
         storage = FirebaseStorage.getInstance()
-    }
-
-    private fun loadMedicineData(id: String) {
-        tvHeaderTitle.text = getString(R.string.edit_medicine)
-        btnSubmitMedicine.text = getString(R.string.update_medicine)
-        
-        firestore.collection("medications").document(id).get()
-            .addOnSuccessListener { doc ->
-                val med = doc.toObject(Medicine::class.java)
-                if (med != null) {
-                    etPillName.setText(med.pillName)
-                    spDiseases.setText(med.diseases)
-                    etDose.setText(med.dose.toString())
-                    etTime.text = med.time
-                    selectedTime = med.time
-                    etDate.text = med.date
-                    selectedDate = med.date
-                    spFoodRelation.text = med.foodRelation
-                    selectedFoodRelation = med.foodRelation
-                    etNotes.setText(med.notes)
-                    medicineTimes.clear()
-                    medicineTimes.addAll(med.medicineTimes)
-                    currentIsTaken = med.isTaken
-                    currentImageUrl = med.imageUrl
-                    if (currentImageUrl.isNotEmpty()) {
-                        Glide.with(this).load(currentImageUrl).into(ivMedicineImage)
-                    }
-                }
-            }
     }
 
     private fun showTimePickerDialog() {
@@ -245,41 +208,41 @@ class AddMedicineActivity : AppCompatActivity() {
         val userId = auth.currentUser?.uid ?: return
 
         btnSubmitMedicine.isEnabled = false
-        btnSubmitMedicine.text = if (editingMedicineId == null) "Adding..." else "Updating..."
-
-        if (selectedImageUri != null) {
-            uploadImageAndSubmit(pillName, diseases, dose, notes, userId)
-        } else {
-            saveToFirestore(pillName, diseases, dose, notes, userId, currentImageUrl)
-        }
-    }
-
-    private fun uploadImageAndSubmit(pillName: String, diseases: String, dose: Double, notes: String, userId: String) {
-        val ref = storage.reference.child("medicine_images/${UUID.randomUUID()}")
-        ref.putFile(selectedImageUri!!)
-            .addOnSuccessListener {
-                ref.downloadUrl.addOnSuccessListener { uri ->
-                    saveToFirestore(pillName, diseases, dose, notes, userId, uri.toString())
-                }
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, "Image upload failed", Toast.LENGTH_SHORT).show()
-                saveToFirestore(pillName, diseases, dose, notes, userId, currentImageUrl)
-            }
-    }
-
-    private fun saveToFirestore(pillName: String, diseases: String, dose: Double, notes: String, userId: String, imageUrl: String) {
-        val docRef = if (editingMedicineId == null) {
-            firestore.collection("medications").document()
-        } else {
-            firestore.collection("medications").document(editingMedicineId!!)
-        }
+        btnSubmitMedicine.text = "Saving..."
 
         // Default to today if no date selected
         if (selectedDate.isEmpty()) {
             val cal = Calendar.getInstance()
             selectedDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(cal.time)
         }
+
+        if (selectedImageUri != null) {
+            performBackgroundUploadAndSave(pillName, diseases, dose, notes, userId)
+        } else {
+            performBackgroundSave(pillName, diseases, dose, notes, userId, "")
+        }
+
+        // Optimistic UI: Close immediately
+        Toast.makeText(this, "Saving medicine...", Toast.LENGTH_SHORT).show()
+        finish()
+    }
+
+    private fun performBackgroundUploadAndSave(pillName: String, diseases: String, dose: Double, notes: String, userId: String) {
+        val ref = storage.reference.child("medicine_images/${UUID.randomUUID()}")
+        ref.putFile(selectedImageUri!!)
+            .addOnSuccessListener {
+                ref.downloadUrl.addOnSuccessListener { uri ->
+                    performBackgroundSave(pillName, diseases, dose, notes, userId, uri.toString())
+                }
+            }
+            .addOnFailureListener { e ->
+                android.util.Log.e("AddMedicine", "Image upload failed", e)
+                performBackgroundSave(pillName, diseases, dose, notes, userId, "")
+            }
+    }
+
+    private fun performBackgroundSave(pillName: String, diseases: String, dose: Double, notes: String, userId: String, imageUrl: String) {
+        val docRef = firestore.collection("medications").document()
 
         val medicineData = hashMapOf(
             "medicineId" to docRef.id,
@@ -294,17 +257,13 @@ class AddMedicineActivity : AppCompatActivity() {
             "createdAt" to System.currentTimeMillis(),
             "status" to "active",
             "userId" to userId,
-            "isTaken" to currentIsTaken,
+            "isTaken" to false,
             "imageUrl" to imageUrl,
         )
 
-        // Optimistic UI: Trigger save and close screen immediately
         docRef.set(medicineData)
             .addOnFailureListener { e ->
                 android.util.Log.e("AddMedicine", "Background save failed", e)
             }
-
-        Toast.makeText(this, "Saving medicine...", Toast.LENGTH_SHORT).show()
-        finish()
     }
 }

@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -33,6 +34,7 @@ class EditMedicineActivity : AppCompatActivity() {
     private lateinit var etDose2: EditText
     private lateinit var etTime2: TextView
     private lateinit var spFoodRelation2: TextView
+    private lateinit var btnAddTimes: LinearLayout
     private lateinit var etNotes: EditText
     private lateinit var btnSave: androidx.appcompat.widget.AppCompatButton
     private lateinit var btnRemove: androidx.appcompat.widget.AppCompatButton
@@ -44,6 +46,7 @@ class EditMedicineActivity : AppCompatActivity() {
     private var medicineId: String? = null
     private var selectedImageUri: Uri? = null
     private var currentImageUrl: String = ""
+    private val medicineTimes = mutableListOf<String>()
 
     private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         if (uri != null) {
@@ -88,6 +91,7 @@ class EditMedicineActivity : AppCompatActivity() {
         etDose2 = findViewById(R.id.etDose2)
         etTime2 = findViewById(R.id.etTime2)
         spFoodRelation2 = findViewById(R.id.spFoodRelation2)
+        btnAddTimes = findViewById(R.id.btnAddTimes)
         etNotes = findViewById(R.id.etNotes)
         btnSave = findViewById(R.id.btnSaveMedicine)
         btnRemove = findViewById(R.id.btnRemoveMedicine)
@@ -108,6 +112,7 @@ class EditMedicineActivity : AppCompatActivity() {
         btnSave.setOnClickListener { saveMedicine() }
         btnRemove.setOnClickListener { removeMedicine() }
         cvPillImage.setOnClickListener { pickImageLauncher.launch("image/*") }
+        btnAddTimes.setOnClickListener { showAddTimeDialog() }
     }
 
     private fun loadMedicineData(id: String) {
@@ -123,6 +128,9 @@ class EditMedicineActivity : AppCompatActivity() {
                     spFoodRelation1.text = med.foodRelation
                     etNotes.setText(med.notes)
                     currentImageUrl = med.imageUrl
+                    medicineTimes.clear()
+                    medicineTimes.addAll(med.medicineTimes)
+
                     if (currentImageUrl.isNotEmpty()) {
                         Glide.with(this).load(currentImageUrl).into(ivMedicineImage)
                     }
@@ -178,6 +186,41 @@ class EditMedicineActivity : AppCompatActivity() {
         }.show()
     }
 
+    private fun showAddTimeDialog() {
+        val timeList = arrayOf("Morning", "Afternoon", "Evening", "Night", "Custom")
+        AlertDialog.Builder(this).setTitle("Add Time").setItems(timeList) { _, which ->
+            if (which == 4) showCustomTimeDialog() else addMedicineTime(timeList[which])
+        }.show()
+    }
+
+    private fun showCustomTimeDialog() {
+        val calendar = Calendar.getInstance()
+        TimePickerDialog(
+            this,
+            { _, hour, minute ->
+                val cal = Calendar.getInstance().apply {
+                    set(Calendar.HOUR_OF_DAY, hour)
+                    set(Calendar.MINUTE, minute)
+                }
+                addMedicineTime(SimpleDateFormat("hh:mm a", Locale.getDefault()).format(cal.time))
+            },
+            calendar[Calendar.HOUR_OF_DAY],
+            calendar[Calendar.MINUTE],
+            false,
+        ).show()
+    }
+
+    private fun addMedicineTime(time: String) {
+        if (!medicineTimes.contains(time)) {
+            medicineTimes.add(time)
+            // Update etTime2 with the latest added time if it's the first extra time
+            if (medicineTimes.size == 1) {
+                etTime2.text = time
+            }
+            Toast.makeText(this, "Added: $time", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun saveMedicine() {
         val pillName = etPillName.text.toString().trim()
         val diseases = spDiseases.text.toString().trim()
@@ -195,11 +238,10 @@ class EditMedicineActivity : AppCompatActivity() {
         btnSave.isEnabled = false
         btnSave.text = getString(R.string.loading)
 
-        // Trigger background work
         if (selectedImageUri != null) {
-            uploadImageAndSave(pillName, diseases, dose1, time1, food1, notes, date)
+            performBackgroundUploadAndSave(pillName, diseases, dose1, time1, food1, notes, date)
         } else {
-            updateFirestore(pillName, diseases, dose1, time1, food1, notes, date, currentImageUrl)
+            performBackgroundUpdate(pillName, diseases, dose1, time1, food1, notes, date, currentImageUrl)
         }
 
         // Optimistic UI: Close immediately
@@ -207,25 +249,21 @@ class EditMedicineActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun uploadImageAndSave(pillName: String, diseases: String, dose: Double, time: String, food: String, notes: String, date: String) {
+    private fun performBackgroundUploadAndSave(pillName: String, diseases: String, dose: Double, time: String, food: String, notes: String, date: String) {
         val ref = storage.reference.child("medicine_images/${UUID.randomUUID()}")
         ref.putFile(selectedImageUri!!)
             .addOnSuccessListener {
                 ref.downloadUrl.addOnSuccessListener { uri ->
-                    performBackgroundFirestoreUpdate(pillName, diseases, dose, time, food, notes, date, uri.toString())
+                    performBackgroundUpdate(pillName, diseases, dose, time, food, notes, date, uri.toString())
                 }
             }
             .addOnFailureListener { e ->
                 android.util.Log.e("EditMedicine", "Image upload failed", e)
-                performBackgroundFirestoreUpdate(pillName, diseases, dose, time, food, notes, date, currentImageUrl)
+                performBackgroundUpdate(pillName, diseases, dose, time, food, notes, date, currentImageUrl)
             }
     }
 
-    private fun updateFirestore(pillName: String, diseases: String, dose: Double, time: String, food: String, notes: String, date: String, imageUrl: String) {
-        performBackgroundFirestoreUpdate(pillName, diseases, dose, time, food, notes, date, imageUrl)
-    }
-
-    private fun performBackgroundFirestoreUpdate(pillName: String, diseases: String, dose: Double, time: String, food: String, notes: String, date: String, imageUrl: String) {
+    private fun performBackgroundUpdate(pillName: String, diseases: String, dose: Double, time: String, food: String, notes: String, date: String, imageUrl: String) {
         val updateData = hashMapOf<String, Any>(
             "pillName" to pillName,
             "diseases" to diseases,
@@ -235,6 +273,7 @@ class EditMedicineActivity : AppCompatActivity() {
             "foodRelation" to food,
             "notes" to notes,
             "imageUrl" to imageUrl,
+            "medicineTimes" to medicineTimes,
         )
 
         firestore.collection("medications").document(medicineId!!)
@@ -249,7 +288,6 @@ class EditMedicineActivity : AppCompatActivity() {
             .setTitle("Remove Medicine")
             .setMessage("Are you sure you want to remove this medicine?")
             .setPositiveButton("Remove") { _, _ ->
-                // Optimistic UI: Trigger delete and close screen immediately
                 firestore.collection("medications").document(medicineId!!).delete()
                     .addOnFailureListener { e ->
                         android.util.Log.e("EditMedicine", "Delete failed in background", e)

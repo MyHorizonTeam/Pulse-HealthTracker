@@ -10,7 +10,7 @@ import java.util.Locale
 
 class CalendarAdapter(
     private var dates: List<CalendarDate>,
-    private val onDateSelected: (CalendarDate) -> Unit
+    private val onDateSelected: (CalendarDate) -> Unit,
 ) : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
 
     class CalendarViewHolder(view: View) : RecyclerView.ViewHolder(view) {
