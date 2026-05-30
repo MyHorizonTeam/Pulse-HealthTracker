@@ -1,0 +1,1931 @@
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.PulseHealthTracker\">\r\n        <activity\r\n            android:name=\".Home_MJ\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".SplashActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".ReminderActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".EditMedicineActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".AddMedicineActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".HomeMed\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".medi_splash\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".PrivacyActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".SettingsActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".EditProfileActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Login\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".ProfilePg\"\r\n            android:exported=\"false\" />\r\n\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Onboarding\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\"com.yalantis.ucrop.UCropActivity\"\r\n            android:exported=\"false\"\r\n            android:hardwareAccelerated=\"true\"\r\n            android:screenOrientation=\"portrait\"\r\n            android:theme=\"@style/Theme.AppCompat.Light.NoActionBar\" />\r\n        <activity android:name=\".ArticlesActivity\"\r\n            android:exported=\"false\"/>\r\n        <activity android:name=\".LibraryActivity\"\r\n            android:exported=\"false\"/>\r\n        <activity android:name=\".WebViewActivity\"\r\n            android:exported=\"false\"/>\r\n        <activity\r\n            android:name=\".LunchActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".EditMealActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Breakfast\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".NutStartActivity\"\r\n            android:exported=\"false\">\r\n        </activity>\r\n        <activity\r\n            android:name=\".DashboardActivity_Nut\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".AddMealActivity\"\r\n            android:exported=\"false\" />\r\n\r\n\r\n\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision 541fed46a9e4b23ceed69695bf8e08945b35005d)
++++ b/app/src/main/AndroidManifest.xml	(date 1780124706385)
+@@ -2,6 +2,13 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools">
+ 
++    <uses-permission android:name="android.permission.INTERNET" />
++    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
++    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
++    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
++    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
++    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
++
+     <application
+         android:allowBackup="true"
+         android:dataExtractionRules="@xml/data_extraction_rules"
+@@ -92,7 +99,14 @@
+             android:name=".AddMealActivity"
+             android:exported="false" />
+ 
+-
++        <receiver
++            android:name=".ReminderReceiver"
++            android:enabled="true"
++            android:exported="false">
++            <intent-filter>
++                <action android:name="android.intent.action.BOOT_COMPLETED" />
++            </intent-filter>
++        </receiver>
+ 
+     </application>
+ 
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">Pulse-HealthTracker</string>\r\n    <string name=\"action_settings\">Settings</string>\r\n    <string name=\"logging_in\">Logging in...</string>\r\n    <string name=\"log_in\">Log in</string>\r\n    <string name=\"creating_account\">Creating account...</string>\r\n    <string name=\"register\">Register</string>\r\n    <string name=\"forgot_password_not_implemented\">Forgot password flow not added yet</string>\r\n    <string name=\"verification_email_sent\">Verification email sent</string>\r\n    <string name=\"successfully_signed_in\">Successfully signed in</string>\r\n    <string name=\"pf_email\">test1@outlook.com</string>\r\n    <string name=\"user_Name\">Musharraf</string>\r\n    <string name=\"weight\">65Kg</string>\r\n    <string name=\"steps\">1300</string>\r\n    <string name=\"sleep_hr\">5hr</string>\r\n    <string name=\"bmi\">7.25</string>\r\n    <string name=\"step_prog\">5250/10000</string>\r\n    <string name=\"session\">3/5</string>\r\n    <string name=\"water\">5/20</string>\r\n    <string name=\"goal\">\"Goals &amp; target\"</string>\r\n    <string name=\"privacy\">Privacy &amp; Data</string>\r\n    <!-- Accessibility -->\r\n    <string name=\"desc_menu\">Menu</string>\r\n    <string name=\"desc_profile\">Profile</string>\r\n    <string name=\"desc_add_task\">Add Task</string>\r\n    <string name=\"desc_delete_task\">Delete Task</string>\r\n    <string name=\"desc_sad\">Sad</string>\r\n    <string name=\"desc_anxious\">Anxious</string>\r\n    <string name=\"desc_overwhelmed\">Overwhelmed</string>\r\n    <string name=\"desc_okay\">Okay</string>\r\n    <string name=\"desc_happy\">Happy</string>\r\n    <string name=\"desc_neutral\">Neutral</string>\r\n\r\n    <!-- UI Text -->\r\n    <string name=\"good_morning\">Good morning,</string>\r\n    <string name=\"user_name_default\">User !</string>\r\n    <string name=\"user_name_musharaff\">Musharaff !</string>\r\n    <string name=\"how_are_you_feeling\">How are you feeling Today?</string>\r\n    <string name=\"tasks_done_format\">%1$d / %2$d tasks done</string>\r\n    <string name=\"tasks_done_default\">0 / 0 tasks done</string>\r\n    <string name=\"add_new_task\">Add New Task</string>\r\n    <string name=\"hint_enter_task_title\">Enter task title...</string>\r\n    <string name=\"btn_add\">Add</string>\r\n    <string name=\"my_tasks\">My Tasks</string>\r\n    <string name=\"mood_insights\">Mood Insights</string>\r\n    <string name=\"date_range_feb\">Feb 4 - 10</string>\r\n    <string name=\"for_you\">For you</string>\r\n    <string name=\"library\">Library</string>\r\n    <string name=\"articles\">Articles</string>\r\n    <string name=\"reduce_anxiety\">Reduce Anxiety</string>\r\n    <string name=\"manage_stress\">Manage Stress</string>\r\n    <string name=\"back\">&lt; Back</string>\r\n    <string name=\"more\">More</string>\r\n\r\n    <!-- Days -->\r\n    <string name=\"day_sa\">Sa</string>\r\n    <string name=\"day_su\">Su</string>\r\n    <string name=\"day_mo\">Mo</string>\r\n    <string name=\"day_tu\">Tu</string>\r\n    <string name=\"day_we\">We</string>\r\n    <string name=\"day_th\">Th</string>\r\n    <string name=\"day_fr\">Fr</string>\r\n    <string name=\"breakfast_macros\">400 Cal | 20g P | 45g C | 10g F</string>\r\n    <string name=\"lunch_macros\">550 Cal | 35g P | 60g C | 10g F</string>\r\n    <string name=\"dinner_macros\">300 Cal | 15g P | 40g C | 8g F</string>\r\n    <string name=\"snack_macros\">200 Cal | 5g P | 25g C | 8g F</string>\r\n\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	(revision 541fed46a9e4b23ceed69695bf8e08945b35005d)
++++ b/app/src/main/res/values/strings.xml	(date 1780132522864)
+@@ -65,4 +65,73 @@
+     <string name="dinner_macros">300 Cal | 15g P | 40g C | 8g F</string>
+     <string name="snack_macros">200 Cal | 5g P | 25g C | 8g F</string>
+ 
++    <!-- Medication Screen -->
++    <string name="title_medication">Medication</string>
++    <string name="hi_good_morning">Hi, Good Morning 👋</string>
++    <string name="todays_progress">Today\'s Progress</string>
++    <string name="medication_progress_format">%1$d / %2$d taken</string>
++    <string name="medication_progress_example">2 / 3 taken</string>
++    <string name="search_medications_hint">🔍  Search medications...</string>
++    <string name="month_january">January</string>
++    <string name="month_february">February</string>
++    <string name="month_march">March</string>
++    <string name="month_april">April</string>
++    <string name="month_may">May</string>
++    <string name="month_june">June</string>
++    <string name="month_july">July</string>
++    <string name="month_august">August</string>
++    <string name="month_september">September</string>
++    <string name="month_october">October</string>
++    <string name="month_november">November</string>
++    <string name="month_december">December</string>
++    <string name="year_2026">2026</string>
++    <string name="symbol_plus">+</string>
++    <string name="mon">Mon</string>
++    <string name="tue">Tue</string>
++    <string name="wed">Wed</string>
++    <string name="thu">Thu</string>
++    <string name="fri">Fri</string>
++    <string name="date_02">02</string>
++    <string name="date_03">03</string>
++    <string name="date_04">04</string>
++    <string name="date_05">05</string>
++    <string name="date_06">06</string>
++    <string name="desc_app_logo">App Logo</string>
++    <string name="desc_calendar">Calendar</string>
++
++    <!-- Medicine List Item -->
++    <string name="medicine_dose_format">%1$.1f pill(s) · %2$s</string>
++    <string name="status_taken">✓ Taken</string>
++    <string name="status_pending">⏰ Pending</string>
++    <string name="menu_edit">Edit</string>
++    <string name="menu_delete">Delete</string>
++
++    <!-- Dialogs and Toasts -->
++    <string name="dialog_delete_title">Delete Medicine</string>
++    <string name="dialog_delete_message">Are you sure you want to delete %1$s?</string>
++    <string name="toast_deleted">Deleted</string>
++    <string name="toast_failed">Failed: %1$s</string>
++    <string name="btn_cancel">Cancel</string>
++
++    <!-- Add/Edit Medicine -->
++    <string name="label_pill_name">Pill Name</string>
++    <string name="hint_pill_name">Enter pills name</string>
++    <string name="label_diseases">Diseases</string>
++    <string name="hint_diseases">diseases</string>
++    <string name="label_dose">Dose</string>
++    <string name="label_time">Time</string>
++    <string name="label_notes">Notes (Optional)</string>
++    <string name="hint_notes">Add any notes</string>
++    <string name="btn_add_medicine">Add Medicine</string>
++    <string name="btn_save_medicine">Save Medicine</string>
++    <string name="btn_remove_medicine">Remove medicine</string>
++    <string name="label_add_times">Add times</string>
++    <string name="title_add_medicine">Add Medicine</string>
++    <string name="title_edit_medicine">Edit Medicine</string>
++    <string name="toast_saving">Saving...</string>
++    <string name="toast_updated">Medicine updated successfully</string>
++    <string name="toast_fill_required">Please fill required fields</string>
++    <string name="label_date">Date</string>
++    <string name="hint_date">Select date</string>
++
+ </resources>
+\ No newline at end of file
+Index: gradle.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># Project-wide Gradle settings.\r\n# IDE (e.g. Android Studio) users:\r\n# Gradle settings configured through the IDE *will override*\r\n# any settings specified in this file.\r\n# For more details on how to configure your build environment visit\r\n# http://www.gradle.org/docs/current/userguide/build_environment.html\r\n# Specifies the JVM arguments used for the daemon process.\r\n# The setting is particularly useful for tweaking memory settings.\r\norg.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8\r\n# When configured, Gradle will run in incubating parallel mode.\r\n# This option should only be used with decoupled projects. For more details, visit\r\n# https://developer.android.com/r/tools/gradle-multi-project-decoupled-projects\r\n# org.gradle.parallel=true\r\n# AndroidX package structure to make it clearer which packages are bundled with the\r\n# Android operating system, and which are packaged with your app's APK\r\n# https://developer.android.com/topic/libraries/support-library/androidx-rn\r\nandroid.useAndroidX=true\r\n# Kotlin code style for this project: \"official\" or \"obsolete\":\r\nkotlin.code.style=official\r\n# Enables namespacing of each library's R class so that its R class includes only the\r\n# resources declared in the library itself and none from the library's dependencies,\r\n# thereby reducing the size of the R class for that library\r\nandroid.nonTransitiveRClass=true\r\nandroid.suppressUnsupportedCompileSdk=35\r\nandroid.defaults.buildfeatures.resvalues=true\r\nandroid.sdk.defaultTargetSdkToCompileSdkIfUnset=false\r\nandroid.uniquePackageNames=false\r\nandroid.dependency.useConstraints=true\r\nandroid.r8.strictFullModeForKeepRules=false\r\nandroid.r8.optimizedResourceShrinking=false\r\nandroid.newDsl=false\r\nandroid.enableAppCompileTimeRClass=false\r\nandroid.usesSdkInManifest.disallowed=false\r\nandroid.builtInKotlin=false\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/gradle.properties b/gradle.properties
+--- a/gradle.properties	(revision 541fed46a9e4b23ceed69695bf8e08945b35005d)
++++ b/gradle.properties	(date 1780135106680)
+@@ -22,13 +22,8 @@
+ # thereby reducing the size of the R class for that library
+ android.nonTransitiveRClass=true
+ android.suppressUnsupportedCompileSdk=35
+-android.defaults.buildfeatures.resvalues=true
+-android.sdk.defaultTargetSdkToCompileSdkIfUnset=false
+ android.uniquePackageNames=false
+ android.dependency.useConstraints=true
+ android.r8.strictFullModeForKeepRules=false
+-android.r8.optimizedResourceShrinking=false
+ android.newDsl=false
+-android.enableAppCompileTimeRClass=false
+-android.usesSdkInManifest.disallowed=false
+ android.builtInKotlin=false
+Index: app/src/main/java/com/example/pulse_healthtracker/CalendarDate.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/pulse_healthtracker/CalendarDate.kt b/app/src/main/java/com/example/pulse_healthtracker/CalendarDate.kt
+new file mode 100644
+--- /dev/null	(date 1780118524920)
++++ b/app/src/main/java/com/example/pulse_healthtracker/CalendarDate.kt	(date 1780118524920)
+@@ -0,0 +1,8 @@
++package com.example.pulse_healthtracker
++
++import java.util.Date
++
++data class CalendarDate(
++    val date: Date,
++    var isSelected: Boolean = false
++)
+Index: app/src/main/res/layout/item_calendar_day.xml
+===================================================================
+diff --git a/app/src/main/res/layout/item_calendar_day.xml b/app/src/main/res/layout/item_calendar_day.xml
+new file mode 100644
+--- /dev/null	(date 1780118658119)
++++ b/app/src/main/res/layout/item_calendar_day.xml	(date 1780118658119)
+@@ -0,0 +1,32 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:id="@+id/rootLayout"
++    android:layout_width="60dp"
++    android:layout_height="wrap_content"
++    android:gravity="center"
++    android:orientation="vertical"
++    android:paddingVertical="8dp"
++    android:clickable="true"
++    android:focusable="true">
++
++    <TextView
++        android:id="@+id/tvDayName"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="Mon"
++        android:textColor="#8899BB"
++        android:textSize="11sp"
++        android:textAllCaps="true" />
++
++    <TextView
++        android:id="@+id/tvDayNumber"
++        android:layout_width="38dp"
++        android:layout_height="38dp"
++        android:layout_marginTop="6dp"
++        android:gravity="center"
++        android:text="04"
++        android:textColor="#555577"
++        android:textSize="15sp"
++        android:textStyle="bold" />
++
++</LinearLayout>
+Index: app/src/main/java/com/example/pulse_healthtracker/CalendarAdapter.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/pulse_healthtracker/CalendarAdapter.kt b/app/src/main/java/com/example/pulse_healthtracker/CalendarAdapter.kt
+new file mode 100644
+--- /dev/null	(date 1780118541594)
++++ b/app/src/main/java/com/example/pulse_healthtracker/CalendarAdapter.kt	(date 1780118541594)
+@@ -0,0 +1,53 @@
++package com.example.pulse_healthtracker
++
++import android.view.LayoutInflater
++import android.view.View
++import android.view.ViewGroup
++import android.widget.TextView
++import androidx.recyclerview.widget.RecyclerView
++import java.text.SimpleDateFormat
++import java.util.*
++
++class CalendarAdapter(
++    private var days: List<CalendarDate>,
++    private val onDateSelected: (CalendarDate) -> Unit
++) : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
++
++    class CalendarViewHolder(view: View) : RecyclerView.ViewHolder(view) {
++        val tvDayName: TextView = view.findViewById(R.id.tvDayName)
++        val tvDayNumber: TextView = view.findViewById(R.id.tvDayNumber)
++    }
++
++    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
++        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_calendar_day, parent, false)
++        return CalendarViewHolder(view)
++    }
++
++    override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
++        val item = days[position]
++        val sdfDay = SimpleDateFormat("EEE", Locale.getDefault())
++        val sdfDate = SimpleDateFormat("dd", Locale.getDefault())
++
++        holder.tvDayName.text = sdfDay.format(item.date)
++        holder.tvDayNumber.text = sdfDate.format(item.date)
++
++        if (item.isSelected) {
++            holder.tvDayNumber.setBackgroundResource(R.drawable.bg_selected_date)
++            holder.tvDayNumber.setTextColor(0xFFFFFFFF.toInt())
++        } else {
++            holder.tvDayNumber.background = null
++            holder.tvDayNumber.setTextColor(0xFF555577.toInt())
++        }
++
++        holder.itemView.setOnClickListener {
++            onDateSelected(item)
++        }
++    }
++
++    override fun getItemCount() = days.size
++
++    fun updateData(newDays: List<CalendarDate>) {
++        days = newDays
++        notifyDataSetChanged()
++    }
++}
+Index: app/src/main/java/com/example/pulse_healthtracker/ReminderReceiver.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/pulse_healthtracker/ReminderReceiver.kt b/app/src/main/java/com/example/pulse_healthtracker/ReminderReceiver.kt
+new file mode 100644
+--- /dev/null	(date 1780124792584)
++++ b/app/src/main/java/com/example/pulse_healthtracker/ReminderReceiver.kt	(date 1780124792584)
+@@ -0,0 +1,15 @@
++package com.example.pulse_healthtracker
++
++import android.content.BroadcastReceiver
++import android.content.Context
++import android.content.Intent
++
++class ReminderReceiver : BroadcastReceiver() {
++    override fun onReceive(context: Context, intent: Intent) {
++        val pillName = intent.getStringExtra("pillName") ?: "Medicine"
++        val time = intent.getStringExtra("time") ?: ""
++        
++        val notificationHelper = NotificationHelper(context)
++        notificationHelper.showNotification(pillName, time)
++    }
++}
+Index: app/src/main/java/com/example/pulse_healthtracker/ReminderManager.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/pulse_healthtracker/ReminderManager.kt b/app/src/main/java/com/example/pulse_healthtracker/ReminderManager.kt
+new file mode 100644
+--- /dev/null	(date 1780126281894)
++++ b/app/src/main/java/com/example/pulse_healthtracker/ReminderManager.kt	(date 1780126281894)
+@@ -0,0 +1,101 @@
++package com.example.pulse_healthtracker
++
++import android.app.AlarmManager
++import android.app.PendingIntent
++import android.content.Context
++import android.content.Intent
++import android.os.Build
++import android.provider.Settings
++import android.util.Log
++import android.widget.Toast
++import java.text.SimpleDateFormat
++import java.util.*
++
++class ReminderManager(private val context: Context) {
++
++    fun scheduleReminder(pillName: String, timeStr: String, dateStr: String) {
++        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
++        
++        // Check if we can schedule exact alarms on Android 12+
++        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
++            if (!alarmManager.canScheduleExactAlarms()) {
++                Log.w("ReminderManager", "Cannot schedule exact alarms. Redirecting to settings.")
++                val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
++                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
++                context.startActivity(intent)
++                return
++            }
++        }
++
++        // Parse date and time
++        // Date: yyyy-MM-dd, Time: hh:mm a
++        val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm a", Locale.getDefault())
++        val date = try {
++            sdf.parse("$dateStr $timeStr")
++        } catch (e: Exception) {
++            Log.e("ReminderManager", "Failed to parse date/time: $dateStr $timeStr")
++            null
++        } ?: return
++        
++        val calendar = Calendar.getInstance()
++        calendar.time = date
++
++        // If time has already passed, don't set
++        if (calendar.timeInMillis <= System.currentTimeMillis()) {
++            Log.d("ReminderManager", "Time already passed for $pillName at $timeStr")
++            return
++        }
++
++        val intent = Intent(context, ReminderReceiver::class.java).apply {
++            putExtra("pillName", pillName)
++            putExtra("time", timeStr)
++        }
++
++        // Use a unique requestCode based on pillName and time to allow multiple reminders
++        val requestCode = (pillName + timeStr).hashCode()
++
++        val pendingIntent = PendingIntent.getBroadcast(
++            context,
++            requestCode,
++            intent,
++            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
++        )
++
++        try {
++            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
++                val alarmClockInfo = AlarmManager.AlarmClockInfo(calendar.timeInMillis, pendingIntent)
++                alarmManager.setAlarmClock(alarmClockInfo, pendingIntent)
++            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
++                alarmManager.setExactAndAllowWhileIdle(
++                    AlarmManager.RTC_WAKEUP,
++                    calendar.timeInMillis,
++                    pendingIntent
++                )
++            } else {
++                alarmManager.setExact(
++                    AlarmManager.RTC_WAKEUP,
++                    calendar.timeInMillis,
++                    pendingIntent
++                )
++            }
++            Log.d("ReminderManager", "Alarm set for $pillName at ${calendar.time}")
++        } catch (e: SecurityException) {
++            Log.e("ReminderManager", "SecurityException: ${e.message}")
++        } catch (e: Exception) {
++            Log.e("ReminderManager", "Error setting alarm: ${e.message}")
++        }
++    }
++    
++    fun cancelReminder(pillName: String, timeStr: String) {
++        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
++        val intent = Intent(context, ReminderReceiver::class.java)
++        val requestCode = (pillName + timeStr).hashCode()
++        val pendingIntent = PendingIntent.getBroadcast(
++            context,
++            requestCode,
++            intent,
++            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
++        )
++        alarmManager.cancel(pendingIntent)
++    }
++}
+Index: app/src/main/res/layout/spinner_item.xml
+===================================================================
+diff --git a/app/src/main/res/layout/spinner_item.xml b/app/src/main/res/layout/spinner_item.xml
+new file mode 100644
+--- /dev/null	(date 1780115766948)
++++ b/app/src/main/res/layout/spinner_item.xml	(date 1780115766948)
+@@ -0,0 +1,14 @@
++<?xml version="1.0" encoding="utf-8"?>
++<TextView xmlns:android="http://schemas.android.com/apk/res/android"
++    android:id="@android:id/text1"
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content"
++    android:paddingStart="12dp"
++    android:paddingEnd="12dp"
++    android:paddingTop="4dp"
++    android:paddingBottom="4dp"
++    android:textColor="#0A0E63"
++    android:textSize="14sp"
++    android:textStyle="bold"
++    android:fontFamily="@font/inter_semibold"
++    android:gravity="center_vertical" />
+Index: app/src/main/res/values/colors.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <color name=\"purple_200\">#FFBB86FC</color>\r\n    <color name=\"purple_500\">#FF6200EE</color>\r\n    <color name=\"purple_700\">#FF3700B3</color>\r\n    <color name=\"teal_200\">#FF03DAC5</color>\r\n    <color name=\"teal_700\">#FF018786</color>\r\n    <color name=\"black\">#FF000000</color>\r\n    <color name=\"white\">#FFFFFFFF</color>\r\n    <color name=\"gray\">#999999</color>\r\n    <color name=\"dash_bg\">#0A1128</color>\r\n    <color name=\"card_bg_dark\">#1C2541</color>\r\n    <color name=\"tab_bg\">#3A506B</color>\r\n    <color name=\"protein_color\">#FF7043</color>\r\n    <color name=\"carbs_color\">#FFCA28</color>\r\n    <color name=\"fat_color\">#29B6F6</color>\r\n    <color name=\"meal_text_dark\">#4A1515</color>\r\n    <color name=\"btn_edit_bg\">#9DB2BF</color>\r\n    <color name=\"red_pink\">#FF6B6B</color>\r\n    <color name=\"darkblue\">#0E164B</color>\r\n    <color name=\"bgBlue\">#121995</color>\r\n    <color name=\"litebg\">#BAC9FE</color>\r\n    <color name=\"ucrop_color\">#4ECDC4</color>\r\n    <color name=\"bg_dark_blue\">#0A1172</color>\r\n    <color name=\"bg_light_blue\">#1F2CB8</color>\r\n    <color name=\"card_bg_dark_2\">#121B4E</color>\r\n    <color name=\"card_bg_light\">#E3E8FF</color>\r\n    <color name=\"cyan_accent\">#00E5FF</color>\r\n    <color name=\"text_gray\">#7E8BAB</color>\r\n    <color name=\"bg_mood\">#0A1628</color>\r\n    <color name=\"dark_card_bg\">#0F1E36</color>\r\n    <color name=\"card_mid_blue\">#112040</color>\r\n    <color name=\"accent_blue\">#378ADD</color>\r\n    <color name=\"text_primary\">#E8F0FE</color>\r\n    <color name=\"text_secondary\">#7BA3CC</color>\r\n    <color name=\"teal_green\">#4CAF93</color>\r\n    <color name=\"border_blue\">#1A3260</color>\r\n    <color name=\"bar_peach_color\">#F4978E</color>\r\n    <color name=\"bar_red_color\">#E25B5B</color>\r\n    <color name=\"bar_teal_color\">#1D9E75</color>\r\n    <color name=\"bar_green_color\">#4CAF50</color>\r\n    <color name=\"bar_blue_color\">#378ADD</color>\r\n    <color name=\"bar_purple_color\">#7E57C2</color>\r\n    <color name=\"bar_indigo_color\">#5C8EE6</color>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/colors.xml b/app/src/main/res/values/colors.xml
+--- a/app/src/main/res/values/colors.xml	(revision 541fed46a9e4b23ceed69695bf8e08945b35005d)
++++ b/app/src/main/res/values/colors.xml	(date 1780114903599)
+@@ -42,4 +42,6 @@
+     <color name="bar_blue_color">#378ADD</color>
+     <color name="bar_purple_color">#7E57C2</color>
+     <color name="bar_indigo_color">#5C8EE6</color>
++    <color name="medication_taken">#4ECDC4</color>
++    <color name="medication_pending">#FFB347</color>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/java/com/example/pulse_healthtracker/NotificationHelper.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/pulse_healthtracker/NotificationHelper.kt b/app/src/main/java/com/example/pulse_healthtracker/NotificationHelper.kt
+new file mode 100644
+--- /dev/null	(date 1780126362579)
++++ b/app/src/main/java/com/example/pulse_healthtracker/NotificationHelper.kt	(date 1780126362579)
+@@ -0,0 +1,58 @@
++package com.example.pulse_healthtracker
++
++import android.app.NotificationChannel
++import android.app.NotificationManager
++import android.app.PendingIntent
++import android.content.Context
++import android.content.Intent
++import android.os.Build
++import androidx.core.app.NotificationCompat
++
++class NotificationHelper(private val context: Context) {
++
++    private val channelId = "medicine_reminder_channel"
++    private val channelName = "Medicine Reminders"
++
++    init {
++        createNotificationChannel()
++    }
++
++    private fun createNotificationChannel() {
++        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
++            val channel = NotificationChannel(
++                channelId,
++                channelName,
++                NotificationManager.IMPORTANCE_HIGH
++            ).apply {
++                description = "Channel for Medicine Reminder Notifications"
++            }
++            val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
++            manager.createNotificationChannel(channel)
++        }
++    }
++
++    fun showNotification(pillName: String, time: String) {
++        val intent = Intent(context, HomeMed::class.java).apply {
++            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
++        }
++        val pendingIntent = PendingIntent.getActivity(
++            context, 0, intent,
++            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
++        )
++
++        val notification = NotificationCompat.Builder(context, channelId)
++            .setSmallIcon(R.drawable.ic_reminder)
++            .setContentTitle("Time for your medicine!")
++            .setContentText("It's time to take your $pillName at $time")
++            .setPriority(NotificationCompat.PRIORITY_HIGH)
++            .setCategory(NotificationCompat.CATEGORY_REMINDER)
++            .setContentIntent(pendingIntent)
++            .setAutoCancel(true)
++            .build()
++
++        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
++        // Use a unique ID based on pillName and time to prevent overriding notifications
++        val notificationId = (pillName + time).hashCode()
++        notificationManager.notify(notificationId, notification)
++    }
++}
+Index: app/src/main/res/layout/activity_home_med.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"#080C3A\"\r\n    tools:context=\".HomeMed\">\r\n\r\n    <!-- Header Background -->\r\n    <View\r\n        android:id=\"@+id/viewHeaderBg\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"72dp\"\r\n        android:background=\"@drawable/bg_header\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <!-- App Title -->\r\n    <TextView\r\n        android:id=\"@+id/btnBack\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"16dp\"\r\n        android:background=\"@drawable/bg_back_button\"\r\n        android:clickable=\"true\"\r\n        android:focusable=\"true\"\r\n        android:paddingHorizontal=\"12dp\"\r\n        android:paddingVertical=\"6dp\"\r\n        android:text=\"&lt; Back\"\r\n        android:textColor=\"#000000\"\r\n        android:textSize=\"12sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintBottom_toBottomOf=\"@id/viewHeaderBg\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"@id/viewHeaderBg\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/tvTitle\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:fontFamily=\"@font/inter_semibold\"\r\n        android:text=\"Medication\"\r\n        android:textColor=\"#FFFFFF\"\r\n        android:textSize=\"18sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintBottom_toBottomOf=\"@id/viewHeaderBg\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"@id/viewHeaderBg\" />\r\n\r\n    <!-- Profile Avatar -->\r\n    <androidx.cardview.widget.CardView\r\n        android:id=\"@+id/cvProfile\"\r\n        android:layout_width=\"44dp\"\r\n        android:layout_height=\"44dp\"\r\n        android:layout_marginEnd=\"20dp\"\r\n        app:cardCornerRadius=\"22dp\"\r\n        app:cardElevation=\"4dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"@id/viewHeaderBg\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"@id/viewHeaderBg\">\r\n        <ImageView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:scaleType=\"centerCrop\"\r\n            android:src=\"@drawable/_9c9d613dab41a8421e763d50f46ac1f09b4b0ee3\" />\r\n    </androidx.cardview.widget.CardView>\r\n\r\n    <!-- Greeting Section -->\r\n    <ImageView\r\n        android:id=\"@+id/ivAvatar\"\r\n        android:layout_width=\"42dp\"\r\n        android:layout_height=\"42dp\"\r\n        android:layout_marginStart=\"20dp\"\r\n        android:layout_marginTop=\"16dp\"\r\n        android:src=\"@drawable/ic_app_logo\"\r\n        android:scaleType=\"fitCenter\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/viewHeaderBg\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/tvWelcome\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"12dp\"\r\n        android:text=\"Hi, Good Morning \uD83D\uDC4B\"\r\n        android:textColor=\"#FFFFFF\"\r\n        android:textSize=\"16sp\"\r\n        android:textStyle=\"bold\"\r\n        android:fontFamily=\"@font/inter_semibold\"\r\n        android:lineSpacingExtra=\"2dp\"\r\n        app:layout_constraintStart_toEndOf=\"@id/ivAvatar\"\r\n        app:layout_constraintTop_toTopOf=\"@id/ivAvatar\"\r\n        app:layout_constraintBottom_toBottomOf=\"@id/ivAvatar\" />\r\n\r\n    <!-- Progress Bar Section -->\r\n    <androidx.cardview.widget.CardView\r\n        android:id=\"@+id/cvProgress\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"20dp\"\r\n        android:layout_marginEnd=\"20dp\"\r\n        android:layout_marginTop=\"14dp\"\r\n        app:cardCornerRadius=\"16dp\"\r\n        app:cardBackgroundColor=\"#1A2166\"\r\n        app:cardElevation=\"0dp\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/ivAvatar\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\"\r\n            android:padding=\"16dp\">\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"horizontal\"\r\n                android:gravity=\"center_vertical\">\r\n\r\n                <TextView\r\n                    android:layout_width=\"0dp\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_weight=\"1\"\r\n                    android:text=\"Today's Progress\"\r\n                    android:textColor=\"#B0C4D8\"\r\n                    android:textSize=\"13sp\"\r\n                    android:fontFamily=\"@font/inter_font\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tvProgressCount\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"2 / 3 taken\"\r\n                    android:textColor=\"#4ECDC4\"\r\n                    android:textSize=\"13sp\"\r\n                    android:textStyle=\"bold\" />\r\n            </LinearLayout>\r\n\r\n            <ProgressBar\r\n                android:id=\"@+id/progressBar\"\r\n                style=\"?android:attr/progressBarStyleHorizontal\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"8dp\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:max=\"3\"\r\n                android:progress=\"2\"\r\n                android:progressDrawable=\"@drawable/bg_progress_bar\"\r\n                android:background=\"@drawable/bg_progress_track\" />\r\n\r\n        </LinearLayout>\r\n    </androidx.cardview.widget.CardView>\r\n\r\n    <!-- Search Bar -->\r\n    <EditText\r\n        android:id=\"@+id/etSearch\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"48dp\"\r\n        android:layout_marginStart=\"20dp\"\r\n        android:layout_marginTop=\"14dp\"\r\n        android:layout_marginEnd=\"20dp\"\r\n        android:background=\"@drawable/bg_search_bar\"\r\n        android:hint=\"\uD83D\uDD0D  Search medications...\"\r\n        android:paddingStart=\"16dp\"\r\n        android:paddingEnd=\"16dp\"\r\n        android:singleLine=\"true\"\r\n        android:textColor=\"#FFFFFF\"\r\n        android:textColorHint=\"#6B7DB3\"\r\n        android:textSize=\"14sp\"\r\n        android:fontFamily=\"@font/inter_font\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/cvProgress\" />\r\n\r\n    <!-- Main Card -->\r\n    <androidx.constraintlayout.widget.ConstraintLayout\r\n        android:id=\"@+id/mainCard\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"0dp\"\r\n        android:layout_marginTop=\"16dp\"\r\n        android:background=\"@drawable/bg_main_card\"\r\n        android:paddingHorizontal=\"20dp\"\r\n        android:paddingTop=\"20dp\"\r\n        android:paddingBottom=\"8dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/etSearch\">\r\n\r\n        <!-- Month + Add Button Row -->\r\n        <TextView\r\n            android:id=\"@+id/tvMonth\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:fontFamily=\"@font/inter_semibold\"\r\n            android:text=\"January 2026\"\r\n            android:textColor=\"#0A0E63\"\r\n            android:textSize=\"18sp\"\r\n            android:textStyle=\"bold\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n        <LinearLayout\r\n            android:id=\"@+id/btnAdd\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"36dp\"\r\n            android:background=\"@drawable/bg_add_button\"\r\n            android:gravity=\"center\"\r\n            android:orientation=\"horizontal\"\r\n            android:paddingHorizontal=\"16dp\"\r\n            app:layout_constraintBottom_toBottomOf=\"@id/tvMonth\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"@id/tvMonth\">\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"+\"\r\n                android:textColor=\"#FFFFFF\"\r\n                android:textSize=\"18sp\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"4dp\"\r\n                android:text=\"Add\"\r\n                android:textColor=\"#FFFFFF\"\r\n                android:textSize=\"13sp\"\r\n                android:textStyle=\"bold\" />\r\n        </LinearLayout>\r\n\r\n        <!-- Day Names Row -->\r\n        <LinearLayout\r\n            android:id=\"@+id/dayNamesContainer\"\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"16dp\"\r\n            android:orientation=\"horizontal\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@id/tvMonth\">\r\n\r\n            <TextView android:layout_width=\"0dp\" android:layout_height=\"wrap_content\" android:layout_weight=\"1\" android:gravity=\"center\" android:text=\"Mon\" android:textColor=\"#8899BB\" android:textSize=\"11sp\" />\r\n            <TextView android:layout_width=\"0dp\" android:layout_height=\"wrap_content\" android:layout_weight=\"1\" android:gravity=\"center\" android:text=\"Tue\" android:textColor=\"#8899BB\" android:textSize=\"11sp\" />\r\n            <TextView android:layout_width=\"0dp\" android:layout_height=\"wrap_content\" android:layout_weight=\"1\" android:gravity=\"center\" android:text=\"Wed\" android:textColor=\"#0A0E63\" android:textSize=\"11sp\" android:textStyle=\"bold\" />\r\n            <TextView android:layout_width=\"0dp\" android:layout_height=\"wrap_content\" android:layout_weight=\"1\" android:gravity=\"center\" android:text=\"Thu\" android:textColor=\"#8899BB\" android:textSize=\"11sp\" />\r\n            <TextView android:layout_width=\"0dp\" android:layout_height=\"wrap_content\" android:layout_weight=\"1\" android:gravity=\"center\" android:text=\"Fri\" android:textColor=\"#8899BB\" android:textSize=\"11sp\" />\r\n        </LinearLayout>\r\n\r\n        <!-- Date Numbers Row — IDs added ✅ -->\r\n        <LinearLayout\r\n            android:id=\"@+id/dateContainer\"\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"6dp\"\r\n            android:gravity=\"center_vertical\"\r\n            android:orientation=\"horizontal\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@id/dayNamesContainer\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvDate02\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"38dp\"\r\n                android:layout_weight=\"1\"\r\n                android:gravity=\"center\"\r\n                android:text=\"02\"\r\n                android:textColor=\"#555577\"\r\n                android:textSize=\"15sp\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvDate03\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"38dp\"\r\n                android:layout_weight=\"1\"\r\n                android:gravity=\"center\"\r\n                android:text=\"03\"\r\n                android:textColor=\"#555577\"\r\n                android:textSize=\"15sp\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvDate04\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"38dp\"\r\n                android:layout_weight=\"1\"\r\n                android:background=\"@drawable/bg_selected_date\"\r\n                android:gravity=\"center\"\r\n                android:text=\"04\"\r\n                android:textColor=\"#FFFFFF\"\r\n                android:textSize=\"15sp\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvDate05\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"38dp\"\r\n                android:layout_weight=\"1\"\r\n                android:gravity=\"center\"\r\n                android:text=\"05\"\r\n                android:textColor=\"#555577\"\r\n                android:textSize=\"15sp\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvDate06\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"38dp\"\r\n                android:layout_weight=\"1\"\r\n                android:gravity=\"center\"\r\n                android:text=\"06\"\r\n                android:textColor=\"#555577\"\r\n                android:textSize=\"15sp\" />\r\n        </LinearLayout>\r\n\r\n        <!-- Divider -->\r\n        <View\r\n            android:id=\"@+id/divider\"\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"1dp\"\r\n            android:layout_marginTop=\"12dp\"\r\n            android:background=\"#E8EAF0\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@id/dateContainer\" />\r\n\r\n        <!-- Medication List -->\r\n        <androidx.recyclerview.widget.RecyclerView\r\n            android:id=\"@+id/rvMedicines\"\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"0dp\"\r\n            android:layout_marginTop=\"12dp\"\r\n            android:clipToPadding=\"false\"\r\n            android:paddingBottom=\"12dp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@id/divider\"\r\n            tools:listitem=\"@layout/item_medicine\" />\r\n\r\n    </androidx.constraintlayout.widget.ConstraintLayout>\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+===================================================================
+diff --git a/app/src/main/res/layout/activity_home_med.xml b/app/src/main/res/layout/activity_home_med.xml
+--- a/app/src/main/res/layout/activity_home_med.xml	(revision 541fed46a9e4b23ceed69695bf8e08945b35005d)
++++ b/app/src/main/res/layout/activity_home_med.xml	(date 1780133317915)
+@@ -30,7 +30,7 @@
+         android:focusable="true"
+         android:paddingHorizontal="12dp"
+         android:paddingVertical="6dp"
+-        android:text="&lt; Back"
++        android:text="@string/back"
+         android:textColor="#000000"
+         android:textSize="12sp"
+         android:textStyle="bold"
+@@ -43,7 +43,7 @@
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:fontFamily="@font/inter_semibold"
+-        android:text="Medication"
++        android:text="@string/title_medication"
+         android:textColor="#FFFFFF"
+         android:textSize="18sp"
+         android:textStyle="bold"
+@@ -67,7 +67,8 @@
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:scaleType="centerCrop"
+-            android:src="@drawable/_9c9d613dab41a8421e763d50f46ac1f09b4b0ee3" />
++            android:src="@drawable/_9c9d613dab41a8421e763d50f46ac1f09b4b0ee3"
++            android:contentDescription="@string/desc_profile" />
+     </androidx.cardview.widget.CardView>
+ 
+     <!-- Greeting Section -->
+@@ -79,6 +80,7 @@
+         android:layout_marginTop="16dp"
+         android:src="@drawable/ic_app_logo"
+         android:scaleType="fitCenter"
++        android:contentDescription="@string/desc_app_logo"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@id/viewHeaderBg" />
+ 
+@@ -87,7 +89,7 @@
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="12dp"
+-        android:text="Hi, Good Morning 👋"
++        android:text="@string/hi_good_morning"
+         android:textColor="#FFFFFF"
+         android:textSize="16sp"
+         android:textStyle="bold"
+@@ -128,7 +130,7 @@
+                     android:layout_width="0dp"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+-                    android:text="Today's Progress"
++                    android:text="@string/todays_progress"
+                     android:textColor="#B0C4D8"
+                     android:textSize="13sp"
+                     android:fontFamily="@font/inter_font" />
+@@ -137,7 +139,7 @@
+                     android:id="@+id/tvProgressCount"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+-                    android:text="2 / 3 taken"
++                    android:text="@string/medication_progress_example"
+                     android:textColor="#4ECDC4"
+                     android:textSize="13sp"
+                     android:textStyle="bold" />
+@@ -166,7 +168,7 @@
+         android:layout_marginTop="14dp"
+         android:layout_marginEnd="20dp"
+         android:background="@drawable/bg_search_bar"
+-        android:hint="🔍  Search medications..."
++        android:hint="@string/search_medications_hint"
+         android:paddingStart="16dp"
+         android:paddingEnd="16dp"
+         android:singleLine="true"
+@@ -174,6 +176,8 @@
+         android:textColorHint="#6B7DB3"
+         android:textSize="14sp"
+         android:fontFamily="@font/inter_font"
++        android:autofillHints="none"
++        android:inputType="text"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@id/cvProgress" />
+@@ -193,18 +197,28 @@
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@id/etSearch">
+ 
+-        <!-- Month + Add Button Row -->
+-        <TextView
+-            android:id="@+id/tvMonth"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:fontFamily="@font/inter_semibold"
+-            android:text="January 2026"
+-            android:textColor="#0A0E63"
+-            android:textSize="18sp"
+-            android:textStyle="bold"
+-            app:layout_constraintStart_toStartOf="parent"
+-            app:layout_constraintTop_toTopOf="parent" />
++        <!-- Month + Year Selection Row -->
++        <LinearLayout
++            android:id="@+id/llDateContainer"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:clickable="true"
++            android:focusable="true"
++            android:gravity="center_vertical"
++            android:orientation="horizontal"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toTopOf="parent">
++
++            <TextView
++                android:id="@+id/tvDateDisplay"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:fontFamily="@font/inter_semibold"
++                android:text="January 2026"
++                android:textColor="#0A0E63"
++                android:textSize="20sp"
++                android:textStyle="bold" />
++        </LinearLayout>
+ 
+         <LinearLayout
+             android:id="@+id/btnAdd"
+@@ -214,14 +228,14 @@
+             android:gravity="center"
+             android:orientation="horizontal"
+             android:paddingHorizontal="16dp"
+-            app:layout_constraintBottom_toBottomOf="@id/tvMonth"
++            app:layout_constraintBottom_toBottomOf="@id/llDateContainer"
+             app:layout_constraintEnd_toEndOf="parent"
+-            app:layout_constraintTop_toTopOf="@id/tvMonth">
++            app:layout_constraintTop_toTopOf="@id/llDateContainer">
+ 
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+-                android:text="+"
++                android:text="@string/symbol_plus"
+                 android:textColor="#FFFFFF"
+                 android:textSize="18sp"
+                 android:textStyle="bold" />
+@@ -230,105 +244,32 @@
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginStart="4dp"
+-                android:text="Add"
++                android:text="@string/btn_add"
+                 android:textColor="#FFFFFF"
+                 android:textSize="13sp"
+                 android:textStyle="bold" />
+         </LinearLayout>
+ 
+-        <!-- Day Names Row -->
+-        <LinearLayout
+-            android:id="@+id/dayNamesContainer"
++        <!-- Horizontal Calendar -->
++        <androidx.recyclerview.widget.RecyclerView
++            android:id="@+id/rvCalendar"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="16dp"
+-            android:orientation="horizontal"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+-            app:layout_constraintTop_toBottomOf="@id/tvMonth">
+-
+-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="Mon" android:textColor="#8899BB" android:textSize="11sp" />
+-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="Tue" android:textColor="#8899BB" android:textSize="11sp" />
+-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="Wed" android:textColor="#0A0E63" android:textSize="11sp" android:textStyle="bold" />
+-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="Thu" android:textColor="#8899BB" android:textSize="11sp" />
+-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="Fri" android:textColor="#8899BB" android:textSize="11sp" />
+-        </LinearLayout>
+-
+-        <!-- Date Numbers Row — IDs added ✅ -->
+-        <LinearLayout
+-            android:id="@+id/dateContainer"
+-            android:layout_width="0dp"
+-            android:layout_height="wrap_content"
+-            android:layout_marginTop="6dp"
+-            android:gravity="center_vertical"
+-            android:orientation="horizontal"
+-            app:layout_constraintEnd_toEndOf="parent"
+-            app:layout_constraintStart_toStartOf="parent"
+-            app:layout_constraintTop_toBottomOf="@id/dayNamesContainer">
+-
+-            <TextView
+-                android:id="@+id/tvDate02"
+-                android:layout_width="0dp"
+-                android:layout_height="38dp"
+-                android:layout_weight="1"
+-                android:gravity="center"
+-                android:text="02"
+-                android:textColor="#555577"
+-                android:textSize="15sp" />
+-
+-            <TextView
+-                android:id="@+id/tvDate03"
+-                android:layout_width="0dp"
+-                android:layout_height="38dp"
+-                android:layout_weight="1"
+-                android:gravity="center"
+-                android:text="03"
+-                android:textColor="#555577"
+-                android:textSize="15sp" />
+-
+-            <TextView
+-                android:id="@+id/tvDate04"
+-                android:layout_width="0dp"
+-                android:layout_height="38dp"
+-                android:layout_weight="1"
+-                android:background="@drawable/bg_selected_date"
+-                android:gravity="center"
+-                android:text="04"
+-                android:textColor="#FFFFFF"
+-                android:textSize="15sp"
+-                android:textStyle="bold" />
+-
+-            <TextView
+-                android:id="@+id/tvDate05"
+-                android:layout_width="0dp"
+-                android:layout_height="38dp"
+-                android:layout_weight="1"
+-                android:gravity="center"
+-                android:text="05"
+-                android:textColor="#555577"
+-                android:textSize="15sp" />
+-
+-            <TextView
+-                android:id="@+id/tvDate06"
+-                android:layout_width="0dp"
+-                android:layout_height="38dp"
+-                android:layout_weight="1"
+-                android:gravity="center"
+-                android:text="06"
+-                android:textColor="#555577"
+-                android:textSize="15sp" />
+-        </LinearLayout>
++            app:layout_constraintTop_toBottomOf="@id/llDateContainer" />
+ 
+         <!-- Divider -->
+         <View
+             android:id="@+id/divider"
+             android:layout_width="0dp"
+             android:layout_height="1dp"
+-            android:layout_marginTop="12dp"
++            android:layout_marginTop="16dp"
+             android:background="#E8EAF0"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+-            app:layout_constraintTop_toBottomOf="@id/dateContainer" />
++            app:layout_constraintTop_toBottomOf="@id/rvCalendar" />
+ 
+         <!-- Medication List -->
+         <androidx.recyclerview.widget.RecyclerView
+Index: app/src/main/java/com/example/pulse_healthtracker/HomeMed.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.pulse_healthtracker\r\n\r\nimport android.content.Intent\r\nimport android.os.Bundle\r\nimport android.text.Editable\r\nimport android.text.TextWatcher\r\nimport android.widget.*\r\nimport androidx.activity.enableEdgeToEdge\r\nimport androidx.appcompat.app.AlertDialog\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.cardview.widget.CardView\r\nimport androidx.core.view.ViewCompat\r\nimport androidx.core.view.WindowInsetsCompat\r\nimport androidx.recyclerview.widget.LinearLayoutManager\r\nimport androidx.recyclerview.widget.RecyclerView\r\nimport com.google.firebase.auth.FirebaseAuth\r\nimport com.google.firebase.firestore.FirebaseFirestore\r\nimport com.google.firebase.firestore.ListenerRegistration\r\n\r\nclass HomeMed : AppCompatActivity() {\r\n\r\n    private lateinit var etSearch: EditText\r\n    private lateinit var progressBar: ProgressBar\r\n    private lateinit var tvProgressCount: TextView\r\n    private lateinit var btnAdd: LinearLayout\r\n    private lateinit var rvMedicines: RecyclerView\r\n\r\n    private lateinit var tvDate02: TextView\r\n    private lateinit var tvDate03: TextView\r\n    private lateinit var tvDate04: TextView\r\n    private lateinit var tvDate05: TextView\r\n    private lateinit var tvDate06: TextView\r\n\r\n    private lateinit var auth: FirebaseAuth\r\n    private lateinit var firestore: FirebaseFirestore\r\n    private var medicineListener: ListenerRegistration? = null\r\n\r\n    private lateinit var medicineAdapter: MedicineAdapter\r\n    private val allMedicines = mutableListOf<Medicine>()\r\n    private val displayedMedicines = mutableListOf<Medicine>()\r\n\r\n    private var selectedDate = \"04\"\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        enableEdgeToEdge()\r\n        setContentView(R.layout.activity_home_med)\r\n\r\n        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->\r\n            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())\r\n            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)\r\n            insets\r\n        }\r\n\r\n        initializeFirebase()\r\n        initViews()\r\n        setupRecyclerView()\r\n        setupDateSelection()\r\n        setupSearch()\r\n        setupAddButton()\r\n        fetchMedicines()\r\n    }\r\n\r\n    private fun initializeFirebase() {\r\n        auth = FirebaseAuth.getInstance()\r\n        firestore = FirebaseFirestore.getInstance()\r\n    }\r\n\r\n    private fun initViews() {\r\n        etSearch = findViewById(R.id.etSearch)\r\n        progressBar = findViewById(R.id.progressBar)\r\n        tvProgressCount = findViewById(R.id.tvProgressCount)\r\n        btnAdd = findViewById(R.id.btnAdd)\r\n        rvMedicines = findViewById(R.id.rvMedicines)\r\n\r\n        tvDate02 = findViewById(R.id.tvDate02)\r\n        tvDate03 = findViewById(R.id.tvDate03)\r\n        tvDate04 = findViewById(R.id.tvDate04)\r\n        tvDate05 = findViewById(R.id.tvDate05)\r\n        tvDate06 = findViewById(R.id.tvDate06)\r\n        \r\n        findViewById<TextView>(R.id.btnBack).setOnClickListener { finish() }\r\n        findViewById<CardView>(R.id.cvProfile).setOnClickListener { finish() }\r\n    }\r\n\r\n    private fun setupRecyclerView() {\r\n        medicineAdapter = MedicineAdapter(\r\n            displayedMedicines,\r\n            onToggleClick = { toggleMedicineStatus(it) },\r\n            onEditClick = { editMedicine(it) },\r\n            onDeleteClick = { deleteMedicine(it) }\r\n        )\r\n        rvMedicines.layoutManager = LinearLayoutManager(this)\r\n        rvMedicines.adapter = medicineAdapter\r\n    }\r\n\r\n    private fun editMedicine(medicine: Medicine) {\r\n        val intent = Intent(this, AddMedicineActivity::class.java)\r\n        intent.putExtra(\"medicineId\", medicine.medicineId)\r\n        startActivity(intent)\r\n    }\r\n\r\n    private fun deleteMedicine(medicine: Medicine) {\r\n        AlertDialog.Builder(this)\r\n            .setTitle(\"Delete Medicine\")\r\n            .setMessage(\"Are you sure you want to delete ${medicine.pillName}?\")\r\n            .setPositiveButton(\"Delete\") { _, _ ->\r\n                firestore.collection(\"medications\").document(medicine.medicineId).delete()\r\n                    .addOnSuccessListener {\r\n                        Toast.makeText(this, \"Deleted\", Toast.LENGTH_SHORT).show()\r\n                    }\r\n                    .addOnFailureListener { e ->\r\n                        Toast.makeText(this, \"Failed: ${e.message}\", Toast.LENGTH_SHORT).show()\r\n                    }\r\n            }\r\n            .setNegativeButton(\"Cancel\", null)\r\n            .show()\r\n    }\r\n\r\n    private fun setupDateSelection() {\r\n        val dates = listOf(tvDate02, tvDate03, tvDate04, tvDate05, tvDate06)\r\n        val vals = listOf(\"02\", \"03\", \"04\", \"05\", \"06\")\r\n\r\n        dates.forEachIndexed { index, textView ->\r\n            textView.setOnClickListener {\r\n                selectedDate = vals[index]\r\n                highlightDate(dates, index)\r\n            }\r\n        }\r\n        highlightDate(dates, 2)\r\n    }\r\n\r\n    private fun highlightDate(dates: List<TextView>, activeIndex: Int) {\r\n        dates.forEachIndexed { index, tv ->\r\n            if (index == activeIndex) {\r\n                tv.setBackgroundResource(R.drawable.bg_selected_date)\r\n                tv.setTextColor(0xFFFFFFFF.toInt())\r\n            } else {\r\n                tv.background = null\r\n                tv.setTextColor(0xFF555577.toInt())\r\n            }\r\n        }\r\n    }\r\n\r\n    private fun setupSearch() {\r\n        etSearch.addTextChangedListener(object : TextWatcher {\r\n            override fun beforeTextChanged(s: CharSequence?, st: Int, c: Int, a: Int) {}\r\n            override fun afterTextChanged(s: Editable?) {}\r\n            override fun onTextChanged(s: CharSequence?, st: Int, b: Int, c: Int) {\r\n                filterMedicines(s.toString())\r\n            }\r\n        })\r\n    }\r\n\r\n    private fun setupAddButton() {\r\n        btnAdd.setOnClickListener {\r\n            startActivity(Intent(this, AddMedicineActivity::class.java))\r\n        }\r\n    }\r\n\r\n    private fun fetchMedicines() {\r\n        val userId = auth.currentUser?.uid ?: return\r\n\r\n        // Fetching without ordering for maximum speed\r\n        medicineListener = firestore.collection(\"medications\")\r\n            .whereEqualTo(\"userId\", userId)\r\n            .addSnapshotListener { snapshots, e ->\r\n                if (e != null) return@addSnapshotListener\r\n                if (snapshots != null) {\r\n                    allMedicines.clear()\r\n                    for (doc in snapshots) {\r\n                        val medicine = doc.toObject(Medicine::class.java)\r\n                        medicine.medicineId = doc.id\r\n                        allMedicines.add(medicine)\r\n                    }\r\n                    // Sort locally to avoid needing a Firestore Index (which is slow)\r\n                    allMedicines.sortByDescending { it.createdAt }\r\n                    filterMedicines(etSearch.text.toString())\r\n                }\r\n            }\r\n    }\r\n\r\n    private fun filterMedicines(query: String) {\r\n        displayedMedicines.clear()\r\n        if (query.isEmpty()) {\r\n            displayedMedicines.addAll(allMedicines)\r\n        } else {\r\n            displayedMedicines.addAll(allMedicines.filter {\r\n                it.pillName.contains(query, ignoreCase = true)\r\n            })\r\n        }\r\n        medicineAdapter.updateData(displayedMedicines)\r\n        updateProgressBar()\r\n    }\r\n\r\n    private fun toggleMedicineStatus(medicine: Medicine) {\r\n        if (medicine.medicineId.isEmpty()) return\r\n        val newStatus = !medicine.isTaken\r\n        firestore.collection(\"medications\").document(medicine.medicineId)\r\n            .update(\"isTaken\", newStatus)\r\n    }\r\n\r\n    private fun updateProgressBar() {\r\n        val total = displayedMedicines.size\r\n        val taken = displayedMedicines.count { it.isTaken }\r\n        progressBar.max = if (total == 0) 1 else total\r\n        progressBar.progress = taken\r\n        tvProgressCount.text = \"$taken / $total taken\"\r\n    }\r\n\r\n    override fun onDestroy() {\r\n        super.onDestroy()\r\n        medicineListener?.remove()\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/app/src/main/java/com/example/pulse_healthtracker/HomeMed.kt b/app/src/main/java/com/example/pulse_healthtracker/HomeMed.kt
+--- a/app/src/main/java/com/example/pulse_healthtracker/HomeMed.kt	(revision 541fed46a9e4b23ceed69695bf8e08945b35005d)
++++ b/app/src/main/java/com/example/pulse_healthtracker/HomeMed.kt	(date 1780132903706)
+@@ -4,6 +4,7 @@
+ import android.os.Bundle
+ import android.text.Editable
+ import android.text.TextWatcher
++import android.view.View
+ import android.widget.*
+ import androidx.activity.enableEdgeToEdge
+ import androidx.appcompat.app.AlertDialog
+@@ -16,6 +17,7 @@
+ import com.google.firebase.auth.FirebaseAuth
+ import com.google.firebase.firestore.FirebaseFirestore
+ import com.google.firebase.firestore.ListenerRegistration
++import java.util.Calendar
+ 
+ class HomeMed : AppCompatActivity() {
+ 
+@@ -24,12 +26,9 @@
+     private lateinit var tvProgressCount: TextView
+     private lateinit var btnAdd: LinearLayout
+     private lateinit var rvMedicines: RecyclerView
+-
+-    private lateinit var tvDate02: TextView
+-    private lateinit var tvDate03: TextView
+-    private lateinit var tvDate04: TextView
+-    private lateinit var tvDate05: TextView
+-    private lateinit var tvDate06: TextView
++    private lateinit var llDateContainer: LinearLayout
++    private lateinit var tvDateDisplay: TextView
++    private lateinit var rvCalendar: RecyclerView
+ 
+     private lateinit var auth: FirebaseAuth
+     private lateinit var firestore: FirebaseFirestore
+@@ -39,7 +38,10 @@
+     private val allMedicines = mutableListOf<Medicine>()
+     private val displayedMedicines = mutableListOf<Medicine>()
+ 
+-    private var selectedDate = "04"
++    private lateinit var calendarAdapter: CalendarAdapter
++    private val calendarDays = mutableListOf<CalendarDate>()
++
++    private var selectedDate = "" // Now stores full date string like "2026-01-04"
+ 
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+@@ -55,9 +57,10 @@
+         initializeFirebase()
+         initViews()
+         setupRecyclerView()
+-        setupDateSelection()
++        setupCalendarRecyclerView()
+         setupSearch()
+         setupAddButton()
++        setupDatePicker()
+         fetchMedicines()
+     }
+ 
+@@ -72,12 +75,9 @@
+         tvProgressCount = findViewById(R.id.tvProgressCount)
+         btnAdd = findViewById(R.id.btnAdd)
+         rvMedicines = findViewById(R.id.rvMedicines)
+-
+-        tvDate02 = findViewById(R.id.tvDate02)
+-        tvDate03 = findViewById(R.id.tvDate03)
+-        tvDate04 = findViewById(R.id.tvDate04)
+-        tvDate05 = findViewById(R.id.tvDate05)
+-        tvDate06 = findViewById(R.id.tvDate06)
++        llDateContainer = findViewById(R.id.llDateContainer)
++        tvDateDisplay = findViewById(R.id.tvDateDisplay)
++        rvCalendar = findViewById(R.id.rvCalendar)
+         
+         findViewById<TextView>(R.id.btnBack).setOnClickListener { finish() }
+         findViewById<CardView>(R.id.cvProfile).setOnClickListener { finish() }
+@@ -94,62 +94,93 @@
+         rvMedicines.adapter = medicineAdapter
+     }
+ 
++    private fun setupCalendarRecyclerView() {
++        calendarAdapter = CalendarAdapter(calendarDays) { date ->
++            calendarDays.forEach { it.isSelected = it == date }
++            calendarAdapter.notifyDataSetChanged()
++            
++            val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
++            selectedDate = sdf.format(date.date)
++            
++            // Re-filter medicines based on search query and potentially selected date
++            filterMedicines(etSearch.text.toString())
++        }
++        rvCalendar.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
++        rvCalendar.adapter = calendarAdapter
++    }
++
++    private fun updateCalendar(year: Int, month: Int) {
++        calendarDays.clear()
++        val calendar = Calendar.getInstance()
++        
++        // Show 2 weeks before and 2 weeks after today
++        val today = Calendar.getInstance()
++        calendar.time = today.time
++        calendar.add(Calendar.DAY_OF_YEAR, -14) // Start 2 weeks ago
++
++        val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
++        val todayStr = sdf.format(today.time)
++
++        for (i in 0..30) { // Show 31 days total
++            val date = calendar.time
++            val dateStr = sdf.format(date)
++            
++            // Auto-select today
++            val isSelected = dateStr == todayStr
++            
++            if (isSelected) {
++                selectedDate = dateStr
++            }
++            
++            calendarDays.add(CalendarDate(date, isSelected))
++            calendar.add(Calendar.DAY_OF_YEAR, 1)
++        }
++
++        calendarAdapter.notifyDataSetChanged()
++        
++        // Scroll to selected date (today)
++        val selectedIndex = calendarDays.indexOfFirst { it.isSelected }
++        if (selectedIndex != -1) {
++            rvCalendar.scrollToPosition(selectedIndex)
++        }
++
++        // Refresh medicine list
++        filterMedicines(etSearch.text.toString())
++    }
++
+     private fun editMedicine(medicine: Medicine) {
+-        val intent = Intent(this, AddMedicineActivity::class.java)
++        val intent = Intent(this, EditMedicineActivity::class.java)
+         intent.putExtra("medicineId", medicine.medicineId)
+         startActivity(intent)
+     }
+ 
+     private fun deleteMedicine(medicine: Medicine) {
+         AlertDialog.Builder(this)
+-            .setTitle("Delete Medicine")
+-            .setMessage("Are you sure you want to delete ${medicine.pillName}?")
+-            .setPositiveButton("Delete") { _, _ ->
++            .setTitle(getString(R.string.dialog_delete_title))
++            .setMessage(getString(R.string.dialog_delete_message, medicine.pillName))
++            .setPositiveButton(getString(R.string.menu_delete)) { _, _ ->
+                 firestore.collection("medications").document(medicine.medicineId).delete()
+                     .addOnSuccessListener {
+-                        Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show()
++                        Toast.makeText(this, getString(R.string.toast_deleted), Toast.LENGTH_SHORT).show()
+                     }
+                     .addOnFailureListener { e ->
+-                        Toast.makeText(this, "Failed: ${e.message}", Toast.LENGTH_SHORT).show()
++                        Toast.makeText(this, getString(R.string.toast_failed, e.message), Toast.LENGTH_SHORT).show()
+                     }
+             }
+-            .setNegativeButton("Cancel", null)
++            .setNegativeButton(getString(R.string.btn_cancel), null)
+             .show()
+     }
+ 
+-    private fun setupDateSelection() {
+-        val dates = listOf(tvDate02, tvDate03, tvDate04, tvDate05, tvDate06)
+-        val vals = listOf("02", "03", "04", "05", "06")
+-
+-        dates.forEachIndexed { index, textView ->
+-            textView.setOnClickListener {
+-                selectedDate = vals[index]
+-                highlightDate(dates, index)
+-            }
+-        }
+-        highlightDate(dates, 2)
+-    }
+-
+-    private fun highlightDate(dates: List<TextView>, activeIndex: Int) {
+-        dates.forEachIndexed { index, tv ->
+-            if (index == activeIndex) {
+-                tv.setBackgroundResource(R.drawable.bg_selected_date)
+-                tv.setTextColor(0xFFFFFFFF.toInt())
+-            } else {
+-                tv.background = null
+-                tv.setTextColor(0xFF555577.toInt())
+-            }
+-        }
+-    }
+-
+     private fun setupSearch() {
+-        etSearch.addTextChangedListener(object : TextWatcher {
+-            override fun beforeTextChanged(s: CharSequence?, st: Int, c: Int, a: Int) {}
+-            override fun afterTextChanged(s: Editable?) {}
+-            override fun onTextChanged(s: CharSequence?, st: Int, b: Int, c: Int) {
+-                filterMedicines(s.toString())
++        etSearch.addTextChangedListener(
++            object : TextWatcher {
++                override fun beforeTextChanged(s: CharSequence?, st: Int, c: Int, a: Int) {}
++                override fun afterTextChanged(s: Editable?) {}
++                override fun onTextChanged(s: CharSequence?, st: Int, b: Int, c: Int) {
++                    filterMedicines(s.toString())
++                }
+             }
+-        })
++        )
+     }
+ 
+     private fun setupAddButton() {
+@@ -158,6 +189,58 @@
+         }
+     }
+ 
++    private fun setupDatePicker() {
++        val calendar = Calendar.getInstance()
++        updateDateDisplay(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH))
++        updateCalendar(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH))
++
++        llDateContainer.setOnClickListener {
++            val currentYear = calendar.get(Calendar.YEAR)
++            val currentMonth = calendar.get(Calendar.MONTH)
++            val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
++
++            val datePickerDialog = android.app.DatePickerDialog(
++                this,
++                { _, year, month, dayOfMonth ->
++                    updateDateDisplay(year, month)
++                    updateCalendar(year, month)
++                    // Select the picked day
++                    val pickedDate = Calendar.getInstance()
++                    pickedDate.set(year, month, dayOfMonth)
++                    val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
++                    selectedDate = sdf.format(pickedDate.time)
++                    
++                    // Update calendar selection
++                    calendarDays.forEach { 
++                        val cal = Calendar.getInstance()
++                        cal.time = it.date
++                        it.isSelected = cal.get(Calendar.DAY_OF_MONTH) == dayOfMonth && 
++                                       cal.get(Calendar.MONTH) == month && 
++                                       cal.get(Calendar.YEAR) == year
++                    }
++                    calendarAdapter.notifyDataSetChanged()
++                    
++                    val selectedIndex = calendarDays.indexOfFirst { it.isSelected }
++                    if (selectedIndex != -1) {
++                        rvCalendar.scrollToPosition(selectedIndex)
++                    }
++                    
++                    filterMedicines(etSearch.text.toString())
++                },
++                currentYear, currentMonth, currentDay
++            )
++            datePickerDialog.show()
++        }
++    }
++
++    private fun updateDateDisplay(year: Int, monthIndex: Int) {
++        val months = listOf(
++            "January", "February", "March", "April", "May", "June",
++            "July", "August", "September", "October", "November", "December"
++        )
++        tvDateDisplay.text = "${months[monthIndex]} $year"
++    }
++
+     private fun fetchMedicines() {
+         val userId = auth.currentUser?.uid ?: return
+ 
+@@ -182,12 +265,20 @@
+ 
+     private fun filterMedicines(query: String) {
+         displayedMedicines.clear()
++        
++        // Filter by date first
++        val dateFiltered = allMedicines.filter { 
++            it.selectedDate == selectedDate 
++        }
++
+         if (query.isEmpty()) {
+-            displayedMedicines.addAll(allMedicines)
++            displayedMedicines.addAll(dateFiltered)
+         } else {
+-            displayedMedicines.addAll(allMedicines.filter {
+-                it.pillName.contains(query, ignoreCase = true)
+-            })
++            displayedMedicines.addAll(
++                dateFiltered.filter {
++                    it.pillName.contains(query, ignoreCase = true)
++                }
++            )
+         }
+         medicineAdapter.updateData(displayedMedicines)
+         updateProgressBar()
+@@ -205,7 +296,7 @@
+         val taken = displayedMedicines.count { it.isTaken }
+         progressBar.max = if (total == 0) 1 else total
+         progressBar.progress = taken
+-        tvProgressCount.text = "$taken / $total taken"
++        tvProgressCount.text = getString(R.string.medication_progress_format, taken, total)
+     }
+ 
+     override fun onDestroy() {
+Index: app/src/main/java/com/example/pulse_healthtracker/MedicineAdapter.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.pulse_healthtracker\r\n\r\nimport android.view.LayoutInflater\r\nimport android.view.View\r\nimport android.view.ViewGroup\r\nimport android.widget.ImageView\r\nimport android.widget.TextView\r\nimport androidx.appcompat.widget.PopupMenu\r\nimport androidx.recyclerview.widget.RecyclerView\r\n\r\nclass MedicineAdapter(\r\n    private var medicines: List<Medicine>,\r\n    private val onToggleClick: (Medicine) -> Unit,\r\n    private val onEditClick: (Medicine) -> Unit,\r\n    private val onDeleteClick: (Medicine) -> Unit\r\n) : RecyclerView.Adapter<MedicineAdapter.MedicineViewHolder>() {\r\n\r\n    class MedicineViewHolder(view: View) : RecyclerView.ViewHolder(view) {\r\n        val tvName: TextView = view.findViewById(R.id.tvMedicineName)\r\n        val tvDose: TextView = view.findViewById(R.id.tvMedicineDose)\r\n        val tvTime: TextView = view.findViewById(R.id.tvMedicineTime)\r\n        val tvStatus: TextView = view.findViewById(R.id.tvStatus)\r\n        val ivToggle: ImageView = view.findViewById(R.id.ivToggle)\r\n        val indicator: View = view.findViewById(R.id.indicator)\r\n        val medicineCard: View = view.findViewById(R.id.medicineCard)\r\n    }\r\n\r\n    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicineViewHolder {\r\n        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_medicine, parent, false)\r\n        return MedicineViewHolder(view)\r\n    }\r\n\r\n    override fun onBindViewHolder(holder: MedicineViewHolder, position: Int) {\r\n        val medicine = medicines[position]\r\n        holder.tvName.text = medicine.pillName\r\n        holder.tvDose.text = \"${medicine.dose} pill(s) · ${medicine.foodRelation}\"\r\n        holder.tvTime.text = medicine.time\r\n\r\n        if (medicine.isTaken) {\r\n            holder.tvStatus.text = \"✓ Taken\"\r\n            holder.tvStatus.setTextColor(0xFF4ECDC4.toInt())\r\n            holder.ivToggle.setImageResource(R.drawable.toggle_green)\r\n            holder.indicator.setBackgroundResource(R.drawable.bg_indicator_green)\r\n        } else {\r\n            holder.tvStatus.text = \"⏰ Pending\"\r\n            holder.tvStatus.setTextColor(0xFFFFB347.toInt())\r\n            holder.ivToggle.setImageResource(R.drawable.toggle_red)\r\n            holder.indicator.setBackgroundResource(R.drawable.bg_indicator_orange)\r\n        }\r\n\r\n        holder.medicineCard.setOnClickListener {\r\n            onToggleClick(medicine)\r\n        }\r\n\r\n        holder.medicineCard.setOnLongClickListener { view ->\r\n            showPopupMenu(view, medicine)\r\n            true\r\n        }\r\n    }\r\n\r\n    private fun showPopupMenu(view: View, medicine: Medicine) {\r\n        val popup = PopupMenu(view.context, view)\r\n        popup.menu.add(\"Edit\")\r\n        popup.menu.add(\"Delete\")\r\n        popup.setOnMenuItemClickListener { item ->\r\n            when (item.title) {\r\n                \"Edit\" -> onEditClick(medicine)\r\n                \"Delete\" -> onDeleteClick(medicine)\r\n            }\r\n            true\r\n        }\r\n        popup.show()\r\n    }\r\n\r\n    override fun getItemCount() = medicines.size\r\n\r\n    fun updateData(newMedicines: List<Medicine>) {\r\n        medicines = newMedicines\r\n        notifyDataSetChanged()\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/app/src/main/java/com/example/pulse_healthtracker/MedicineAdapter.kt b/app/src/main/java/com/example/pulse_healthtracker/MedicineAdapter.kt
+--- a/app/src/main/java/com/example/pulse_healthtracker/MedicineAdapter.kt	(revision 541fed46a9e4b23ceed69695bf8e08945b35005d)
++++ b/app/src/main/java/com/example/pulse_healthtracker/MedicineAdapter.kt	(date 1780116656594)
+@@ -12,7 +12,7 @@
+     private var medicines: List<Medicine>,
+     private val onToggleClick: (Medicine) -> Unit,
+     private val onEditClick: (Medicine) -> Unit,
+-    private val onDeleteClick: (Medicine) -> Unit
++    private val onDeleteClick: (Medicine) -> Unit,
+ ) : RecyclerView.Adapter<MedicineAdapter.MedicineViewHolder>() {
+ 
+     class MedicineViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+@@ -32,26 +32,33 @@
+ 
+     override fun onBindViewHolder(holder: MedicineViewHolder, position: Int) {
+         val medicine = medicines[position]
++        val context = holder.itemView.context
+         holder.tvName.text = medicine.pillName
+-        holder.tvDose.text = "${medicine.dose} pill(s) · ${medicine.foodRelation}"
++        holder.tvDose.text = context.getString(R.string.medicine_dose_format, medicine.dose, medicine.foodRelation)
+         holder.tvTime.text = medicine.time
+ 
+         if (medicine.isTaken) {
+-            holder.tvStatus.text = "✓ Taken"
+-            holder.tvStatus.setTextColor(0xFF4ECDC4.toInt())
++            holder.tvStatus.text = context.getString(R.string.status_taken)
++            holder.tvStatus.setTextColor(context.getColor(R.color.medication_taken))
+             holder.ivToggle.setImageResource(R.drawable.toggle_green)
+             holder.indicator.setBackgroundResource(R.drawable.bg_indicator_green)
+         } else {
+-            holder.tvStatus.text = "⏰ Pending"
+-            holder.tvStatus.setTextColor(0xFFFFB347.toInt())
++            holder.tvStatus.text = context.getString(R.string.status_pending)
++            holder.tvStatus.setTextColor(context.getColor(R.color.medication_pending))
+             holder.ivToggle.setImageResource(R.drawable.toggle_red)
+             holder.indicator.setBackgroundResource(R.drawable.bg_indicator_orange)
+         }
+ 
+-        holder.medicineCard.setOnClickListener {
++        // Click on toggle to change status
++        holder.ivToggle.setOnClickListener {
+             onToggleClick(medicine)
+         }
+ 
++        // Click on card to Edit
++        holder.medicineCard.setOnClickListener {
++            onEditClick(medicine)
++        }
++
+         holder.medicineCard.setOnLongClickListener { view ->
+             showPopupMenu(view, medicine)
+             true
+@@ -59,13 +66,14 @@
+     }
+ 
+     private fun showPopupMenu(view: View, medicine: Medicine) {
+-        val popup = PopupMenu(view.context, view)
+-        popup.menu.add("Edit")
+-        popup.menu.add("Delete")
++        val context = view.context
++        val popup = PopupMenu(context, view)
++        popup.menu.add(context.getString(R.string.menu_edit))
++        popup.menu.add(context.getString(R.string.menu_delete))
+         popup.setOnMenuItemClickListener { item ->
+             when (item.title) {
+-                "Edit" -> onEditClick(medicine)
+-                "Delete" -> onDeleteClick(medicine)
++                context.getString(R.string.menu_edit) -> onEditClick(medicine)
++                context.getString(R.string.menu_delete) -> onDeleteClick(medicine)
+             }
+             true
+         }
+Index: app/src/main/java/com/example/pulse_healthtracker/EditMedicineActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.pulse_healthtracker\r\n\r\nimport android.os.Bundle\r\nimport androidx.activity.enableEdgeToEdge\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.core.view.ViewCompat\r\nimport androidx.core.view.WindowInsetsCompat\r\n\r\nclass EditMedicineActivity : AppCompatActivity() {\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        enableEdgeToEdge()\r\n        setContentView(R.layout.activity_edit_medicine)\r\n        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->\r\n            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())\r\n            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)\r\n            insets\r\n        }\r\n    }\r\n}
+===================================================================
+diff --git a/app/src/main/java/com/example/pulse_healthtracker/EditMedicineActivity.kt b/app/src/main/java/com/example/pulse_healthtracker/EditMedicineActivity.kt
+--- a/app/src/main/java/com/example/pulse_healthtracker/EditMedicineActivity.kt	(revision 541fed46a9e4b23ceed69695bf8e08945b35005d)
++++ b/app/src/main/java/com/example/pulse_healthtracker/EditMedicineActivity.kt	(date 1780125104546)
+@@ -1,20 +1,243 @@
+ package com.example.pulse_healthtracker
+ 
++import android.app.AlertDialog
++import android.app.DatePickerDialog
++import android.app.TimePickerDialog
+ import android.os.Bundle
++import android.widget.EditText
++import android.widget.LinearLayout
++import android.widget.TextView
++import android.widget.Toast
+ import androidx.activity.enableEdgeToEdge
+ import androidx.appcompat.app.AppCompatActivity
++import androidx.cardview.widget.CardView
+ import androidx.core.view.ViewCompat
+ import androidx.core.view.WindowInsetsCompat
++import com.google.firebase.auth.FirebaseAuth
++import com.google.firebase.firestore.FirebaseFirestore
++import java.text.SimpleDateFormat
++import java.util.Calendar
++import java.util.Locale
+ 
+ class EditMedicineActivity : AppCompatActivity() {
++    private lateinit var btnBack: TextView
++    private lateinit var tvHeaderTitle: TextView
++    private lateinit var cvPillImage: CardView
++    private lateinit var etPillName: EditText
++    private lateinit var spDiseases: EditText
++    private lateinit var etDate: TextView
++    private lateinit var etDose1: EditText
++    private lateinit var etTime1: TextView
++    private lateinit var spFoodRelation1: TextView
++    private lateinit var etDose2: EditText
++    private lateinit var etTime2: TextView
++    private lateinit var spFoodRelation2: TextView
++    private lateinit var btnAddTimes: LinearLayout
++    private lateinit var etNotes: EditText
++    private lateinit var btnSaveMedicine: androidx.appcompat.widget.AppCompatButton
++    private lateinit var btnRemoveMedicine: androidx.appcompat.widget.AppCompatButton
++
++    private lateinit var auth: FirebaseAuth
++    private lateinit var firestore: FirebaseFirestore
++    private var medicineId: String? = null
++    private var isTaken: Boolean = false
++    private var selectedDate = "" // Format: "yyyy-MM-dd"
++
+     override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+         enableEdgeToEdge()
+         setContentView(R.layout.activity_edit_medicine)
++
+         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+             insets
+         }
++
++        auth = FirebaseAuth.getInstance()
++        firestore = FirebaseFirestore.getInstance()
++        medicineId = intent.getStringExtra("medicineId")
++
++        initViews()
++        setupClickListeners()
++        loadMedicineData()
+     }
+-}
+\ No newline at end of file
++
++    private fun initViews() {
++        btnBack = findViewById(R.id.btnBack)
++        tvHeaderTitle = findViewById(R.id.tvHeaderTitle)
++        cvPillImage = findViewById(R.id.cvPillImage)
++        etPillName = findViewById(R.id.etPillName)
++        spDiseases = findViewById(R.id.spDiseases)
++        etDate = findViewById(R.id.etDate)
++        etDose1 = findViewById(R.id.etDose1)
++        etTime1 = findViewById(R.id.etTime1)
++        spFoodRelation1 = findViewById(R.id.spFoodRelation1)
++        etDose2 = findViewById(R.id.etDose2)
++        etTime2 = findViewById(R.id.etTime2)
++        spFoodRelation2 = findViewById(R.id.spFoodRelation2)
++        btnAddTimes = findViewById(R.id.btnAddTimes)
++        etNotes = findViewById(R.id.etNotes)
++        btnSaveMedicine = findViewById(R.id.btnSaveMedicine)
++        btnRemoveMedicine = findViewById(R.id.btnRemoveMedicine)
++    }
++
++    private fun setupClickListeners() {
++        btnBack.setOnClickListener { finish() }
++        etDate.setOnClickListener { showDatePickerDialog() }
++        etTime1.setOnClickListener { showTimePickerDialog(etTime1) }
++        etTime2.setOnClickListener { showTimePickerDialog(etTime2) }
++        spFoodRelation1.setOnClickListener { showFoodRelationDialog(spFoodRelation1) }
++        spFoodRelation2.setOnClickListener { showFoodRelationDialog(spFoodRelation2) }
++        btnSaveMedicine.setOnClickListener { updateMedicine() }
++        btnRemoveMedicine.setOnClickListener { removeMedicine() }
++    }
++
++    private fun loadMedicineData() {
++        if (medicineId == null) {
++            Toast.makeText(this, "Medicine ID missing", Toast.LENGTH_SHORT).show()
++            finish()
++            return
++        }
++
++        firestore.collection("medications").document(medicineId!!).get()
++            .addOnSuccessListener { doc ->
++                val med = doc.toObject(Medicine::class.java)
++                if (med != null) {
++                    etPillName.setText(med.pillName)
++                    spDiseases.setText(med.diseases)
++                    etDate.text = med.selectedDate
++                    selectedDate = med.selectedDate
++                    etDose1.setText(med.dose.toString())
++                    etTime1.text = med.time
++                    spFoodRelation1.text = med.foodRelation
++                    etNotes.setText(med.notes)
++                    isTaken = med.isTaken
++                    
++                    if (med.medicineTimes.isNotEmpty()) {
++                        etTime1.text = med.medicineTimes[0]
++                        if (med.medicineTimes.size > 1) {
++                            etTime2.text = med.medicineTimes[1]
++                        }
++                    }
++                }
++            }
++            .addOnFailureListener {
++                Toast.makeText(this, "Failed to load medicine data", Toast.LENGTH_SHORT).show()
++            }
++    }
++
++    private fun showDatePickerDialog() {
++        val calendar = Calendar.getInstance()
++        if (selectedDate.isNotEmpty()) {
++            try {
++                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
++                val date = sdf.parse(selectedDate)
++                if (date != null) calendar.time = date
++            } catch (e: Exception) {}
++        }
++
++        DatePickerDialog(
++            this,
++            { _, year, month, dayOfMonth ->
++                val selectedCalendar = Calendar.getInstance()
++                selectedCalendar.set(year, month, dayOfMonth)
++                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
++                selectedDate = sdf.format(selectedCalendar.time)
++                etDate.text = selectedDate
++            },
++            calendar.get(Calendar.YEAR),
++            calendar.get(Calendar.MONTH),
++            calendar.get(Calendar.DAY_OF_MONTH)
++        ).show()
++    }
++
++    private fun showTimePickerDialog(textView: TextView) {
++        val calendar = Calendar.getInstance()
++        TimePickerDialog(this, { _, hour, minute ->
++            val cal = Calendar.getInstance().apply {
++                set(Calendar.HOUR_OF_DAY, hour)
++                set(Calendar.MINUTE, minute)
++            }
++            textView.text = SimpleDateFormat("hh:mm a", Locale.getDefault()).format(cal.time)
++        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show()
++    }
++
++    private fun showFoodRelationDialog(textView: TextView) {
++        val options = arrayOf("Before eat", "After eat", "With food", "Empty stomach")
++        AlertDialog.Builder(this).setTitle("Select Timing").setItems(options) { _, which ->
++            textView.text = options[which]
++        }.show()
++    }
++
++    private fun updateMedicine() {
++        val pillName = etPillName.text.toString().trim()
++        val diseases = spDiseases.text.toString().trim()
++        val dose = etDose1.text.toString().toDoubleOrNull() ?: 0.0
++        val time = etTime1.text.toString()
++        val foodRelation = spFoodRelation1.text.toString()
++        val notes = etNotes.text.toString().trim()
++
++        if (pillName.isEmpty() || diseases.isEmpty()) {
++            Toast.makeText(this, "Pill name and diseases are required", Toast.LENGTH_SHORT).show()
++            return
++        }
++
++        val medicineTimes = mutableListOf<String>()
++        medicineTimes.add(time)
++        val time2 = etTime2.text.toString()
++        if (time2 != "02:00 PM") { 
++            medicineTimes.add(time2)
++        }
++
++        val updateData = hashMapOf(
++            "pillName" to pillName,
++            "diseases" to diseases,
++            "dose" to dose,
++            "time" to time,
++            "selectedDate" to selectedDate,
++            "foodRelation" to foodRelation,
++            "notes" to notes,
++            "medicineTimes" to medicineTimes,
++            "isTaken" to isTaken
++        )
++
++        // START UPDATING IN BACKGROUND
++        firestore.collection("medications").document(medicineId!!)
++            .update(updateData as Map<String, Any>)
++            .addOnSuccessListener {
++                Toast.makeText(applicationContext, "Medicine updated successfully", Toast.LENGTH_SHORT).show()
++                
++                // Update Reminder
++                val reminderManager = ReminderManager(applicationContext)
++                reminderManager.scheduleReminder(pillName, time, selectedDate)
++            }
++            .addOnFailureListener { e ->
++                Toast.makeText(applicationContext, "Failed to update: ${e.message}", Toast.LENGTH_LONG).show()
++            }
++
++        // INSTANTLY GO BACK
++        finish()
++    }
++
++    private fun removeMedicine() {
++        AlertDialog.Builder(this)
++            .setTitle("Delete Medicine")
++            .setMessage("Are you sure you want to delete ${etPillName.text}?")
++            .setPositiveButton("Delete") { _, _ ->
++                // START REMOVING IN BACKGROUND
++                firestore.collection("medications").document(medicineId!!).delete()
++                    .addOnSuccessListener {
++                        Toast.makeText(applicationContext, "Medicine removed successfully", Toast.LENGTH_SHORT).show()
++                    }
++                    .addOnFailureListener { e ->
++                        Toast.makeText(applicationContext, "Failed to remove: ${e.message}", Toast.LENGTH_LONG).show()
++                    }
++                
++                // INSTANTLY GO BACK
++                finish()
++            }
++            .setNegativeButton("Cancel", null)
++            .show()
++    }
++}
+Index: app/src/main/java/com/example/pulse_healthtracker/AddMedicineActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.pulse_healthtracker\r\n\r\nimport android.app.AlertDialog\r\nimport android.app.TimePickerDialog\r\nimport android.os.Bundle\r\nimport android.view.View\r\nimport android.widget.EditText\r\nimport android.widget.LinearLayout\r\nimport android.widget.TextView\r\nimport android.widget.Toast\r\nimport androidx.activity.enableEdgeToEdge\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.cardview.widget.CardView\r\nimport androidx.core.view.ViewCompat\r\nimport androidx.core.view.WindowInsetsCompat\r\nimport com.google.firebase.auth.FirebaseAuth\r\nimport com.google.firebase.firestore.FirebaseFirestore\r\nimport java.text.SimpleDateFormat\r\nimport java.util.Calendar\r\nimport java.util.Locale\r\n\r\nclass AddMedicineActivity : AppCompatActivity() {\r\n    private lateinit var btnBack: TextView\r\n    private lateinit var tvHeaderTitle: TextView\r\n    private lateinit var cvPillImage: CardView\r\n    private lateinit var etPillName: EditText\r\n    private lateinit var spDiseases: EditText\r\n    private lateinit var etDose: EditText\r\n    private lateinit var etTime: TextView\r\n    private lateinit var spFoodRelation: TextView\r\n    private lateinit var btnAddTimes: LinearLayout\r\n    private lateinit var etNotes: EditText\r\n    private lateinit var btnSubmitMedicine: androidx.appcompat.widget.AppCompatButton\r\n\r\n    // Data variables\r\n    private var selectedTime = \"08:00 AM\"\r\n    private var selectedFoodRelation = \"Before eat\"\r\n    private val medicineTimes = mutableListOf<String>()\r\n    private lateinit var auth: FirebaseAuth\r\n    private lateinit var firestore: FirebaseFirestore\r\n\r\n    private var editingMedicineId: String? = null\r\n    private var currentIsTaken = false\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n        enableEdgeToEdge()\r\n        setContentView(R.layout.activity_add_medicine)\r\n\r\n        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->\r\n            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())\r\n            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)\r\n            insets\r\n        }\r\n\r\n        initViews()\r\n        initializeFirebase()\r\n        setupClickListeners()\r\n\r\n        val medicineId = intent.getStringExtra(\"medicineId\")\r\n        if (medicineId != null) {\r\n            editingMedicineId = medicineId\r\n            loadMedicineData(medicineId)\r\n        }\r\n    }\r\n\r\n    private fun initViews() {\r\n        btnBack = findViewById(R.id.btnBack)\r\n        tvHeaderTitle = findViewById(R.id.tvHeaderTitle)\r\n        cvPillImage = findViewById(R.id.cvPillImage)\r\n        etPillName = findViewById(R.id.etPillName)\r\n        spDiseases = findViewById(R.id.spDiseases)\r\n        etDose = findViewById(R.id.etDose)\r\n        etTime = findViewById(R.id.etTime)\r\n        spFoodRelation = findViewById(R.id.spFoodRelation)\r\n        btnAddTimes = findViewById(R.id.btnAddTimes)\r\n        etNotes = findViewById(R.id.etNotes)\r\n        btnSubmitMedicine = findViewById(R.id.btnSubmitMedicine)\r\n    }\r\n\r\n    private fun setupClickListeners() {\r\n        btnBack.setOnClickListener { finish() }\r\n        etTime.setOnClickListener { showTimePickerDialog() }\r\n        spFoodRelation.setOnClickListener { showFoodRelationDialog() }\r\n        btnAddTimes.setOnClickListener { showAddTimeDialog() }\r\n        btnSubmitMedicine.setOnClickListener { submitMedicine() }\r\n        cvPillImage.setOnClickListener { showImagePickerDialog() }\r\n    }\r\n\r\n    private fun initializeFirebase() {\r\n        auth = FirebaseAuth.getInstance()\r\n        firestore = FirebaseFirestore.getInstance()\r\n    }\r\n\r\n    private fun loadMedicineData(id: String) {\r\n        tvHeaderTitle.text = \"Edit Medicine\"\r\n        btnSubmitMedicine.text = \"Update Medicine\"\r\n        \r\n        firestore.collection(\"medications\").document(id).get()\r\n            .addOnSuccessListener { doc ->\r\n                val med = doc.toObject(Medicine::class.java)\r\n                if (med != null) {\r\n                    etPillName.setText(med.pillName)\r\n                    spDiseases.setText(med.diseases)\r\n                    etDose.setText(med.dose.toString())\r\n                    etTime.text = med.time\r\n                    selectedTime = med.time\r\n                    spFoodRelation.text = med.foodRelation\r\n                    selectedFoodRelation = med.foodRelation\r\n                    etNotes.setText(med.notes)\r\n                    medicineTimes.clear()\r\n                    medicineTimes.addAll(med.medicineTimes)\r\n                    currentIsTaken = med.isTaken\r\n                }\r\n            }\r\n    }\r\n\r\n    private fun showTimePickerDialog() {\r\n        val calendar = Calendar.getInstance()\r\n        val timePickerDialog = TimePickerDialog(this, { _, hour, minute ->\r\n            val formattedTime = formatTime(hour, minute)\r\n            selectedTime = formattedTime\r\n            etTime.text = formattedTime\r\n        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false)\r\n        timePickerDialog.show()\r\n    }\r\n\r\n    private fun formatTime(hour: Int, minute: Int): String {\r\n        val calendar = Calendar.getInstance().apply {\r\n            set(Calendar.HOUR_OF_DAY, hour)\r\n            set(Calendar.MINUTE, minute)\r\n        }\r\n        return SimpleDateFormat(\"hh:mm a\", Locale.getDefault()).format(calendar.time)\r\n    }\r\n\r\n    private fun showFoodRelationDialog() {\r\n        val options = arrayOf(\"Before eat\", \"After eat\", \"With food\", \"Empty stomach\")\r\n        AlertDialog.Builder(this).setTitle(\"Select Timing\").setItems(options) { _, which ->\r\n            selectedFoodRelation = options[which]\r\n            spFoodRelation.text = selectedFoodRelation\r\n        }.show()\r\n    }\r\n\r\n    private fun showAddTimeDialog() {\r\n        val timeList = arrayOf(\"Morning\", \"Afternoon\", \"Evening\", \"Night\", \"Custom\")\r\n        AlertDialog.Builder(this).setTitle(\"Add Time\").setItems(timeList) { _, which ->\r\n            if (which == 4) showCustomTimeDialog() else addMedicineTime(timeList[which])\r\n        }.show()\r\n    }\r\n\r\n    private fun showCustomTimeDialog() {\r\n        val calendar = Calendar.getInstance()\r\n        TimePickerDialog(this, { _, hour, minute ->\r\n            addMedicineTime(formatTime(hour, minute))\r\n        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show()\r\n    }\r\n\r\n    private fun addMedicineTime(time: String) {\r\n        if (!medicineTimes.contains(time)) {\r\n            medicineTimes.add(time)\r\n            Toast.makeText(this, \"Added: $time\", Toast.LENGTH_SHORT).show()\r\n        }\r\n    }\r\n\r\n    private fun showImagePickerDialog() {\r\n        Toast.makeText(this, \"Image picker coming soon\", Toast.LENGTH_SHORT).show()\r\n    }\r\n\r\n    private fun submitMedicine() {\r\n        val pillName = etPillName.text.toString().trim()\r\n        val diseases = spDiseases.text.toString().trim()\r\n        val doseStr = etDose.text.toString().trim()\r\n        val notes = etNotes.text.toString().trim()\r\n\r\n        if (pillName.isEmpty() || diseases.isEmpty() || doseStr.isEmpty()) {\r\n            Toast.makeText(this, \"Please fill required fields\", Toast.LENGTH_SHORT).show()\r\n            return\r\n        }\r\n\r\n        val dose = doseStr.toDoubleOrNull() ?: 0.0\r\n        val userId = auth.currentUser?.uid ?: return\r\n\r\n        btnSubmitMedicine.isEnabled = false\r\n        btnSubmitMedicine.text = if (editingMedicineId == null) \"Adding...\" else \"Updating...\"\r\n\r\n        val docRef = if (editingMedicineId == null) {\r\n            firestore.collection(\"medications\").document()\r\n        } else {\r\n            firestore.collection(\"medications\").document(editingMedicineId!!)\r\n        }\r\n\r\n        val medicineData = hashMapOf(\r\n            \"medicineId\" to docRef.id,\r\n            \"pillName\" to pillName,\r\n            \"diseases\" to diseases,\r\n            \"dose\" to dose,\r\n            \"time\" to selectedTime,\r\n            \"foodRelation\" to selectedFoodRelation,\r\n            \"notes\" to notes,\r\n            \"medicineTimes\" to medicineTimes,\r\n            \"createdAt\" to System.currentTimeMillis(),\r\n            \"status\" to \"active\",\r\n            \"userId\" to userId,\r\n            \"isTaken\" to currentIsTaken\r\n        )\r\n\r\n        // Optimistic UI: Close immediately and let Firestore handle sync in background\r\n        docRef.set(medicineData)\r\n            .addOnFailureListener { e ->\r\n                // If it fails after we already closed, we can't easily undo the finish()\r\n                // but this is extremely rare with Firestore's offline capabilities.\r\n                android.util.Log.e(\"AddMedicine\", \"Background upload failed\", e)\r\n            }\r\n\r\n        Toast.makeText(this, \"Saving...\", Toast.LENGTH_SHORT).show()\r\n        finish()\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/app/src/main/java/com/example/pulse_healthtracker/AddMedicineActivity.kt b/app/src/main/java/com/example/pulse_healthtracker/AddMedicineActivity.kt
+--- a/app/src/main/java/com/example/pulse_healthtracker/AddMedicineActivity.kt	(revision 541fed46a9e4b23ceed69695bf8e08945b35005d)
++++ b/app/src/main/java/com/example/pulse_healthtracker/AddMedicineActivity.kt	(date 1780124980931)
+@@ -1,9 +1,9 @@
+ package com.example.pulse_healthtracker
+ 
+ import android.app.AlertDialog
++import android.app.DatePickerDialog
+ import android.app.TimePickerDialog
+ import android.os.Bundle
+-import android.view.View
+ import android.widget.EditText
+ import android.widget.LinearLayout
+ import android.widget.TextView
+@@ -25,6 +25,7 @@
+     private lateinit var cvPillImage: CardView
+     private lateinit var etPillName: EditText
+     private lateinit var spDiseases: EditText
++    private lateinit var etDate: TextView
+     private lateinit var etDose: EditText
+     private lateinit var etTime: TextView
+     private lateinit var spFoodRelation: TextView
+@@ -34,6 +35,7 @@
+ 
+     // Data variables
+     private var selectedTime = "08:00 AM"
++    private var selectedDate = "" // Format: "yyyy-MM-dd"
+     private var selectedFoodRelation = "Before eat"
+     private val medicineTimes = mutableListOf<String>()
+     private lateinit var auth: FirebaseAuth
+@@ -70,16 +72,24 @@
+         cvPillImage = findViewById(R.id.cvPillImage)
+         etPillName = findViewById(R.id.etPillName)
+         spDiseases = findViewById(R.id.spDiseases)
++        etDate = findViewById(R.id.etDate)
+         etDose = findViewById(R.id.etDose)
+         etTime = findViewById(R.id.etTime)
+         spFoodRelation = findViewById(R.id.spFoodRelation)
+         btnAddTimes = findViewById(R.id.btnAddTimes)
+         etNotes = findViewById(R.id.etNotes)
+         btnSubmitMedicine = findViewById(R.id.btnSubmitMedicine)
++
++        // Set current date as default
++        val calendar = Calendar.getInstance()
++        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
++        selectedDate = sdf.format(calendar.time)
++        etDate.text = selectedDate
+     }
+ 
+     private fun setupClickListeners() {
+         btnBack.setOnClickListener { finish() }
++        etDate.setOnClickListener { showDatePickerDialog() }
+         etTime.setOnClickListener { showTimePickerDialog() }
+         spFoodRelation.setOnClickListener { showFoodRelationDialog() }
+         btnAddTimes.setOnClickListener { showAddTimeDialog() }
+@@ -93,8 +103,8 @@
+     }
+ 
+     private fun loadMedicineData(id: String) {
+-        tvHeaderTitle.text = "Edit Medicine"
+-        btnSubmitMedicine.text = "Update Medicine"
++        tvHeaderTitle.text = getString(R.string.title_edit_medicine)
++        btnSubmitMedicine.text = getString(R.string.btn_save_medicine)
+         
+         firestore.collection("medications").document(id).get()
+             .addOnSuccessListener { doc ->
+@@ -102,6 +112,8 @@
+                 if (med != null) {
+                     etPillName.setText(med.pillName)
+                     spDiseases.setText(med.diseases)
++                    etDate.text = med.selectedDate
++                    selectedDate = med.selectedDate
+                     etDose.setText(med.dose.toString())
+                     etTime.text = med.time
+                     selectedTime = med.time
+@@ -115,13 +127,37 @@
+             }
+     }
+ 
++    private fun showDatePickerDialog() {
++        val calendar = Calendar.getInstance()
++        val datePickerDialog = DatePickerDialog(
++            this,
++            { _, year, month, dayOfMonth ->
++                val selectedCalendar = Calendar.getInstance()
++                selectedCalendar.set(year, month, dayOfMonth)
++                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
++                selectedDate = sdf.format(selectedCalendar.time)
++                etDate.text = selectedDate
++            },
++            calendar.get(Calendar.YEAR),
++            calendar.get(Calendar.MONTH),
++            calendar.get(Calendar.DAY_OF_MONTH)
++        )
++        datePickerDialog.show()
++    }
++
+     private fun showTimePickerDialog() {
+         val calendar = Calendar.getInstance()
+-        val timePickerDialog = TimePickerDialog(this, { _, hour, minute ->
+-            val formattedTime = formatTime(hour, minute)
+-            selectedTime = formattedTime
+-            etTime.text = formattedTime
+-        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false)
++        val timePickerDialog = TimePickerDialog(
++            this,
++            { _, hour, minute ->
++                val formattedTime = formatTime(hour, minute)
++                selectedTime = formattedTime
++                etTime.text = formattedTime
++            },
++            calendar.get(Calendar.HOUR_OF_DAY),
++            calendar.get(Calendar.MINUTE),
++            false
++        )
+         timePickerDialog.show()
+     }
+ 
+@@ -178,10 +214,10 @@
+         }
+ 
+         val dose = doseStr.toDoubleOrNull() ?: 0.0
+-        val userId = auth.currentUser?.uid ?: return
+-
+-        btnSubmitMedicine.isEnabled = false
+-        btnSubmitMedicine.text = if (editingMedicineId == null) "Adding..." else "Updating..."
++        val userId = auth.currentUser?.uid ?: run {
++            Toast.makeText(this, "User not logged in!", Toast.LENGTH_SHORT).show()
++            return
++        }
+ 
+         val docRef = if (editingMedicineId == null) {
+             firestore.collection("medications").document()
+@@ -195,6 +231,7 @@
+             "diseases" to diseases,
+             "dose" to dose,
+             "time" to selectedTime,
++            "selectedDate" to selectedDate,
+             "foodRelation" to selectedFoodRelation,
+             "notes" to notes,
+             "medicineTimes" to medicineTimes,
+@@ -204,15 +241,21 @@
+             "isTaken" to currentIsTaken
+         )
+ 
+-        // Optimistic UI: Close immediately and let Firestore handle sync in background
++        // START SAVING IN BACKGROUND
+         docRef.set(medicineData)
++            .addOnSuccessListener {
++                val successMsg = if (editingMedicineId == null) "Medicine added successfully" else "Medicine updated successfully"
++                Toast.makeText(applicationContext, successMsg, Toast.LENGTH_SHORT).show()
++                
++                // Set Reminder
++                val reminderManager = ReminderManager(applicationContext)
++                reminderManager.scheduleReminder(pillName, selectedTime, selectedDate)
++            }
+             .addOnFailureListener { e ->
+-                // If it fails after we already closed, we can't easily undo the finish()
+-                // but this is extremely rare with Firestore's offline capabilities.
+-                android.util.Log.e("AddMedicine", "Background upload failed", e)
++                Toast.makeText(applicationContext, "Failed to save: ${e.message}", Toast.LENGTH_LONG).show()
+             }
+ 
+-        Toast.makeText(this, "Saving...", Toast.LENGTH_SHORT).show()
++        // INSTANTLY GO BACK
+         finish()
+     }
+ }
+Index: app/src/main/java/com/example/pulse_healthtracker/Medicine.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.pulse_healthtracker\r\n\r\nimport com.google.firebase.firestore.PropertyName\r\n\r\ndata class Medicine(\r\n    var medicineId: String = \"\",\r\n    var pillName: String = \"\",\r\n    var diseases: String = \"\",\r\n    var dose: Double = 0.0,\r\n    var time: String = \"\",\r\n    var foodRelation: String = \"\",\r\n    var notes: String = \"\",\r\n    var medicineTimes: List<String> = emptyList(),\r\n    var createdAt: Long = 0,\r\n    var status: String = \"active\",\r\n    var userId: String = \"\",\r\n    \r\n    @get:PropertyName(\"isTaken\")\r\n    @set:PropertyName(\"isTaken\")\r\n    var isTaken: Boolean = false\r\n)\r\n
+===================================================================
+diff --git a/app/src/main/java/com/example/pulse_healthtracker/Medicine.kt b/app/src/main/java/com/example/pulse_healthtracker/Medicine.kt
+--- a/app/src/main/java/com/example/pulse_healthtracker/Medicine.kt	(revision 541fed46a9e4b23ceed69695bf8e08945b35005d)
++++ b/app/src/main/java/com/example/pulse_healthtracker/Medicine.kt	(date 1780122940078)
+@@ -14,6 +14,7 @@
+     var createdAt: Long = 0,
+     var status: String = "active",
+     var userId: String = "",
++    var selectedDate: String = "", // Format: "yyyy-MM-dd"
+     
+     @get:PropertyName("isTaken")
+     @set:PropertyName("isTaken")
+Index: app/src/main/res/layout/activity_edit_medicine.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"#0A129C\"\r\n    tools:context=\".EditMedicineActivity\">\r\n\r\n    <View\r\n        android:id=\"@+id/viewHeaderBg\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"60dp\"\r\n        android:background=\"#0D1647\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/btnBack\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"16dp\"\r\n        android:background=\"@drawable/bg_back_button\"\r\n        android:clickable=\"true\"\r\n        android:focusable=\"true\"\r\n        android:paddingHorizontal=\"12dp\"\r\n        android:paddingVertical=\"6dp\"\r\n        android:text=\"&lt; Back\"\r\n        android:textColor=\"#000000\"\r\n        android:textSize=\"12sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintBottom_toBottomOf=\"@+id/viewHeaderBg\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"@+id/viewHeaderBg\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/tvHeaderTitle\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Edit Medicine\"\r\n        android:textColor=\"#FFFFFF\"\r\n        android:textSize=\"18sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintBottom_toBottomOf=\"@+id/viewHeaderBg\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"@+id/viewHeaderBg\" />\r\n\r\n    <ScrollView\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"0dp\"\r\n        android:fillViewport=\"true\"\r\n        android:scrollbars=\"none\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/viewHeaderBg\">\r\n\r\n        <androidx.constraintlayout.widget.ConstraintLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:padding=\"20dp\">\r\n\r\n            <androidx.cardview.widget.CardView\r\n                android:id=\"@+id/cvPillImage\"\r\n                android:layout_width=\"140dp\"\r\n                android:layout_height=\"140dp\"\r\n                android:layout_marginTop=\"16dp\"\r\n                app:cardCornerRadius=\"70dp\"\r\n                app:cardElevation=\"0dp\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n                <ImageView\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:scaleType=\"centerCrop\"\r\n                    android:src=\"@drawable/ee3919aad04b84d34bab824999ca2a961984078b\" />\r\n            </androidx.cardview.widget.CardView>\r\n\r\n            <TextView\r\n                android:id=\"@+id/lblPillName\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"24dp\"\r\n                android:fontFamily=\"sans-serif\"\r\n                android:text=\"Pill Name\"\r\n                android:textColor=\"#FFFFFF\"\r\n                android:textSize=\"14sp\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/cvPillImage\" />\r\n\r\n            <EditText\r\n                android:id=\"@+id/etPillName\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"45dp\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:background=\"@drawable/bg_input_field\"\r\n                android:hint=\"Panadol\"\r\n                android:paddingHorizontal=\"16dp\"\r\n                android:singleLine=\"true\"\r\n                android:textColor=\"#000000\"\r\n                android:textColorHint=\"#B0B0B0\"\r\n                android:textSize=\"14sp\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/lblPillName\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/lblDiseases\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"16dp\"\r\n                android:text=\"Diseases\"\r\n                android:textColor=\"#FFFFFF\"\r\n                android:textSize=\"14sp\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/etPillName\" />\r\n\r\n            <EditText\r\n                android:id=\"@+id/spDiseases\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"45dp\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:hint=\"Fever\"\r\n                android:background=\"@drawable/bg_input_field\"\r\n                android:paddingHorizontal=\"16dp\"\r\n                android:singleLine=\"true\"\r\n                android:textColor=\"#000000\"\r\n                android:textColorHint=\"#B0B0B0\"\r\n                android:textSize=\"14sp\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/lblDiseases\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/lblDose\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"16dp\"\r\n                android:text=\"Dose\"\r\n                android:textColor=\"#FFFFFF\"\r\n                android:textSize=\"14sp\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/spDiseases\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/lblTime\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Time\"\r\n                android:textColor=\"#FFFFFF\"\r\n                android:textSize=\"14sp\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintStart_toStartOf=\"@+id/etTime1\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/lblDose\" />\r\n\r\n            <EditText\r\n                android:id=\"@+id/etDose1\"\r\n                android:layout_width=\"75dp\"\r\n                android:layout_height=\"42dp\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:background=\"@drawable/bg_input_field\"\r\n                android:gravity=\"center\"\r\n                android:inputType=\"number\"\r\n                android:text=\"1\"\r\n                android:textColor=\"#000000\"\r\n                android:textSize=\"15sp\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/lblDose\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/etTime1\"\r\n                android:layout_width=\"100dp\"\r\n                android:layout_height=\"42dp\"\r\n                android:layout_marginStart=\"12dp\"\r\n                android:background=\"@drawable/bg_input_field\"\r\n                android:clickable=\"true\"\r\n                android:focusable=\"true\"\r\n                android:gravity=\"center\"\r\n                android:paddingEnd=\"8dp\"\r\n                android:paddingStart=\"4dp\"\r\n                android:text=\"08:00 AM\"\r\n                android:textColor=\"#000000\"\r\n                android:textSize=\"13sp\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/etDose1\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/etDose1\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/etDose1\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/spFoodRelation1\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"42dp\"\r\n                android:layout_marginStart=\"12dp\"\r\n                android:background=\"@drawable/bg_input_field\"\r\n                android:paddingHorizontal=\"16dp\"\r\n                android:gravity=\"center_vertical\"\r\n                android:text=\"Before eat\"\r\n                android:textColor=\"#000000\"\r\n                android:textSize=\"14sp\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/etTime1\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/etTime1\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/etTime1\" />\r\n\r\n            <EditText\r\n                android:id=\"@+id/etDose2\"\r\n                android:layout_width=\"75dp\"\r\n                android:layout_height=\"42dp\"\r\n                android:layout_marginTop=\"12dp\"\r\n                android:background=\"@drawable/bg_input_field\"\r\n                android:gravity=\"center\"\r\n                android:inputType=\"number\"\r\n                android:text=\"1\"\r\n                android:textColor=\"#000000\"\r\n                android:textSize=\"15sp\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/etDose1\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/etTime2\"\r\n                android:layout_width=\"100dp\"\r\n                android:layout_height=\"42dp\"\r\n                android:layout_marginStart=\"12dp\"\r\n                android:background=\"@drawable/bg_input_field\"\r\n                android:clickable=\"true\"\r\n                android:focusable=\"true\"\r\n                android:gravity=\"center\"\r\n                android:paddingEnd=\"8dp\"\r\n                android:paddingStart=\"4dp\"\r\n                android:text=\"02:00 PM\"\r\n                android:textColor=\"#000000\"\r\n                android:textSize=\"13sp\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/etDose2\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/etDose2\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/etDose2\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/spFoodRelation2\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"42dp\"\r\n                android:layout_marginStart=\"12dp\"\r\n                android:background=\"@drawable/bg_input_field\"\r\n                android:paddingHorizontal=\"16dp\"\r\n                android:gravity=\"center_vertical\"\r\n                android:text=\"Before eat\"\r\n                android:textColor=\"#000000\"\r\n                android:textSize=\"14sp\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/etTime2\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/etTime2\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/etTime2\" />\r\n\r\n            <LinearLayout\r\n                android:id=\"@+id/btnAddTimes\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"12dp\"\r\n                android:background=\"@drawable/bg_add_times_btn\"\r\n                android:clickable=\"true\"\r\n                android:focusable=\"true\"\r\n                android:gravity=\"center_vertical\"\r\n                android:orientation=\"horizontal\"\r\n                android:paddingHorizontal=\"12dp\"\r\n                android:paddingVertical=\"6dp\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/etDose2\">\r\n\r\n                <ImageView\r\n                    android:layout_width=\"12dp\"\r\n                    android:layout_height=\"12dp\" />\r\n\r\n                <TextView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginStart=\"4dp\"\r\n                    android:text=\"Add times\"\r\n                    android:textColor=\"#C5C9FF\"\r\n                    android:textSize=\"12sp\"\r\n                    android:textStyle=\"bold\" />\r\n            </LinearLayout>\r\n\r\n            <TextView\r\n                android:id=\"@+id/lblNotes\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"16dp\"\r\n                android:text=\"Notes (Optional)\"\r\n                android:textColor=\"#FFFFFF\"\r\n                android:textSize=\"14sp\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/btnAddTimes\" />\r\n\r\n            <EditText\r\n                android:id=\"@+id/etNotes\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"80dp\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:background=\"@drawable/bg_input_field\"\r\n                android:gravity=\"top|start\"\r\n                android:hint=\"This medicine i am taking for fever prescription\"\r\n                android:padding=\"12dp\"\r\n                android:textColor=\"#000000\"\r\n                android:textColorHint=\"#B0B0B0\"\r\n                android:textSize=\"14sp\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/lblNotes\" />\r\n\r\n            <androidx.appcompat.widget.AppCompatButton\r\n                android:id=\"@+id/btnSaveMedicine\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"48dp\"\r\n                android:layout_marginTop=\"24dp\"\r\n                android:layout_marginHorizontal=\"40dp\"\r\n                android:background=\"@drawable/bg_submit_button\"\r\n                android:text=\"Save Medicine\"\r\n                android:textAllCaps=\"false\"\r\n                android:textColor=\"#000000\"\r\n                android:textSize=\"16sp\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/etNotes\" />\r\n\r\n            <androidx.appcompat.widget.AppCompatButton\r\n                android:id=\"@+id/btnRemoveMedicine\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"48dp\"\r\n                android:layout_marginTop=\"16dp\"\r\n                android:layout_marginHorizontal=\"40dp\"\r\n                android:layout_marginBottom=\"16dp\"\r\n                android:background=\"#FF1744\"\r\n                android:text=\"Remove medicine\"\r\n                android:textAllCaps=\"false\"\r\n                android:textColor=\"#FFFFFF\"\r\n                android:textSize=\"16sp\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/btnSaveMedicine\" />\r\n\r\n\r\n        </androidx.constraintlayout.widget.ConstraintLayout>\r\n    </ScrollView>\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+===================================================================
+diff --git a/app/src/main/res/layout/activity_edit_medicine.xml b/app/src/main/res/layout/activity_edit_medicine.xml
+--- a/app/src/main/res/layout/activity_edit_medicine.xml	(revision 541fed46a9e4b23ceed69695bf8e08945b35005d)
++++ b/app/src/main/res/layout/activity_edit_medicine.xml	(date 1780122885258)
+@@ -27,7 +27,7 @@
+         android:focusable="true"
+         android:paddingHorizontal="12dp"
+         android:paddingVertical="6dp"
+-        android:text="&lt; Back"
++        android:text="@string/back"
+         android:textColor="#000000"
+         android:textSize="12sp"
+         android:textStyle="bold"
+@@ -39,7 +39,7 @@
+         android:id="@+id/tvHeaderTitle"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:text="Edit Medicine"
++        android:text="@string/title_edit_medicine"
+         android:textColor="#FFFFFF"
+         android:textSize="18sp"
+         android:textStyle="bold"
+@@ -87,7 +87,7 @@
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="24dp"
+                 android:fontFamily="sans-serif"
+-                android:text="Pill Name"
++                android:text="@string/label_pill_name"
+                 android:textColor="#FFFFFF"
+                 android:textSize="14sp"
+                 android:textStyle="bold"
+@@ -100,7 +100,7 @@
+                 android:layout_height="45dp"
+                 android:layout_marginTop="8dp"
+                 android:background="@drawable/bg_input_field"
+-                android:hint="Panadol"
++                android:hint="@string/hint_pill_name"
+                 android:paddingHorizontal="16dp"
+                 android:singleLine="true"
+                 android:textColor="#000000"
+@@ -115,7 +115,7 @@
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="16dp"
+-                android:text="Diseases"
++                android:text="@string/label_diseases"
+                 android:textColor="#FFFFFF"
+                 android:textSize="14sp"
+                 android:textStyle="bold"
+@@ -127,7 +127,7 @@
+                 android:layout_width="0dp"
+                 android:layout_height="45dp"
+                 android:layout_marginTop="8dp"
+-                android:hint="Fever"
++                android:hint="@string/hint_diseases"
+                 android:background="@drawable/bg_input_field"
+                 android:paddingHorizontal="16dp"
+                 android:singleLine="true"
+@@ -138,23 +138,54 @@
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/lblDiseases" />
+ 
++            <!-- New Date Selection Field -->
+             <TextView
+-                android:id="@+id/lblDose"
++                android:id="@+id/lblDate"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="16dp"
+-                android:text="Dose"
++                android:text="@string/label_date"
+                 android:textColor="#FFFFFF"
+                 android:textSize="14sp"
+                 android:textStyle="bold"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/spDiseases" />
+ 
++            <TextView
++                android:id="@+id/etDate"
++                android:layout_width="0dp"
++                android:layout_height="45dp"
++                android:layout_marginTop="8dp"
++                android:background="@drawable/bg_input_field"
++                android:clickable="true"
++                android:focusable="true"
++                android:gravity="center_vertical"
++                android:hint="@string/hint_date"
++                android:paddingHorizontal="16dp"
++                android:textColor="#000000"
++                android:textColorHint="#B0B0B0"
++                android:textSize="14sp"
++                app:layout_constraintEnd_toEndOf="parent"
++                app:layout_constraintStart_toStartOf="parent"
++                app:layout_constraintTop_toBottomOf="@+id/lblDate" />
++
++            <TextView
++                android:id="@+id/lblDose"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginTop="16dp"
++                android:text="@string/label_dose"
++                android:textColor="#FFFFFF"
++                android:textSize="14sp"
++                android:textStyle="bold"
++                app:layout_constraintStart_toStartOf="parent"
++                app:layout_constraintTop_toBottomOf="@+id/etDate" />
++
+             <TextView
+                 android:id="@+id/lblTime"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+-                android:text="Time"
++                android:text="@string/label_time"
+                 android:textColor="#FFFFFF"
+                 android:textSize="14sp"
+                 android:textStyle="bold"
+@@ -291,7 +322,7 @@
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="16dp"
+-                android:text="Notes (Optional)"
++                android:text="@string/label_notes"
+                 android:textColor="#FFFFFF"
+                 android:textSize="14sp"
+                 android:textStyle="bold"
+@@ -305,7 +336,7 @@
+                 android:layout_marginTop="8dp"
+                 android:background="@drawable/bg_input_field"
+                 android:gravity="top|start"
+-                android:hint="This medicine i am taking for fever prescription"
++                android:hint="@string/hint_notes"
+                 android:padding="12dp"
+                 android:textColor="#000000"
+                 android:textColorHint="#B0B0B0"
+@@ -321,7 +352,7 @@
+                 android:layout_marginTop="24dp"
+                 android:layout_marginHorizontal="40dp"
+                 android:background="@drawable/bg_submit_button"
+-                android:text="Save Medicine"
++                android:text="@string/btn_save_medicine"
+                 android:textAllCaps="false"
+                 android:textColor="#000000"
+                 android:textSize="16sp"
+@@ -338,7 +369,7 @@
+                 android:layout_marginHorizontal="40dp"
+                 android:layout_marginBottom="16dp"
+                 android:background="#FF1744"
+-                android:text="Remove medicine"
++                android:text="@string/btn_remove_medicine"
+                 android:textAllCaps="false"
+                 android:textColor="#FFFFFF"
+                 android:textSize="16sp"
+Index: app/src/main/res/layout/activity_add_medicine.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"#0A129C\"\r\n    tools:context=\".AddMedicineActivity\">\r\n\r\n    <View\r\n        android:id=\"@+id/viewHeaderBg\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"60dp\"\r\n        android:background=\"#0D1647\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/btnBack\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"16dp\"\r\n        android:background=\"@drawable/bg_back_button\"\r\n        android:clickable=\"true\"\r\n        android:focusable=\"true\"\r\n        android:paddingHorizontal=\"12dp\"\r\n        android:paddingVertical=\"6dp\"\r\n        android:text=\"&lt; Back\"\r\n        android:textColor=\"#000000\"\r\n        android:textSize=\"12sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintBottom_toBottomOf=\"@+id/viewHeaderBg\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"@+id/viewHeaderBg\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/tvHeaderTitle\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Add Medicine\"\r\n        android:textColor=\"#FFFFFF\"\r\n        android:textSize=\"18sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintBottom_toBottomOf=\"@+id/viewHeaderBg\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"@+id/viewHeaderBg\" />\r\n\r\n    <ScrollView\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"0dp\"\r\n        android:fillViewport=\"true\"\r\n        android:scrollbars=\"none\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/viewHeaderBg\">\r\n\r\n        <androidx.constraintlayout.widget.ConstraintLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:padding=\"20dp\">\r\n\r\n            <androidx.cardview.widget.CardView\r\n                android:id=\"@+id/cvPillImage\"\r\n                android:layout_width=\"140dp\"\r\n                android:layout_height=\"140dp\"\r\n                android:layout_marginTop=\"16dp\"\r\n                app:cardCornerRadius=\"70dp\"\r\n                app:cardElevation=\"0dp\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n                <ImageView\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\"\r\n                    android:scaleType=\"centerCrop\"\r\n                    android:src=\"@drawable/_9742218fabe9161f8872fe0064d01eecd2528d1d\" /></androidx.cardview.widget.CardView>\r\n\r\n            <TextView\r\n                android:id=\"@+id/lblPillName\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"24dp\"\r\n                android:fontFamily=\"sans-serif\"\r\n                android:text=\"Pill Name\"\r\n                android:textColor=\"#FFFFFF\"\r\n                android:textSize=\"14sp\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/cvPillImage\" />\r\n\r\n            <EditText\r\n                android:id=\"@+id/etPillName\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"45dp\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:background=\"@drawable/bg_input_field\"\r\n                android:hint=\"Enter pills name\"\r\n                android:paddingHorizontal=\"16dp\"\r\n                android:singleLine=\"true\"\r\n                android:textColor=\"#000000\"\r\n                android:textColorHint=\"#B0B0B0\"\r\n                android:textSize=\"14sp\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/lblPillName\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/lblDiseases\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"16dp\"\r\n                android:text=\"Diseases\"\r\n                android:textColor=\"#FFFFFF\"\r\n                android:textSize=\"14sp\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/etPillName\" />\r\n\r\n\r\n            <EditText\r\n                android:id=\"@+id/spDiseases\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"45dp\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:hint=\"diseases\"\r\n                android:background=\"@drawable/bg_input_field\"\r\n                android:paddingHorizontal=\"16dp\"\r\n                android:singleLine=\"true\"\r\n                android:textColor=\"#000000\"\r\n                android:textColorHint=\"#B0B0B0\"\r\n                android:textSize=\"14sp\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/lblDiseases\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/lblDose\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"16dp\"\r\n                android:text=\"Dose\"\r\n                android:textColor=\"#FFFFFF\"\r\n                android:textSize=\"14sp\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/spDiseases\" />\r\n\r\n            <EditText\r\n                android:id=\"@+id/etDose\"\r\n                android:layout_width=\"75dp\"\r\n                android:layout_height=\"42dp\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:background=\"@drawable/bg_input_field\"\r\n                android:gravity=\"center\"\r\n                android:inputType=\"numberDecimal\"\r\n                android:text=\"0.5\"\r\n                android:textColor=\"#000000\"\r\n                android:textSize=\"15sp\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/lblDose\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/lblTime\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Time\"\r\n                android:textColor=\"#FFFFFF\"\r\n                android:textSize=\"14sp\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintBaseline_toBaselineOf=\"@id/lblDose\"\r\n                app:layout_constraintStart_toStartOf=\"@+id/etTime\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/lblDose\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/etTime\"\r\n                android:layout_width=\"100dp\"\r\n                android:layout_height=\"42dp\"\r\n                android:layout_marginStart=\"12dp\"\r\n                android:background=\"@drawable/bg_input_field\"\r\n                android:clickable=\"true\"\r\n                android:focusable=\"true\"\r\n                android:gravity=\"center\"\r\n                android:paddingEnd=\"8dp\"\r\n                android:paddingStart=\"4dp\"\r\n                android:text=\"08:00 AM\"\r\n                android:textColor=\"#000000\"\r\n                android:textSize=\"13sp\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/etDose\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/etDose\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/etDose\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/spFoodRelation\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"42dp\"\r\n                android:layout_marginStart=\"12dp\"\r\n                android:background=\"@drawable/bg_input_field\"\r\n                android:paddingHorizontal=\"16dp\"\r\n                android:singleLine=\"true\"\r\n                android:gravity=\"center_vertical\"\r\n                android:text=\"Before eat\"\r\n                android:textColor=\"#000000\"\r\n                android:textColorHint=\"#B0B0B0\"\r\n                android:textSize=\"14sp\"\r\n                app:layout_constraintBottom_toBottomOf=\"@+id/etTime\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toEndOf=\"@+id/etTime\"\r\n                app:layout_constraintTop_toTopOf=\"@+id/etTime\" />\r\n\r\n            <LinearLayout\r\n                android:id=\"@+id/btnAddTimes\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"12dp\"\r\n                android:background=\"@drawable/bg_add_times_btn\"\r\n                android:clickable=\"true\"\r\n                android:focusable=\"true\"\r\n                android:gravity=\"center_vertical\"\r\n                android:orientation=\"horizontal\"\r\n                android:paddingHorizontal=\"12dp\"\r\n                android:paddingVertical=\"6dp\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/etDose\">\r\n\r\n                <ImageView\r\n                    android:layout_width=\"12dp\"\r\n                    android:layout_height=\"12dp\" />\r\n\r\n                <TextView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginStart=\"4dp\"\r\n                    android:text=\"Add times\"\r\n                    android:textColor=\"#C5C9FF\"\r\n                    android:textSize=\"12sp\"\r\n                    android:textStyle=\"bold\" />\r\n            </LinearLayout>\r\n\r\n            <TextView\r\n                android:id=\"@+id/lblNotes\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"16dp\"\r\n                android:text=\"Notes (Optional)\"\r\n                android:textColor=\"#FFFFFF\"\r\n                android:textSize=\"14sp\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/btnAddTimes\" />\r\n\r\n            <EditText\r\n                android:id=\"@+id/etNotes\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"80dp\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:background=\"@drawable/bg_input_field\"\r\n                android:gravity=\"top|start\"\r\n                android:hint=\"Add any notes\"\r\n                android:padding=\"12dp\"\r\n                android:textColor=\"#000000\"\r\n                android:textColorHint=\"#B0B0B0\"\r\n                android:textSize=\"14sp\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/lblNotes\" />\r\n\r\n            <androidx.appcompat.widget.AppCompatButton\r\n                android:id=\"@+id/btnSubmitMedicine\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"48dp\"\r\n                android:layout_marginTop=\"32dp\"\r\n                android:layout_marginHorizontal=\"40dp\"\r\n                android:layout_marginBottom=\"16dp\"\r\n                android:background=\"@drawable/bg_submit_button\"\r\n                android:text=\"Add Medicine\"\r\n                android:textAllCaps=\"false\"\r\n                android:textColor=\"#000000\"\r\n                android:textSize=\"16sp\"\r\n                android:textStyle=\"bold\"\r\n                app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                app:layout_constraintEnd_toEndOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\"\r\n                app:layout_constraintTop_toBottomOf=\"@+id/etNotes\" />\r\n\r\n        </androidx.constraintlayout.widget.ConstraintLayout>\r\n    </ScrollView>\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+===================================================================
+diff --git a/app/src/main/res/layout/activity_add_medicine.xml b/app/src/main/res/layout/activity_add_medicine.xml
+--- a/app/src/main/res/layout/activity_add_medicine.xml	(revision 541fed46a9e4b23ceed69695bf8e08945b35005d)
++++ b/app/src/main/res/layout/activity_add_medicine.xml	(date 1780122843917)
+@@ -27,7 +27,7 @@
+         android:focusable="true"
+         android:paddingHorizontal="12dp"
+         android:paddingVertical="6dp"
+-        android:text="&lt; Back"
++        android:text="@string/back"
+         android:textColor="#000000"
+         android:textSize="12sp"
+         android:textStyle="bold"
+@@ -39,7 +39,7 @@
+         android:id="@+id/tvHeaderTitle"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:text="Add Medicine"
++        android:text="@string/title_add_medicine"
+         android:textColor="#FFFFFF"
+         android:textSize="18sp"
+         android:textStyle="bold"
+@@ -86,7 +86,7 @@
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="24dp"
+                 android:fontFamily="sans-serif"
+-                android:text="Pill Name"
++                android:text="@string/label_pill_name"
+                 android:textColor="#FFFFFF"
+                 android:textSize="14sp"
+                 android:textStyle="bold"
+@@ -99,7 +99,7 @@
+                 android:layout_height="45dp"
+                 android:layout_marginTop="8dp"
+                 android:background="@drawable/bg_input_field"
+-                android:hint="Enter pills name"
++                android:hint="@string/hint_pill_name"
+                 android:paddingHorizontal="16dp"
+                 android:singleLine="true"
+                 android:textColor="#000000"
+@@ -114,20 +114,19 @@
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="16dp"
+-                android:text="Diseases"
++                android:text="@string/label_diseases"
+                 android:textColor="#FFFFFF"
+                 android:textSize="14sp"
+                 android:textStyle="bold"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/etPillName" />
+ 
+-
+             <EditText
+                 android:id="@+id/spDiseases"
+                 android:layout_width="0dp"
+                 android:layout_height="45dp"
+                 android:layout_marginTop="8dp"
+-                android:hint="diseases"
++                android:hint="@string/hint_diseases"
+                 android:background="@drawable/bg_input_field"
+                 android:paddingHorizontal="16dp"
+                 android:singleLine="true"
+@@ -138,18 +137,49 @@
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/lblDiseases" />
+ 
++            <!-- New Date Selection Field -->
+             <TextView
+-                android:id="@+id/lblDose"
++                android:id="@+id/lblDate"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="16dp"
+-                android:text="Dose"
++                android:text="@string/label_date"
+                 android:textColor="#FFFFFF"
+                 android:textSize="14sp"
+                 android:textStyle="bold"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/spDiseases" />
+ 
++            <TextView
++                android:id="@+id/etDate"
++                android:layout_width="0dp"
++                android:layout_height="45dp"
++                android:layout_marginTop="8dp"
++                android:background="@drawable/bg_input_field"
++                android:clickable="true"
++                android:focusable="true"
++                android:gravity="center_vertical"
++                android:hint="@string/hint_date"
++                android:paddingHorizontal="16dp"
++                android:textColor="#000000"
++                android:textColorHint="#B0B0B0"
++                android:textSize="14sp"
++                app:layout_constraintEnd_toEndOf="parent"
++                app:layout_constraintStart_toStartOf="parent"
++                app:layout_constraintTop_toBottomOf="@+id/lblDate" />
++
++            <TextView
++                android:id="@+id/lblDose"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginTop="16dp"
++                android:text="@string/label_dose"
++                android:textColor="#FFFFFF"
++                android:textSize="14sp"
++                android:textStyle="bold"
++                app:layout_constraintStart_toStartOf="parent"
++                app:layout_constraintTop_toBottomOf="@+id/etDate" />
++
+             <EditText
+                 android:id="@+id/etDose"
+                 android:layout_width="75dp"
+@@ -168,7 +198,7 @@
+                 android:id="@+id/lblTime"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+-                android:text="Time"
++                android:text="@string/label_time"
+                 android:textColor="#FFFFFF"
+                 android:textSize="14sp"
+                 android:textStyle="bold"
+@@ -235,7 +265,7 @@
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginStart="4dp"
+-                    android:text="Add times"
++                    android:text="@string/label_add_times"
+                     android:textColor="#C5C9FF"
+                     android:textSize="12sp"
+                     android:textStyle="bold" />
+@@ -246,7 +276,7 @@
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="16dp"
+-                android:text="Notes (Optional)"
++                android:text="@string/label_notes"
+                 android:textColor="#FFFFFF"
+                 android:textSize="14sp"
+                 android:textStyle="bold"
+@@ -260,7 +290,7 @@
+                 android:layout_marginTop="8dp"
+                 android:background="@drawable/bg_input_field"
+                 android:gravity="top|start"
+-                android:hint="Add any notes"
++                android:hint="@string/hint_notes"
+                 android:padding="12dp"
+                 android:textColor="#000000"
+                 android:textColorHint="#B0B0B0"
+@@ -277,7 +307,7 @@
+                 android:layout_marginHorizontal="40dp"
+                 android:layout_marginBottom="16dp"
+                 android:background="@drawable/bg_submit_button"
+-                android:text="Add Medicine"
++                android:text="@string/btn_add_medicine"
+                 android:textAllCaps="false"
+                 android:textColor="#000000"
+                 android:textSize="16sp"
+Index: app/src/main/res/layout/activity_reminder.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"#0A129C\"\r\n    tools:context=\".ReminderActivity\">\r\n\r\n    <!-- Header Background -->\r\n    <View\r\n        android:id=\"@+id/viewHeaderBg\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"65dp\"\r\n        android:background=\"#0D1647\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <!-- Back Button -->\r\n    <TextView\r\n        android:id=\"@+id/btnBack\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"16dp\"\r\n        android:background=\"@drawable/bg_back_button\"\r\n        android:clickable=\"true\"\r\n        android:focusable=\"true\"\r\n        android:paddingHorizontal=\"12dp\"\r\n        android:paddingVertical=\"6dp\"\r\n        android:text=\"Back\"\r\n        android:textColor=\"#000000\"\r\n        android:textSize=\"12sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintBottom_toBottomOf=\"@+id/viewHeaderBg\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"@+id/viewHeaderBg\" />\r\n\r\n    <!-- Header Title -->\r\n    <TextView\r\n        android:id=\"@+id/tvHeaderTitle\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:text=\"Pill Reminder\"\r\n        android:textColor=\"#FFFFFF\"\r\n        android:textSize=\"20sp\"\r\n        android:textStyle=\"bold\"\r\n        app:layout_constraintBottom_toBottomOf=\"@+id/viewHeaderBg\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"@+id/viewHeaderBg\" />\r\n\r\n    <!-- User Profile Image -->\r\n    <androidx.cardview.widget.CardView\r\n        android:id=\"@+id/cvUserProfile\"\r\n        android:layout_width=\"45dp\"\r\n        android:layout_height=\"45dp\"\r\n        android:layout_marginEnd=\"16dp\"\r\n        app:cardCornerRadius=\"22.5dp\"\r\n        app:cardElevation=\"0dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"@+id/viewHeaderBg\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"@+id/viewHeaderBg\">\r\n\r\n        <ImageView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:scaleType=\"centerCrop\"\r\n            android:src=\"@drawable/_9c9d613dab41a8421e763d50f46ac1f09b4b0ee3\" />\r\n    </androidx.cardview.widget.CardView>\r\n\r\n    <!-- Main Body Container -->\r\n    <androidx.constraintlayout.widget.ConstraintLayout\r\n        android:id=\"@+id/containerBody\"\r\n        android:layout_width=\"0dp\"\r\n        android:layout_height=\"0dp\"\r\n        android:layout_marginTop=\"20dp\"\r\n        android:background=\"#152F63\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/viewHeaderBg\">\r\n\r\n        <!-- Background Artwork Inside Body -->\r\n        <ImageView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:alpha=\"0.5\"\r\n            android:scaleType=\"centerCrop\"\r\n            android:src=\"@drawable/f29972c8626ea693cf52c41f2c72366072298d8e\" />\r\n\r\n        <!-- Alarm Clock Illustration Container -->\r\n        <androidx.cardview.widget.CardView\r\n            android:id=\"@+id/cvAlarmClock\"\r\n            android:layout_width=\"220dp\"\r\n            android:layout_height=\"220dp\"\r\n            android:layout_marginTop=\"32dp\"\r\n            app:cardBackgroundColor=\"@android:color/transparent\"\r\n            app:cardCornerRadius=\"0dp\"\r\n            app:cardElevation=\"0dp\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n            <ImageView\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:scaleType=\"fitCenter\"\r\n                android:src=\"@drawable/f9cca7fe5588634385ce2c36fcd838feb5489aa1\" />\r\n        </androidx.cardview.widget.CardView>\r\n\r\n        <!-- Alert Title Text -->\r\n        <TextView\r\n            android:id=\"@+id/tvTimeForPill\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"24dp\"\r\n            android:text=\"Time for your pill\"\r\n            android:textColor=\"#FFFFFF\"\r\n            android:textSize=\"26sp\"\r\n            android:textStyle=\"bold\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@+id/cvAlarmClock\" />\r\n\r\n        <!-- Medicine Card 1 (Paracetamol) -->\r\n        <androidx.cardview.widget.CardView\r\n            android:id=\"@+id/cardMedicine1\"\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"80dp\"\r\n            android:layout_marginHorizontal=\"28dp\"\r\n            android:layout_marginTop=\"24dp\"\r\n            app:cardBackgroundColor=\"#B2E7B0\"\r\n            app:cardCornerRadius=\"40dp\"\r\n            app:cardElevation=\"4dp\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@+id/tvTimeForPill\">\r\n\r\n            <androidx.constraintlayout.widget.ConstraintLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:paddingHorizontal=\"24dp\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/ivPillIcon1\"\r\n                    android:src=\"@drawable/ic_pills\"\r\n                    android:layout_width=\"32dp\"\r\n                    android:layout_height=\"32dp\"\r\n                    app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                    app:layout_constraintStart_toStartOf=\"parent\"\r\n                    app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tvPillName1\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginStart=\"16dp\"\r\n                    android:layout_marginTop=\"14dp\"\r\n                    android:text=\"Paracetamol\"\r\n                    android:textColor=\"#000000\"\r\n                    android:textSize=\"18sp\"\r\n                    android:textStyle=\"bold\"\r\n                    app:layout_constraintStart_toEndOf=\"@+id/ivPillIcon1\"\r\n                    app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tvPillDesc1\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"02 pills  |  After food\"\r\n                    android:textColor=\"#333333\"\r\n                    android:textSize=\"14sp\"\r\n                    app:layout_constraintStart_toStartOf=\"@+id/tvPillName1\"\r\n                    app:layout_constraintTop_toBottomOf=\"@+id/tvPillName1\" />\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/ivNotificationBell1\"\r\n                    android:src=\"@drawable/ic_reminder\"\r\n                    android:layout_width=\"28dp\"\r\n                    android:layout_height=\"28dp\"\r\n                    app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                    app:layout_constraintEnd_toEndOf=\"parent\"\r\n                    app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n            </androidx.constraintlayout.widget.ConstraintLayout>\r\n        </androidx.cardview.widget.CardView>\r\n\r\n        <!-- Medicine Card 2 (Eye Drops) -->\r\n        <androidx.cardview.widget.CardView\r\n            android:id=\"@+id/cardMedicine2\"\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"80dp\"\r\n            android:layout_marginHorizontal=\"28dp\"\r\n            android:layout_marginTop=\"16dp\"\r\n            app:cardBackgroundColor=\"#B2E7B0\"\r\n            app:cardCornerRadius=\"40dp\"\r\n            app:cardElevation=\"4dp\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@+id/cardMedicine1\">\r\n\r\n            <androidx.constraintlayout.widget.ConstraintLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                android:paddingHorizontal=\"24dp\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/ivPillIcon2\"\r\n                    android:src=\"@drawable/ic_drop2\"\r\n                    android:layout_width=\"32dp\"\r\n                    android:layout_height=\"32dp\"\r\n                    app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                    app:layout_constraintStart_toStartOf=\"parent\"\r\n                    app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tvPillName2\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginStart=\"16dp\"\r\n                    android:layout_marginTop=\"14dp\"\r\n                    android:text=\"Eye drops\"\r\n                    android:textColor=\"#000000\"\r\n                    android:textSize=\"18sp\"\r\n                    android:textStyle=\"bold\"\r\n                    app:layout_constraintStart_toEndOf=\"@+id/ivPillIcon2\"\r\n                    app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tvPillDesc2\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"Before bed\"\r\n                    android:textColor=\"#333333\"\r\n                    android:textSize=\"14sp\"\r\n                    app:layout_constraintStart_toStartOf=\"@+id/tvPillName2\"\r\n                    app:layout_constraintTop_toBottomOf=\"@+id/tvPillName2\" />\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/ivNotificationBell2\"\r\n                    android:src=\"@drawable/ic_reminder\"\r\n                    android:layout_width=\"28dp\"\r\n                    android:layout_height=\"28dp\"\r\n                    app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                    app:layout_constraintEnd_toEndOf=\"parent\"\r\n                    app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n            </androidx.constraintlayout.widget.ConstraintLayout>\r\n        </androidx.cardview.widget.CardView>\r\n\r\n    </androidx.constraintlayout.widget.ConstraintLayout>\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+===================================================================
+diff --git a/app/src/main/res/layout/activity_reminder.xml b/app/src/main/res/layout/activity_reminder.xml
+--- a/app/src/main/res/layout/activity_reminder.xml	(revision 541fed46a9e4b23ceed69695bf8e08945b35005d)
++++ b/app/src/main/res/layout/activity_reminder.xml	(date 1780114463749)
+@@ -83,14 +83,17 @@
+         app:layout_constraintTop_toBottomOf="@+id/viewHeaderBg">
+ 
+         <!-- Background Artwork Inside Body -->
++
++        <!-- Alarm Clock Illustration Container -->
+         <ImageView
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:alpha="0.5"
+             android:scaleType="centerCrop"
+-            android:src="@drawable/f29972c8626ea693cf52c41f2c72366072298d8e" />
++            android:src="@drawable/f29972c8626ea693cf52c41f2c72366072298d8e"
++            tools:layout_editor_absoluteX="85dp"
++            tools:layout_editor_absoluteY="-16dp" />
+ 
+-        <!-- Alarm Clock Illustration Container -->
+         <androidx.cardview.widget.CardView
+             android:id="@+id/cvAlarmClock"
+             android:layout_width="220dp"

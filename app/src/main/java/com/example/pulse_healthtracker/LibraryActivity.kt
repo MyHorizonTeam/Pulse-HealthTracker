@@ -78,7 +78,7 @@ class LibraryActivity : AppCompatActivity() {
                     val mood = parts[1]
                     
                     val tv = TextView(this)
-                    tv.text = "[$time] - $mood"
+                    tv.text = String.format("[%s] - %s", time, mood)
                     tv.setPadding(0, 8, 0, 8)
                     tv.setTextColor(resources.getColor(R.color.text_primary))
                     tv.textSize = 15f

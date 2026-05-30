@@ -228,9 +228,10 @@
                     android:background="@drawable/edtxtlog"
                     android:ems="10"
                     android:hint="Enter your name"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textPersonName"
                     android:padding="8dp"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:autofillHints="name" />
 
                 <EditText
                     android:id="@+id/edtxtEmailR"
@@ -263,8 +264,10 @@
                     android:layout_margin="10dp"
                     android:background="@drawable/edtxtlog"
                     android:hint="Confirm password"
+                    android:inputType="textPassword"
                     android:padding="8dp"
-                    android:textSize="20dp" />
+                    android:textSize="20sp"
+                    android:autofillHints="password" />
 
                 <Button
                     android:id="@+id/btnReg"

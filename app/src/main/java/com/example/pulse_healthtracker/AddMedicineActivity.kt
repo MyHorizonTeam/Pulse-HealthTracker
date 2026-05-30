@@ -2,29 +2,36 @@ package com.example.pulse_healthtracker
 
 import android.app.AlertDialog
 import android.app.TimePickerDialog
+import android.net.Uri
 import android.os.Bundle
-import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import java.util.UUID
 
 class AddMedicineActivity : AppCompatActivity() {
     private lateinit var btnBack: TextView
     private lateinit var tvHeaderTitle: TextView
     private lateinit var cvPillImage: CardView
+    private lateinit var ivMedicineImage: ImageView
     private lateinit var etPillName: EditText
     private lateinit var spDiseases: EditText
+    private lateinit var etDate: TextView
     private lateinit var etDose: EditText
     private lateinit var etTime: TextView
     private lateinit var spFoodRelation: TextView
@@ -33,14 +40,25 @@ class AddMedicineActivity : AppCompatActivity() {
     private lateinit var btnSubmitMedicine: androidx.appcompat.widget.AppCompatButton
 
     // Data variables
+    private var selectedDate = ""
     private var selectedTime = "08:00 AM"
     private var selectedFoodRelation = "Before eat"
     private val medicineTimes = mutableListOf<String>()
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
+    private lateinit var storage: FirebaseStorage
 
     private var editingMedicineId: String? = null
     private var currentIsTaken = false
+    private var selectedImageUri: Uri? = null
+    private var currentImageUrl: String = ""
+
+    private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        if (uri != null) {
+            selectedImageUri = uri
+            ivMedicineImage.setImageURI(uri)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,9 +76,14 @@ class AddMedicineActivity : AppCompatActivity() {
         setupClickListeners()
 
         val medicineId = intent.getStringExtra("medicineId")
+        val preSelectedDate = intent.getStringExtra("selectedDate")
+        
         if (medicineId != null) {
             editingMedicineId = medicineId
             loadMedicineData(medicineId)
+        } else if (preSelectedDate != null) {
+            selectedDate = preSelectedDate
+            etDate.text = selectedDate
         }
     }
 
@@ -68,8 +91,10 @@ class AddMedicineActivity : AppCompatActivity() {
         btnBack = findViewById(R.id.btnBack)
         tvHeaderTitle = findViewById(R.id.tvHeaderTitle)
         cvPillImage = findViewById(R.id.cvPillImage)
+        ivMedicineImage = findViewById(R.id.ivMedicineImage)
         etPillName = findViewById(R.id.etPillName)
         spDiseases = findViewById(R.id.spDiseases)
+        etDate = findViewById(R.id.etDate)
         etDose = findViewById(R.id.etDose)
         etTime = findViewById(R.id.etTime)
         spFoodRelation = findViewById(R.id.spFoodRelation)
@@ -80,6 +105,7 @@ class AddMedicineActivity : AppCompatActivity() {
 
     private fun setupClickListeners() {
         btnBack.setOnClickListener { finish() }
+        etDate.setOnClickListener { showDatePickerDialog() }
         etTime.setOnClickListener { showTimePickerDialog() }
         spFoodRelation.setOnClickListener { showFoodRelationDialog() }
         btnAddTimes.setOnClickListener { showAddTimeDialog() }
@@ -90,11 +116,12 @@ class AddMedicineActivity : AppCompatActivity() {
     private fun initializeFirebase() {
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
+        storage = FirebaseStorage.getInstance()
     }
 
     private fun loadMedicineData(id: String) {
-        tvHeaderTitle.text = "Edit Medicine"
-        btnSubmitMedicine.text = "Update Medicine"
+        tvHeaderTitle.text = getString(R.string.edit_medicine)
+        btnSubmitMedicine.text = getString(R.string.update_medicine)
         
         firestore.collection("medications").document(id).get()
             .addOnSuccessListener { doc ->
@@ -105,24 +132,55 @@ class AddMedicineActivity : AppCompatActivity() {
                     etDose.setText(med.dose.toString())
                     etTime.text = med.time
                     selectedTime = med.time
+                    etDate.text = med.date
+                    selectedDate = med.date
                     spFoodRelation.text = med.foodRelation
                     selectedFoodRelation = med.foodRelation
                     etNotes.setText(med.notes)
                     medicineTimes.clear()
                     medicineTimes.addAll(med.medicineTimes)
                     currentIsTaken = med.isTaken
+                    currentImageUrl = med.imageUrl
+                    if (currentImageUrl.isNotEmpty()) {
+                        Glide.with(this).load(currentImageUrl).into(ivMedicineImage)
+                    }
                 }
             }
     }
 
     private fun showTimePickerDialog() {
         val calendar = Calendar.getInstance()
-        val timePickerDialog = TimePickerDialog(this, { _, hour, minute ->
-            val formattedTime = formatTime(hour, minute)
-            selectedTime = formattedTime
-            etTime.text = formattedTime
-        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false)
+        val timePickerDialog = TimePickerDialog(
+            this,
+            { _, hour, minute ->
+                val formattedTime = formatTime(hour, minute)
+                selectedTime = formattedTime
+                etTime.text = formattedTime
+            },
+            calendar[Calendar.HOUR_OF_DAY],
+            calendar[Calendar.MINUTE],
+            false,
+        )
         timePickerDialog.show()
+    }
+
+    private fun showDatePickerDialog() {
+        val calendar = Calendar.getInstance()
+        val datePickerDialog = android.app.DatePickerDialog(
+            this,
+            { _, year, month, dayOfMonth ->
+                val cal = Calendar.getInstance().apply {
+                    set(year, month, dayOfMonth)
+                }
+                val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                selectedDate = format.format(cal.time)
+                etDate.text = selectedDate
+            },
+            calendar[Calendar.YEAR],
+            calendar[Calendar.MONTH],
+            calendar[Calendar.DAY_OF_MONTH],
+        )
+        datePickerDialog.show()
     }
 
     private fun formatTime(hour: Int, minute: Int): String {
@@ -150,9 +208,15 @@ class AddMedicineActivity : AppCompatActivity() {
 
     private fun showCustomTimeDialog() {
         val calendar = Calendar.getInstance()
-        TimePickerDialog(this, { _, hour, minute ->
-            addMedicineTime(formatTime(hour, minute))
-        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show()
+        TimePickerDialog(
+            this,
+            { _, hour, minute ->
+                addMedicineTime(formatTime(hour, minute))
+            },
+            calendar[Calendar.HOUR_OF_DAY],
+            calendar[Calendar.MINUTE],
+            false,
+        ).show()
     }
 
     private fun addMedicineTime(time: String) {
@@ -163,7 +227,7 @@ class AddMedicineActivity : AppCompatActivity() {
     }
 
     private fun showImagePickerDialog() {
-        Toast.makeText(this, "Image picker coming soon", Toast.LENGTH_SHORT).show()
+        pickImageLauncher.launch("image/*")
     }
 
     private fun submitMedicine() {
@@ -183,10 +247,38 @@ class AddMedicineActivity : AppCompatActivity() {
         btnSubmitMedicine.isEnabled = false
         btnSubmitMedicine.text = if (editingMedicineId == null) "Adding..." else "Updating..."
 
+        if (selectedImageUri != null) {
+            uploadImageAndSubmit(pillName, diseases, dose, notes, userId)
+        } else {
+            saveToFirestore(pillName, diseases, dose, notes, userId, currentImageUrl)
+        }
+    }
+
+    private fun uploadImageAndSubmit(pillName: String, diseases: String, dose: Double, notes: String, userId: String) {
+        val ref = storage.reference.child("medicine_images/${UUID.randomUUID()}")
+        ref.putFile(selectedImageUri!!)
+            .addOnSuccessListener {
+                ref.downloadUrl.addOnSuccessListener { uri ->
+                    saveToFirestore(pillName, diseases, dose, notes, userId, uri.toString())
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Image upload failed", Toast.LENGTH_SHORT).show()
+                saveToFirestore(pillName, diseases, dose, notes, userId, currentImageUrl)
+            }
+    }
+
+    private fun saveToFirestore(pillName: String, diseases: String, dose: Double, notes: String, userId: String, imageUrl: String) {
         val docRef = if (editingMedicineId == null) {
             firestore.collection("medications").document()
         } else {
             firestore.collection("medications").document(editingMedicineId!!)
+        }
+
+        // Default to today if no date selected
+        if (selectedDate.isEmpty()) {
+            val cal = Calendar.getInstance()
+            selectedDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(cal.time)
         }
 
         val medicineData = hashMapOf(
@@ -194,6 +286,7 @@ class AddMedicineActivity : AppCompatActivity() {
             "pillName" to pillName,
             "diseases" to diseases,
             "dose" to dose,
+            "date" to selectedDate,
             "time" to selectedTime,
             "foodRelation" to selectedFoodRelation,
             "notes" to notes,
@@ -201,18 +294,17 @@ class AddMedicineActivity : AppCompatActivity() {
             "createdAt" to System.currentTimeMillis(),
             "status" to "active",
             "userId" to userId,
-            "isTaken" to currentIsTaken
+            "isTaken" to currentIsTaken,
+            "imageUrl" to imageUrl,
         )
 
-        // Optimistic UI: Close immediately and let Firestore handle sync in background
+        // Optimistic UI: Trigger save and close screen immediately
         docRef.set(medicineData)
             .addOnFailureListener { e ->
-                // If it fails after we already closed, we can't easily undo the finish()
-                // but this is extremely rare with Firestore's offline capabilities.
-                android.util.Log.e("AddMedicine", "Background upload failed", e)
+                android.util.Log.e("AddMedicine", "Background save failed", e)
             }
 
-        Toast.makeText(this, "Saving...", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Saving medicine...", Toast.LENGTH_SHORT).show()
         finish()
     }
 }

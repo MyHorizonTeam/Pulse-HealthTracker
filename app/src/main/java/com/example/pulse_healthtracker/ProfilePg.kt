@@ -1,6 +1,5 @@
 package com.example.pulse_healthtracker
 
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -15,6 +14,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.bumptech.glide.Glide
@@ -44,17 +44,17 @@ class ProfilePg : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     // Define navigation button bottom
-    public lateinit var mediSwitch: MaterialButton
-    public lateinit var actSwitch: MaterialButton
-    public lateinit var nutSwitch: MaterialButton
-    public lateinit var docSwitch: MaterialButton
-    public lateinit var mentalSwitch: MaterialButton
-    public lateinit var userSwitch: MaterialButton
+    lateinit var mediSwitch: MaterialButton
+    lateinit var actSwitch: MaterialButton
+    lateinit var nutSwitch: MaterialButton
+    lateinit var docSwitch: MaterialButton
+    lateinit var mentalSwitch: MaterialButton
+    lateinit var userSwitch: MaterialButton
 
 
     private var selectedImageUri: Uri? = null
-    private val PICK_IMAGE_REQUEST = 1
-    private val UCROP_REQUEST = UCrop.REQUEST_CROP
+    private val pickImageRequest = 1
+    private val ucropRequest = UCrop.REQUEST_CROP
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,7 +88,7 @@ class ProfilePg : AppCompatActivity() {
         // Navigation button function
         val toggleGroup = findViewById<MaterialButtonToggleGroup>(R.id.navgrp)
 
-        toggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
+        toggleGroup.addOnButtonCheckedListener { _, checkedId, isChecked ->
             if (isChecked) {
                 when (checkedId) {
                     R.id.medi_switch -> {
@@ -106,7 +106,7 @@ class ProfilePg : AppCompatActivity() {
                         startActivity(intent)
                     }
                     R.id.mental_switch->{
-                        val intent = Intent(this, Home_MJ::class.java)
+                        val intent = Intent(this, HomeMJActivity::class.java)
                         startActivity(intent)
                     }
                     R.id.nut_switch->{
@@ -116,21 +116,21 @@ class ProfilePg : AppCompatActivity() {
                 }
             }
         }
-        val btn_edtpf = findViewById<Button>(R.id.edtpf)
-        btn_edtpf.setOnClickListener {
+        val btnEdtpf = findViewById<Button>(R.id.edtpf)
+        btnEdtpf.setOnClickListener {
             val intent= Intent(this, EditProfileActivity::class.java)
             startActivity(intent)
         }
-        val btn_goal = findViewById<Button>(R.id.goal)
+        findViewById<Button>(R.id.goal)
         // Need to create page
 
-        val btn_set = findViewById<Button>(R.id.settings)
-        btn_set.setOnClickListener {
+        val btnSet = findViewById<Button>(R.id.settings)
+        btnSet.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
-        val btn_pri = findViewById<Button>(R.id.privacy)
-        btn_pri.setOnClickListener {
+        val btnPri = findViewById<Button>(R.id.privacy)
+        btnPri.setOnClickListener {
             val intent = Intent(this, PrivacyActivity::class.java)
             startActivity(intent)
         }
@@ -138,7 +138,7 @@ class ProfilePg : AppCompatActivity() {
 
         lgOut.setOnClickListener {
             lgOut.isEnabled = false
-            lgOut.text = "Signing out..."
+            lgOut.text = getString(R.string.signing_out)
             signOut()
         }
 
@@ -172,7 +172,8 @@ class ProfilePg : AppCompatActivity() {
     private fun openCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         try {
-            startActivityForResult(intent, PICK_IMAGE_REQUEST)
+            @Suppress("DEPRECATION")
+            startActivityForResult(intent, pickImageRequest)
         } catch (e: Exception) {
             Toast.makeText(this, "Cannot open camera: ${e.message}", Toast.LENGTH_SHORT).show()
         }
@@ -180,16 +181,18 @@ class ProfilePg : AppCompatActivity() {
 
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, PICK_IMAGE_REQUEST)
+        @Suppress("DEPRECATION")
+        startActivityForResult(intent, pickImageRequest)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+        if ((requestCode == pickImageRequest) && (resultCode == RESULT_OK)) {
             val uriFromGallery = data?.data
             if (uriFromGallery != null) {
                 startCrop(uriFromGallery)
             } else {
+                @Suppress("DEPRECATION")
                 val bitmap = data?.extras?.get("data") as? Bitmap
                 if (bitmap != null) {
                     val tempUri = saveBitmapToCache(bitmap)
@@ -197,8 +200,8 @@ class ProfilePg : AppCompatActivity() {
                         Toast.makeText(this, "Failed to save camera image", Toast.LENGTH_SHORT).show()
                 }
             }
-        } else if (requestCode == UCROP_REQUEST) {
-            if (resultCode == Activity.RESULT_OK && data != null) {
+        } else if (requestCode == ucropRequest) {
+            if ((resultCode == RESULT_OK) && (data != null)) {
                 val resultUri = UCrop.getOutput(data)
                 if (resultUri != null) {
                     selectedImageUri = resultUri
@@ -233,13 +236,12 @@ class ProfilePg : AppCompatActivity() {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fos)
             fos.flush()
             Uri.fromFile(file)
-        } catch (e: IOException) {
-            e.printStackTrace()
+        } catch (_: IOException) {
             null
         } finally {
             try {
                 fos?.close()
-            } catch (ignored: IOException) {
+            } catch (_: IOException) {
             }
         }
     }
@@ -319,7 +321,7 @@ class ProfilePg : AppCompatActivity() {
             .signOut(this)
             .addOnCompleteListener { task ->
                 lgOut.isEnabled = true
-                lgOut.text = "Log out"
+                lgOut.text = getString(R.string.log_out_btn)
                 if (task.isSuccessful) {
                     clearUserSession()
                     val intent = Intent(this, Login::class.java)
@@ -334,6 +336,6 @@ class ProfilePg : AppCompatActivity() {
 
     private fun clearUserSession() {
         val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
-        prefs.edit().clear().apply()
+        prefs.edit { clear() }
     }
 }

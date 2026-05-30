@@ -30,7 +30,7 @@
         android:focusable="true"
         android:paddingHorizontal="12dp"
         android:paddingVertical="6dp"
-        android:text="&lt; Back"
+        android:text="@string/back"
         android:textColor="#000000"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_semibold"
-        android:text="Medication"
+        android:text="@string/medication_title"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -67,7 +67,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/_9c9d613dab41a8421e763d50f46ac1f09b4b0ee3" />
+            android:src="@drawable/_9c9d613dab41a8421e763d50f46ac1f09b4b0ee3"
+            android:contentDescription="@string/desc_profile" />
     </androidx.cardview.widget.CardView>
 
     <!-- Greeting Section -->
@@ -79,6 +80,7 @@
         android:layout_marginTop="16dp"
         android:src="@drawable/ic_app_logo"
         android:scaleType="fitCenter"
+        android:contentDescription="@string/app_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/viewHeaderBg" />
 
@@ -87,7 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:text="Hi, Good Morning 👋"
+        android:text="@string/hi_good_morning"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -122,13 +124,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:baselineAligned="false">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Today's Progress"
+                    android:text="@string/todays_progress"
                     android:textColor="#B0C4D8"
                     android:textSize="13sp"
                     android:fontFamily="@font/inter_font" />
@@ -137,7 +140,7 @@
                     android:id="@+id/tvProgressCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2 / 3 taken"
+                    android:text="@string/tasks_done_default"
                     android:textColor="#4ECDC4"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -166,7 +169,7 @@
         android:layout_marginTop="14dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/bg_search_bar"
-        android:hint="🔍  Search medications..."
+        android:hint="@string/search_medications"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:singleLine="true"
@@ -174,6 +177,8 @@
         android:textColorHint="#6B7DB3"
         android:textSize="14sp"
         android:fontFamily="@font/inter_font"
+        android:inputType="text"
+        android:autofillHints="none"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cvProgress" />
@@ -190,19 +195,26 @@
         android:paddingBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etSearch">
+        app:layout_constraintTop_toBottomOf="@id/etSearch"
+        app:layout_constraintVertical_bias="0.0">
 
         <!-- Month + Add Button Row -->
         <TextView
             android:id="@+id/tvMonth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:drawablePadding="8dp"
+            android:focusable="true"
             android:fontFamily="@font/inter_semibold"
-            android:text="January 2026"
+            android:text="@string/january_2026"
             android:textColor="#0A0E63"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:drawableEndCompat="@drawable/ic_arrow_down"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -221,7 +233,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+"
+                android:text="@string/plus"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -230,15 +242,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:text="Add"
+                android:text="@string/add"
                 android:textColor="#FFFFFF"
                 android:textSize="13sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Day Names Row -->
+        <!-- Day Names Row (Stationary) -->
         <LinearLayout
-            android:id="@+id/dayNamesContainer"
+            android:id="@+id/dayNamesHeader"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -247,77 +259,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvMonth">
 
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="Mon" android:textColor="#8899BB" android:textSize="11sp" />
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="Tue" android:textColor="#8899BB" android:textSize="11sp" />
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="Wed" android:textColor="#0A0E63" android:textSize="11sp" android:textStyle="bold" />
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="Thu" android:textColor="#8899BB" android:textSize="11sp" />
-            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="Fri" android:textColor="#8899BB" android:textSize="11sp" />
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/mon" android:textColor="#8899BB" android:textSize="11sp" />
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/tue" android:textColor="#8899BB" android:textSize="11sp" />
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/wed" android:textColor="#8899BB" android:textSize="11sp" />
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/thu" android:textColor="#8899BB" android:textSize="11sp" />
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/fri" android:textColor="#8899BB" android:textSize="11sp" />
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/day_sa" android:textColor="#8899BB" android:textSize="11sp" />
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="@string/day_su" android:textColor="#8899BB" android:textSize="11sp" />
         </LinearLayout>
 
-        <!-- Date Numbers Row — IDs added ✅ -->
-        <LinearLayout
-            android:id="@+id/dateContainer"
+        <!-- Calendar View (Horizontal Scrollable Dates) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCalendar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:gravity="center_vertical"
+            android:layout_marginTop="4dp"
+            android:clipToPadding="false"
             android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dayNamesContainer">
-
-            <TextView
-                android:id="@+id/tvDate02"
-                android:layout_width="0dp"
-                android:layout_height="38dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="02"
-                android:textColor="#555577"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/tvDate03"
-                android:layout_width="0dp"
-                android:layout_height="38dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="03"
-                android:textColor="#555577"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/tvDate04"
-                android:layout_width="0dp"
-                android:layout_height="38dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg_selected_date"
-                android:gravity="center"
-                android:text="04"
-                android:textColor="#FFFFFF"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvDate05"
-                android:layout_width="0dp"
-                android:layout_height="38dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="05"
-                android:textColor="#555577"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/tvDate06"
-                android:layout_width="0dp"
-                android:layout_height="38dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="06"
-                android:textColor="#555577"
-                android:textSize="15sp" />
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@id/dayNamesHeader"
+            tools:listitem="@layout/item_calendar_date" />
 
         <!-- Divider -->
         <View
@@ -328,7 +291,7 @@
             android:background="#E8EAF0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dateContainer" />
+            app:layout_constraintTop_toBottomOf="@id/rvCalendar" />
 
         <!-- Medication List -->
         <androidx.recyclerview.widget.RecyclerView

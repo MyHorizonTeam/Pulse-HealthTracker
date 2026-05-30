@@ -35,29 +35,26 @@ class SplashActivity : AppCompatActivity() {
 
         // Navigate after 3 seconds
         Handler(Looper.getMainLooper()).postDelayed({
+            if (isFinishing || isDestroyed) return@postDelayed
 
-            val prefs = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+            val prefs = getSharedPreferences("app_prefs", MODE_PRIVATE)
             val isFirstTime = prefs.getBoolean("first_time", true)
 
             if (isFirstTime) {
                 prefs.edit().putBoolean("first_time", false).apply()
                 startActivity(Intent(this, Onboarding::class.java))
             } else {
-                // val user = FirebaseAuth.getInstance().currentUser
-                /* if (user != null) {
-                     startActivity(Intent(this, HomeActivity::class.java))
-                 } else {
-                     startActivity(Intent(this, LoginActivity::class.java))
-                 } */
                 startActivity(Intent(this, Login::class.java))
             }
             finish()
-
         }, 3000)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        findViewById<View>(R.id.main)?.let { mainView ->
+            ViewCompat.setOnApplyWindowInsetsListener(mainView) { v, insets ->
+                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+                insets
+            }
         }
     }
 }

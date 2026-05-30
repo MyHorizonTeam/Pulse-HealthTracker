@@ -27,7 +27,7 @@
         android:focusable="true"
         android:paddingHorizontal="12dp"
         android:paddingVertical="6dp"
-        android:text="&lt; Back"
+        android:text="@string/back"
         android:textColor="#000000"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -39,7 +39,7 @@
         android:id="@+id/tvHeaderTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit Medicine"
+        android:text="@string/edit_medicine"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -75,10 +75,12 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:id="@+id/ivMedicineImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ee3919aad04b84d34bab824999ca2a961984078b" />
+                    android:src="@drawable/ee3919aad04b84d34bab824999ca2a961984078b"
+                    android:contentDescription="@string/desc_profile" />
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -87,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:fontFamily="sans-serif"
-                android:text="Pill Name"
+                android:text="@string/pill_name"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -100,12 +102,14 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_input_field"
-                android:hint="Panadol"
+                android:hint="@string/pill_name_hint"
                 android:paddingHorizontal="16dp"
                 android:singleLine="true"
                 android:textColor="#000000"
                 android:textColorHint="#B0B0B0"
                 android:textSize="14sp"
+                android:inputType="text"
+                android:autofillHints="none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblPillName" />
@@ -115,7 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Diseases"
+                android:text="@string/diseases"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -127,23 +131,25 @@
                 android:layout_width="0dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="8dp"
-                android:hint="Fever"
+                android:hint="@string/diseases_hint"
                 android:background="@drawable/bg_input_field"
                 android:paddingHorizontal="16dp"
                 android:singleLine="true"
                 android:textColor="#000000"
                 android:textColorHint="#B0B0B0"
                 android:textSize="14sp"
+                android:inputType="text"
+                android:autofillHints="none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblDiseases" />
 
             <TextView
-                android:id="@+id/lblDose"
+                android:id="@+id/lblDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Dose"
+                android:text="@string/date"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -151,10 +157,39 @@
                 app:layout_constraintTop_toBottomOf="@+id/spDiseases" />
 
             <TextView
+                android:id="@+id/etDate"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input_field"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:text="@string/select_date"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblDate" />
+
+            <TextView
+                android:id="@+id/lblDose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/dose"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etDate" />
+
+            <TextView
                 android:id="@+id/lblTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Time"
+                android:text="@string/time"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -168,10 +203,11 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_input_field"
                 android:gravity="center"
-                android:inputType="number"
-                android:text="1"
+                android:inputType="numberDecimal"
+                android:text="@string/default_dose"
                 android:textColor="#000000"
                 android:textSize="15sp"
+                android:autofillHints="none"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblDose" />
 
@@ -186,7 +222,7 @@
                 android:gravity="center"
                 android:paddingEnd="8dp"
                 android:paddingStart="4dp"
-                android:text="08:00 AM"
+                android:text="@string/default_time"
                 android:textColor="#000000"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="@+id/etDose1"
@@ -201,7 +237,7 @@
                 android:background="@drawable/bg_input_field"
                 android:paddingHorizontal="16dp"
                 android:gravity="center_vertical"
-                android:text="Before eat"
+                android:text="@string/before_eat"
                 android:textColor="#000000"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/etTime1"
@@ -216,10 +252,11 @@
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_input_field"
                 android:gravity="center"
-                android:inputType="number"
-                android:text="1"
+                android:inputType="numberDecimal"
+                android:text="@string/default_dose"
                 android:textColor="#000000"
                 android:textSize="15sp"
+                android:autofillHints="none"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etDose1" />
 
@@ -234,7 +271,7 @@
                 android:gravity="center"
                 android:paddingEnd="8dp"
                 android:paddingStart="4dp"
-                android:text="02:00 PM"
+                android:text="@string/medicine_time_placeholder"
                 android:textColor="#000000"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="@+id/etDose2"
@@ -249,7 +286,7 @@
                 android:background="@drawable/bg_input_field"
                 android:paddingHorizontal="16dp"
                 android:gravity="center_vertical"
-                android:text="Before eat"
+                android:text="@string/before_eat"
                 android:textColor="#000000"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/etTime2"
@@ -274,13 +311,15 @@
 
                 <ImageView
                     android:layout_width="12dp"
-                    android:layout_height="12dp" />
+                    android:layout_height="12dp"
+                    android:src="@drawable/ic_add"
+                    android:contentDescription="@string/add_times" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:text="Add times"
+                    android:text="@string/add_times"
                     android:textColor="#C5C9FF"
                     android:textSize="12sp"
                     android:textStyle="bold" />
@@ -291,7 +330,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Notes (Optional)"
+                android:text="@string/notes_optional"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -305,11 +344,13 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/bg_input_field"
                 android:gravity="top|start"
-                android:hint="This medicine i am taking for fever prescription"
+                android:hint="@string/hint_add_notes"
                 android:padding="12dp"
                 android:textColor="#000000"
                 android:textColorHint="#B0B0B0"
                 android:textSize="14sp"
+                android:inputType="textMultiLine"
+                android:autofillHints="none"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblNotes" />
@@ -321,7 +362,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginHorizontal="40dp"
                 android:background="@drawable/bg_submit_button"
-                android:text="Save Medicine"
+                android:text="@string/save_medicine"
                 android:textAllCaps="false"
                 android:textColor="#000000"
                 android:textSize="16sp"
@@ -338,7 +379,7 @@
                 android:layout_marginHorizontal="40dp"
                 android:layout_marginBottom="16dp"
                 android:background="#FF1744"
-                android:text="Remove medicine"
+                android:text="@string/remove_medicine"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"

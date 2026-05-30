@@ -1,0 +1,134 @@
+Index: app/src/main/res/layout/activity_home.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"@color/bg_mood\"\r\n    android:orientation=\"vertical\"\r\n    android:fitsSystemWindows=\"true\">\r\n\r\n    <ScrollView\r\n        android:id=\"@+id/scrollView\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"0dp\"\r\n        android:layout_weight=\"1\"\r\n        android:fillViewport=\"true\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <!-- ===== HEADER SECTION ===== -->\r\n            <RelativeLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"180dp\"\r\n                android:background=\"@drawable/bg_header_blue\"\r\n                android:padding=\"20dp\">\r\n\r\n                <ImageView\r\n                    android:id=\"@+id/ivAvatar\"\r\n                    android:layout_width=\"55dp\"\r\n                    android:layout_height=\"62dp\"\r\n                    android:layout_alignParentTop=\"true\"\r\n                    android:layout_alignParentEnd=\"true\"\r\n                    android:background=\"@drawable/bg_avatar_border\"\r\n                    android:contentDescription=\"@string/desc_profile\"\r\n                    android:scaleType=\"centerCrop\"\r\n                    android:src=\"@drawable/ic_profile\"\r\n                    app:tint=\"#FFFFFF\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tvGreeting\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_below=\"@id/ivMenu\"\r\n                    android:layout_marginTop=\"24dp\"\r\n                    android:text=\"@string/good_morning\"\r\n                    android:textColor=\"#CCFFFFFF\"\r\n                    android:textSize=\"16sp\" />\r\n\r\n                <TextView\r\n                    android:id=\"@+id/tvUserName\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_below=\"@id/tvGreeting\"\r\n                    android:text=\"@string/user_name_musharaff\"\r\n                    android:textColor=\"#FFFFFF\"\r\n                    android:textSize=\"26sp\"\r\n                    android:textStyle=\"bold\" />\r\n            </RelativeLayout>\r\n\r\n            <!-- ===== PROGRESS CARD ===== -->\r\n            <androidx.cardview.widget.CardView\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"16dp\"\r\n                android:layout_marginTop=\"-28dp\"\r\n                android:layout_marginEnd=\"16dp\"\r\n                app:cardCornerRadius=\"20dp\"\r\n                app:cardElevation=\"8dp\"\r\n                app:cardBackgroundColor=\"@color/dark_card_bg\">\r\n\r\n                <LinearLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:orientation=\"vertical\"\r\n                    android:padding=\"20dp\">\r\n\r\n                    <TextView\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_gravity=\"center_horizontal\"\r\n                        android:text=\"@string/how_are_you_feeling\"\r\n                        android:textColor=\"@color/text_primary\"\r\n                        android:textSize=\"15sp\"\r\n                        android:textStyle=\"bold\"\r\n                        android:layout_marginBottom=\"14dp\" />\r\n\r\n                    <LinearLayout\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:orientation=\"horizontal\"\r\n                        android:gravity=\"center\"\r\n                        android:baselineAligned=\"false\">\r\n\r\n                        <TextView android:id=\"@+id/emoji1\" android:layout_width=\"0dp\" android:layout_height=\"wrap_content\" android:layout_weight=\"1\" android:gravity=\"center\" android:text=\"\uD83D\uDE22\" android:textSize=\"32sp\" android:padding=\"6dp\" android:contentDescription=\"@string/desc_sad\" />\r\n                        <TextView android:id=\"@+id/emoji2\" android:layout_width=\"0dp\" android:layout_height=\"wrap_content\" android:layout_weight=\"1\" android:gravity=\"center\" android:text=\"\uD83D\uDE25\" android:textSize=\"32sp\" android:padding=\"6dp\" android:contentDescription=\"@string/desc_anxious\" />\r\n                        <TextView android:id=\"@+id/emoji3\" android:layout_width=\"0dp\" android:layout_height=\"wrap_content\" android:layout_weight=\"1\" android:gravity=\"center\" android:text=\"\uD83D\uDE35\" android:textSize=\"32sp\" android:padding=\"6dp\" android:contentDescription=\"@string/desc_overwhelmed\" />\r\n                        <TextView android:id=\"@+id/emoji4\" android:layout_width=\"0dp\" android:layout_height=\"wrap_content\" android:layout_weight=\"1\" android:gravity=\"center\" android:text=\"\uD83D\uDE42\" android:textSize=\"32sp\" android:padding=\"6dp\" android:contentDescription=\"@string/desc_okay\" />\r\n                        <TextView android:id=\"@+id/emoji5\" android:layout_width=\"0dp\" android:layout_height=\"wrap_content\" android:layout_weight=\"1\" android:gravity=\"center\" android:text=\"\uD83D\uDE0A\" android:textSize=\"32sp\" android:padding=\"6dp\" android:contentDescription=\"@string/desc_happy\" />\r\n                    </LinearLayout>\r\n                </LinearLayout>\r\n            </androidx.cardview.widget.CardView>\r\n\r\n            <!-- ===== PROGRESS BAR CARD ===== -->\r\n            <androidx.cardview.widget.CardView\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginStart=\"16dp\"\r\n                android:layout_marginTop=\"16dp\"\r\n                android:layout_marginEnd=\"16dp\"\r\n                app:cardCornerRadius=\"20dp\"\r\n                app:cardElevation=\"4dp\"\r\n                app:cardBackgroundColor=\"@color/dark_card_bg\">\r\n\r\n                <LinearLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:orientation=\"vertical\"\r\n                    android:padding=\"16dp\">\r\n\r\n                    <TextView\r\n                        android:id=\"@+id/tvProgress\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:text=\"@string/tasks_done_default\"\r\n                        android:textColor=\"@color/text_primary\"\r\n                        android:textSize=\"14sp\"\r\n                        android:textStyle=\"bold\" />\r\n\r\n                    <ProgressBar\r\n                        android:id=\"@+id/progressBar\"\r\n                        style=\"?android:attr/progressBarStyleHorizontal\"\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_marginTop=\"8dp\"\r\n                        android:progress=\"0\"\r\n                        android:max=\"100\"\r\n                        android:progressTint=\"#4CAF93\" />\r\n                </LinearLayout>\r\n            </androidx.cardview.widget.CardView>\r\n\r\n            <!-- ===== ADD TASK SECTION ===== -->\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"vertical\"\r\n                android:layout_marginTop=\"16dp\"\r\n                android:padding=\"16dp\">\r\n\r\n                <TextView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"@string/add_new_task\"\r\n                    android:textColor=\"@color/text_primary\"\r\n                    android:textSize=\"16sp\"\r\n                    android:textStyle=\"bold\"\r\n                    android:layout_marginBottom=\"8dp\" />\r\n\r\n                <LinearLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:orientation=\"horizontal\">\r\n\r\n                    <EditText\r\n                        android:id=\"@+id/etAddTask\"\r\n                        android:layout_width=\"0dp\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_weight=\"1\"\r\n                        android:hint=\"@string/hint_enter_task_title\"\r\n                        android:textColor=\"@color/text_primary\"\r\n                        android:textColorHint=\"@color/text_secondary\"\r\n                        android:backgroundTint=\"#4CAF93\"\r\n                        android:imeOptions=\"actionDone\"\r\n                        android:inputType=\"text\"\r\n                        android:autofillHints=\"none\" />\r\n\r\n                    <com.google.android.material.button.MaterialButton\r\n                        android:id=\"@+id/btnAddTask\"\r\n                        style=\"@style/Widget.MaterialComponents.Button.TextButton\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:text=\"@string/btn_add\"\r\n                        android:textColor=\"#4CAF93\" />\r\n                </LinearLayout>\r\n            </LinearLayout>\r\n\r\n            <!-- ===== MY ACTIVITY (TASKS) SECTION ===== -->\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"vertical\"\r\n                android:layout_marginTop=\"8dp\"\r\n                android:padding=\"16dp\">\r\n\r\n                <TextView\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"@string/my_tasks\"\r\n                    android:textColor=\"@color/text_primary\"\r\n                    android:textSize=\"18sp\"\r\n                    android:textStyle=\"bold\"\r\n                    android:layout_marginBottom=\"12dp\" />\r\n\r\n                <androidx.recyclerview.widget.RecyclerView\r\n                    android:id=\"@+id/rvTasks\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:nestedScrollingEnabled=\"false\"\r\n                    app:layoutManager=\"androidx.recyclerview.widget.LinearLayoutManager\" />\r\n            </LinearLayout>\r\n\r\n            <View android:layout_width=\"match_parent\" android:layout_height=\"32dp\" />\r\n        </LinearLayout>\r\n    </ScrollView>\r\n\r\n    <!-- ===== STICKY BOTTOM SECTION (\"For you\") ===== -->\r\n    <LinearLayout\r\n        android:id=\"@+id/layoutForYou\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:background=\"@color/bg_mood\"\r\n        android:orientation=\"vertical\"\r\n        android:padding=\"16dp\"\r\n        android:elevation=\"8dp\">\r\n\r\n        <RelativeLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginBottom=\"12dp\">\r\n            <TextView\r\n                android:id=\"@+id/tvForYou\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_alignParentStart=\"true\"\r\n                android:text=\"@string/for_you\"\r\n                android:textColor=\"@color/text_primary\"\r\n                android:textSize=\"18sp\"\r\n                android:textStyle=\"bold\" />\r\n            <TextView\r\n                android:id=\"@+id/tvLibrary\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_alignParentEnd=\"true\"\r\n                android:text=\"@string/library\"\r\n                android:textColor=\"#4CAF93\"\r\n                android:textSize=\"14sp\" />\r\n        </RelativeLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"horizontal\"\r\n            android:baselineAligned=\"false\">\r\n\r\n            <androidx.cardview.widget.CardView\r\n                android:id=\"@+id/cardArticles\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"90dp\"\r\n                android:layout_marginEnd=\"8dp\"\r\n                android:layout_weight=\"1\"\r\n                app:cardCornerRadius=\"16dp\"\r\n                app:cardElevation=\"0dp\">\r\n                <RelativeLayout android:layout_width=\"match_parent\" android:layout_height=\"match_parent\" android:background=\"@drawable/bg_tip_teal\">\r\n                    <TextView android:layout_width=\"wrap_content\" android:layout_height=\"wrap_content\" android:text=\"@string/articles\" android:textColor=\"#FFFFFF\" android:layout_alignParentBottom=\"true\" android:layout_centerHorizontal=\"true\" android:layout_marginBottom=\"12dp\" android:textSize=\"12sp\" android:textStyle=\"bold\"/>\r\n                </RelativeLayout>\r\n            </androidx.cardview.widget.CardView>\r\n\r\n            <androidx.cardview.widget.CardView\r\n                android:id=\"@+id/cardDeepTimer\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"90dp\"\r\n                android:layout_marginEnd=\"8dp\"\r\n                android:layout_weight=\"1\"\r\n                app:cardCornerRadius=\"16dp\"\r\n                app:cardElevation=\"0dp\">\r\n                <RelativeLayout android:layout_width=\"match_parent\" android:layout_height=\"match_parent\" android:background=\"@drawable/bg_tip_green\">\r\n                    <TextView android:layout_width=\"wrap_content\" android:layout_height=\"wrap_content\" android:text=\"Deep Timer\" android:textColor=\"#FFFFFF\" android:layout_alignParentBottom=\"true\" android:layout_centerHorizontal=\"true\" android:layout_marginBottom=\"12dp\" android:textSize=\"12sp\" android:textStyle=\"bold\"/>\r\n                </RelativeLayout>\r\n            </androidx.cardview.widget.CardView>\r\n\r\n            <androidx.cardview.widget.CardView\r\n                android:id=\"@+id/cardChatWithGPT\"\r\n                android:layout_width=\"0dp\"\r\n                android:layout_height=\"90dp\"\r\n                android:layout_weight=\"1\"\r\n                app:cardCornerRadius=\"16dp\"\r\n                app:cardElevation=\"0dp\">\r\n                <RelativeLayout android:layout_width=\"match_parent\" android:layout_height=\"match_parent\" android:background=\"@drawable/bg_tip_blue\">\r\n                    <TextView android:layout_width=\"wrap_content\" android:layout_height=\"wrap_content\" android:text=\"Chat with GPT\" android:textColor=\"#FFFFFF\" android:layout_alignParentBottom=\"true\" android:layout_centerHorizontal=\"true\" android:layout_marginBottom=\"12dp\" android:textSize=\"12sp\" android:textStyle=\"bold\"/>\r\n                </RelativeLayout>\r\n            </androidx.cardview.widget.CardView>\r\n        </LinearLayout>\r\n    </LinearLayout>\r\n\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_home.xml b/app/src/main/res/layout/activity_home.xml
+--- a/app/src/main/res/layout/activity_home.xml	(revision a1ae4380cbe02e5ae598b11b3a91c8041ef7d1e0)
++++ b/app/src/main/res/layout/activity_home.xml	(date 1779945361105)
+@@ -237,6 +237,7 @@
+                 android:textColor="@color/text_primary"
+                 android:textSize="18sp"
+                 android:textStyle="bold" />
++
+             <TextView
+                 android:id="@+id/tvLibrary"
+                 android:layout_width="wrap_content"
+Index: app/src/main/java/com/example/pulse_healthtracker/activity_main.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/pulse_healthtracker/activity_main.kt b/app/src/main/java/com/example/pulse_healthtracker/activity_main.kt
+deleted file mode 100644
+--- a/app/src/main/java/com/example/pulse_healthtracker/activity_main.kt	(revision a1ae4380cbe02e5ae598b11b3a91c8041ef7d1e0)
++++ /dev/null	(revision a1ae4380cbe02e5ae598b11b3a91c8041ef7d1e0)
+@@ -1,93 +0,0 @@
+-package com.example.pulse_healthtracker
+-
+-import android.os.Bundle
+-import android.view.inputmethod.EditorInfo
+-import android.widget.EditText
+-import android.widget.ProgressBar
+-import android.widget.TextView
+-import android.widget.Toast
+-import androidx.appcompat.app.AppCompatActivity
+-import androidx.recyclerview.widget.LinearLayoutManager
+-import androidx.recyclerview.widget.RecyclerView
+-
+-class MainActivity : AppCompatActivity() {
+-
+-    private lateinit var adapter: TaskAdapter
+-    private lateinit var progressBar: ProgressBar
+-    private lateinit var tvProgress: TextView
+-
+-    private val tasks = mutableListOf(
+-        Task(title = "Wake up early", description = "Start your day with energy", time = "06:00 AM", color = "#FF5252"),
+-        Task(title = "Drink 3L water", description = "Stay hydrated", time = "08:00 AM", color = "#448AFF"),
+-        Task(title = "Exercise 30 min", description = "Workout", time = "07:00 AM", color = "#4CAF50"),
+-        Task(title = "Eat healthy", description = "Balanced meal", time = "09:00 AM", color = "#FF9800"),
+-        Task(title = "Meditation for mind", description = "Relax", time = "10:00 PM", color = "#9C27B0"),
+-        Task(title = "Read a book", description = "Knowledge", time = "11:00 PM", color = "#00BCD4")
+-    )
+-
+-    override fun onCreate(savedInstanceState: Bundle?) {
+-        super.onCreate(savedInstanceState)
+-        setContentView(R.layout.activity_main)
+-
+-        progressBar = findViewById(R.id.progressBar)
+-        tvProgress = findViewById(R.id.tvProgress)
+-
+-        adapter = TaskAdapter(tasks, 
+-            onTaskChanged = { updateProgress() },
+-            onTaskDeleted = { position ->
+-                tasks.removeAt(position)
+-                adapter.notifyItemRemoved(position)
+-                updateProgress()
+-            }
+-        )
+-
+-        val rv = findViewById<RecyclerView>(R.id.rvTasks)
+-        rv.layoutManager = LinearLayoutManager(this)
+-        rv.adapter = adapter
+-
+-        val etAddTask = findViewById<EditText>(R.id.etAddTask)
+-
+-        findViewById<com.google.android.material.button.MaterialButton>(R.id.btnAddTask)
+-            .setOnClickListener {
+-                addCustomTask(etAddTask)
+-            }
+-
+-        etAddTask.setOnEditorActionListener { _, actionId, _ ->
+-            if (actionId == EditorInfo.IME_ACTION_DONE) {
+-                addCustomTask(etAddTask)
+-                true
+-            } else false
+-        }
+-
+-        findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(
+-            R.id.fabAddTask
+-        ).setOnClickListener {
+-            etAddTask.requestFocus()
+-        }
+-
+-        findViewById<androidx.cardview.widget.CardView>(R.id.cardArticles).setOnClickListener {
+-            startActivity(android.content.Intent(this, ArticlesActivity::class.java))
+-        }
+-
+-        updateProgress()
+-    }
+-
+-    private fun addCustomTask(et: EditText) {
+-        val text = et.text.toString().trim()
+-        if (text.isNotEmpty()) {
+-            val newTask = Task(title = text, description = "Custom task", time = "Now", color = "#7E57C2")
+-            tasks.add(newTask)
+-            adapter.notifyItemInserted(tasks.size - 1)
+-            updateProgress()
+-            et.text.clear()
+-        }
+-    }
+-
+-    private fun updateProgress() {
+-        val done = tasks.count { it.isCompleted }
+-        val total = tasks.size
+-        val pct = if (total > 0) (done * 100) / total else 0
+-        progressBar.progress = pct
+-        tvProgress.text = getString(R.string.tasks_done_format, done, total)
+-    }
+-}
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_21\" default=\"true\" project-jdk-name=\"jbr-21\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n  <component name=\"VisualizationToolProject\">\r\n    <option name=\"state\">\r\n      <ProjectState>\r\n        <option name=\"scale\" value=\"0.19542236328125\" />\r\n      </ProjectState>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision a1ae4380cbe02e5ae598b11b3a91c8041ef7d1e0)
++++ b/.idea/misc.xml	(date 1780112216007)
+@@ -1,4 +1,3 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="jbr-21" project-jdk-type="JavaSDK">

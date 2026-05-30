@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Personal Library"
+            android:text="@string/my_library"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -48,7 +48,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My Calendar"
+                android:text="@string/my_calendar"
                 android:textColor="@color/text_primary"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -62,11 +62,11 @@
                 android:theme="@style/Theme.PulseHealthTracker"
                 android:layout_marginBottom="24dp" />
 
-            <!-- Daily Mood Tracking (Moved from Home) -->
+            <!-- Daily Mood Tracking -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Saved Daily Moods"
+                android:text="@string/saved_daily_moods"
                 android:textColor="@color/text_primary"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -89,7 +89,7 @@
                         android:id="@+id/tvNoMoods"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="No moods saved yet today."
+                        android:text="@string/no_moods_saved_today"
                         android:textColor="@color/text_secondary"
                         android:gravity="center" />
                 </LinearLayout>
@@ -101,9 +101,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp">
                 <TextView
+                    android:id="@+id/tvStickyNotesTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sticky Notes"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@+id/btnAddNote"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/sticky_notes"
                     android:textColor="@color/text_primary"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -114,7 +118,7 @@
                     android:layout_alignParentEnd="true"
                     android:src="@drawable/ic_add"
                     app:tint="#4CAF93"
-                    android:contentDescription="Add Note" />
+                    android:contentDescription="@string/desc_add_note" />
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView

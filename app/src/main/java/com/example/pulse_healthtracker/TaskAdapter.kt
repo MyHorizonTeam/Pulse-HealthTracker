@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.RecyclerView
 
 class TaskAdapter(
@@ -40,10 +41,10 @@ class TaskAdapter(
         holder.tvDesc.text = task.description
         
         try {
-            val colorInt = Color.parseColor(task.color)
+            val colorInt = task.color.toColorInt()
             holder.viewColor.setBackgroundColor(colorInt)
             holder.cbTask.buttonTintList = android.content.res.ColorStateList.valueOf(colorInt)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             holder.viewColor.setBackgroundColor(Color.RED)
         }
         

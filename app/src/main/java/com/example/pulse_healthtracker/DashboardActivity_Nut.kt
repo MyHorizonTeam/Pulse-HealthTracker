@@ -20,7 +20,8 @@ class DashboardActivity_Nut : AppCompatActivity() {
 
 
         btnProfile.setOnClickListener {
-
+            val intent = Intent(this, ProfilePg::class.java)
+            startActivity(intent)
         }
 
 

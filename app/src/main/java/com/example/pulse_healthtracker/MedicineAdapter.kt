@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 class MedicineAdapter(
     private var medicines: List<Medicine>,
     private val onToggleClick: (Medicine) -> Unit,
-    private val onEditClick: (Medicine) -> Unit,
+    private val onItemClick: (Medicine) -> Unit,
     private val onDeleteClick: (Medicine) -> Unit
 ) : RecyclerView.Adapter<MedicineAdapter.MedicineViewHolder>() {
 
@@ -33,22 +33,34 @@ class MedicineAdapter(
     override fun onBindViewHolder(holder: MedicineViewHolder, position: Int) {
         val medicine = medicines[position]
         holder.tvName.text = medicine.pillName
-        holder.tvDose.text = "${medicine.dose} pill(s) · ${medicine.foodRelation}"
+        
+        val doseText = if ((medicine.dose % 1.0) == 0.0) {
+            medicine.dose.toInt().toString()
+        } else {
+            medicine.dose.toString()
+        }
+        holder.tvDose.text = String.format("%s pill(s) · %s", doseText, medicine.foodRelation)
+
         holder.tvTime.text = medicine.time
 
+        val context = holder.itemView.context
         if (medicine.isTaken) {
-            holder.tvStatus.text = "✓ Taken"
+            holder.tvStatus.text = context.getString(R.string.taken)
             holder.tvStatus.setTextColor(0xFF4ECDC4.toInt())
             holder.ivToggle.setImageResource(R.drawable.toggle_green)
             holder.indicator.setBackgroundResource(R.drawable.bg_indicator_green)
         } else {
-            holder.tvStatus.text = "⏰ Pending"
+            holder.tvStatus.text = context.getString(R.string.pending)
             holder.tvStatus.setTextColor(0xFFFFB347.toInt())
             holder.ivToggle.setImageResource(R.drawable.toggle_red)
             holder.indicator.setBackgroundResource(R.drawable.bg_indicator_orange)
         }
 
         holder.medicineCard.setOnClickListener {
+            onItemClick(medicine)
+        }
+
+        holder.ivToggle.setOnClickListener {
             onToggleClick(medicine)
         }
 
@@ -64,7 +76,7 @@ class MedicineAdapter(
         popup.menu.add("Delete")
         popup.setOnMenuItemClickListener { item ->
             when (item.title) {
-                "Edit" -> onEditClick(medicine)
+                "Edit" -> onItemClick(medicine)
                 "Delete" -> onDeleteClick(medicine)
             }
             true
