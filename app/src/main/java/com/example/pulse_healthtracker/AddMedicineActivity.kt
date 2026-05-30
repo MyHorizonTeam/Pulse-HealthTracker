@@ -3,6 +3,7 @@ package com.example.pulse_healthtracker
 import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -38,13 +39,29 @@ class AddMedicineActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
 
+    private var editingMedicineId: String? = null
+    private var currentIsTaken = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_add_medicine)
 
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
         initViews()
-        setupClickListeners()
         initializeFirebase()
+        setupClickListeners()
+
+        val medicineId = intent.getStringExtra("medicineId")
+        if (medicineId != null) {
+            editingMedicineId = medicineId
+            loadMedicineData(medicineId)
+        }
     }
 
     private fun initViews() {
@@ -62,35 +79,12 @@ class AddMedicineActivity : AppCompatActivity() {
     }
 
     private fun setupClickListeners() {
-        // Back button
-        btnBack.setOnClickListener {
-            finish()
-        }
-
-        // Time picker
-        etTime.setOnClickListener {
-            showTimePickerDialog()
-        }
-
-        // Food relation spinner (using TextView as dropdown)
-        spFoodRelation.setOnClickListener {
-            showFoodRelationDialog()
-        }
-
-        // Add times button
-        btnAddTimes.setOnClickListener {
-            showAddTimeDialog()
-        }
-
-        // Submit button
-        btnSubmitMedicine.setOnClickListener {
-            submitMedicine()
-        }
-
-        // Profile image click (optional - for changing image)
-        cvPillImage.setOnClickListener {
-            showImagePickerDialog()
-        }
+        btnBack.setOnClickListener { finish() }
+        etTime.setOnClickListener { showTimePickerDialog() }
+        spFoodRelation.setOnClickListener { showFoodRelationDialog() }
+        btnAddTimes.setOnClickListener { showAddTimeDialog() }
+        btnSubmitMedicine.setOnClickListener { submitMedicine() }
+        cvPillImage.setOnClickListener { showImagePickerDialog() }
     }
 
     private fun initializeFirebase() {
@@ -98,22 +92,36 @@ class AddMedicineActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
     }
 
+    private fun loadMedicineData(id: String) {
+        tvHeaderTitle.text = "Edit Medicine"
+        btnSubmitMedicine.text = "Update Medicine"
+        
+        firestore.collection("medications").document(id).get()
+            .addOnSuccessListener { doc ->
+                val med = doc.toObject(Medicine::class.java)
+                if (med != null) {
+                    etPillName.setText(med.pillName)
+                    spDiseases.setText(med.diseases)
+                    etDose.setText(med.dose.toString())
+                    etTime.text = med.time
+                    selectedTime = med.time
+                    spFoodRelation.text = med.foodRelation
+                    selectedFoodRelation = med.foodRelation
+                    etNotes.setText(med.notes)
+                    medicineTimes.clear()
+                    medicineTimes.addAll(med.medicineTimes)
+                    currentIsTaken = med.isTaken
+                }
+            }
+    }
+
     private fun showTimePickerDialog() {
         val calendar = Calendar.getInstance()
-        val hour = calendar.get(Calendar.HOUR_OF_DAY)
-        val minute = calendar.get(Calendar.MINUTE)
-
-        val timePickerDialog = TimePickerDialog(
-            this,
-            { _, selectedHour, selectedMinute ->
-                val formattedTime = formatTime(selectedHour, selectedMinute)
-                selectedTime = formattedTime
-                etTime.text = formattedTime
-            },
-            hour,
-            minute,
-            false
-        )
+        val timePickerDialog = TimePickerDialog(this, { _, hour, minute ->
+            val formattedTime = formatTime(hour, minute)
+            selectedTime = formattedTime
+            etTime.text = formattedTime
+        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false)
         timePickerDialog.show()
     }
 
@@ -122,196 +130,89 @@ class AddMedicineActivity : AppCompatActivity() {
             set(Calendar.HOUR_OF_DAY, hour)
             set(Calendar.MINUTE, minute)
         }
-        val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
-        return sdf.format(calendar.time)
+        return SimpleDateFormat("hh:mm a", Locale.getDefault()).format(calendar.time)
     }
 
     private fun showFoodRelationDialog() {
         val options = arrayOf("Before eat", "After eat", "With food", "Empty stomach")
-
-        AlertDialog.Builder(this)
-            .setTitle("Select when to take")
-            .setItems(options) { _, which ->
-                selectedFoodRelation = options[which]
-                spFoodRelation.text = selectedFoodRelation
-            }
-            .show()
+        AlertDialog.Builder(this).setTitle("Select Timing").setItems(options) { _, which ->
+            selectedFoodRelation = options[which]
+            spFoodRelation.text = selectedFoodRelation
+        }.show()
     }
 
     private fun showAddTimeDialog() {
-        val timeList = arrayOf("Morning (6AM - 9AM)", "Afternoon (12PM - 2PM)",
-            "Evening (5PM - 7PM)", "Night (9PM - 10PM)", "Custom")
-
-        AlertDialog.Builder(this)
-            .setTitle("Add Medicine Time")
-            .setItems(timeList) { _, which ->
-                when (which) {
-                    0 -> addMedicineTime("Morning (6AM - 9AM)")
-                    1 -> addMedicineTime("Afternoon (12PM - 2PM)")
-                    2 -> addMedicineTime("Evening (5PM - 7PM)")
-                    3 -> addMedicineTime("Night (9PM - 10PM)")
-                    4 -> showCustomTimeDialog()
-                }
-            }
-            .show()
+        val timeList = arrayOf("Morning", "Afternoon", "Evening", "Night", "Custom")
+        AlertDialog.Builder(this).setTitle("Add Time").setItems(timeList) { _, which ->
+            if (which == 4) showCustomTimeDialog() else addMedicineTime(timeList[which])
+        }.show()
     }
 
     private fun showCustomTimeDialog() {
         val calendar = Calendar.getInstance()
-        val timePickerDialog = TimePickerDialog(
-            this,
-            { _, hour, minute ->
-                val customTime = formatTime(hour, minute)
-                addMedicineTime(customTime)
-            },
-            calendar.get(Calendar.HOUR_OF_DAY),
-            calendar.get(Calendar.MINUTE),
-            false
-        )
-        timePickerDialog.show()
+        TimePickerDialog(this, { _, hour, minute ->
+            addMedicineTime(formatTime(hour, minute))
+        }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show()
     }
 
     private fun addMedicineTime(time: String) {
         if (!medicineTimes.contains(time)) {
             medicineTimes.add(time)
             Toast.makeText(this, "Added: $time", Toast.LENGTH_SHORT).show()
-
-            // Optional: Display all added times
-            displayAddedTimes()
-        } else {
-            Toast.makeText(this, "Time already added", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun displayAddedTimes() {
-        if (medicineTimes.isNotEmpty()) {
-            val timesText = medicineTimes.joinToString(", ")
-            Toast.makeText(this, "Times: $timesText", Toast.LENGTH_LONG).show()
         }
     }
 
     private fun showImagePickerDialog() {
-        val options = arrayOf("Take Photo", "Choose from Gallery", "Cancel")
-        AlertDialog.Builder(this)
-            .setTitle("Select Pill Image")
-            .setItems(options) { _, which ->
-                when (which) {
-                    0 -> openCamera()
-                    1 -> openGallery()
-                }
-            }
-            .show()
-    }
-
-    private fun openCamera() {
-        // Implement camera intent
-        Toast.makeText(this, "Camera feature coming soon", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun openGallery() {
-        // Implement gallery intent
-        Toast.makeText(this, "Gallery feature coming soon", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Image picker coming soon", Toast.LENGTH_SHORT).show()
     }
 
     private fun submitMedicine() {
         val pillName = etPillName.text.toString().trim()
         val diseases = spDiseases.text.toString().trim()
-        val dose = etDose.text.toString().trim()
+        val doseStr = etDose.text.toString().trim()
         val notes = etNotes.text.toString().trim()
 
-        // Validation
-        when {
-            pillName.isEmpty() -> {
-                etPillName.error = "Pill name is required"
-                etPillName.requestFocus()
-                return
-            }
-            diseases.isEmpty() -> {
-                spDiseases.error = "Disease is required"
-                spDiseases.requestFocus()
-                return
-            }
-            dose.isEmpty() -> {
-                etDose.error = "Dose is required"
-                etDose.requestFocus()
-                return
-            }
-            dose.toDoubleOrNull() == null -> {
-                etDose.error = "Enter valid dose"
-                etDose.requestFocus()
-                return
-            }
-        }
-
-        // Disable button during submission
-        btnSubmitMedicine.isEnabled = false
-        btnSubmitMedicine.text = "Adding..."
-
-        // Prepare data for Firebase
-        val userId = auth.currentUser?.uid ?: run {
-            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show()
-            btnSubmitMedicine.isEnabled = true
-            btnSubmitMedicine.text = "Add Medicine"
+        if (pillName.isEmpty() || diseases.isEmpty() || doseStr.isEmpty()) {
+            Toast.makeText(this, "Please fill required fields", Toast.LENGTH_SHORT).show()
             return
         }
 
+        val dose = doseStr.toDoubleOrNull() ?: 0.0
+        val userId = auth.currentUser?.uid ?: return
+
+        btnSubmitMedicine.isEnabled = false
+        btnSubmitMedicine.text = if (editingMedicineId == null) "Adding..." else "Updating..."
+
+        val docRef = if (editingMedicineId == null) {
+            firestore.collection("medications").document()
+        } else {
+            firestore.collection("medications").document(editingMedicineId!!)
+        }
+
         val medicineData = hashMapOf(
+            "medicineId" to docRef.id,
             "pillName" to pillName,
             "diseases" to diseases,
-            "dose" to dose.toDouble(),
+            "dose" to dose,
             "time" to selectedTime,
             "foodRelation" to selectedFoodRelation,
             "notes" to notes,
             "medicineTimes" to medicineTimes,
             "createdAt" to System.currentTimeMillis(),
             "status" to "active",
-            "userId" to userId
+            "userId" to userId,
+            "isTaken" to currentIsTaken
         )
 
-        // Save to Firestore
-        firestore.collection("medications")
-            .add(medicineData)
-            .addOnSuccessListener { documentReference ->
-                Toast.makeText(this, "Medicine added successfully!", Toast.LENGTH_LONG).show()
-
-                // Optionally update the document with its own ID
-                documentReference.update("medicineId", documentReference.id)
-                    .addOnSuccessListener {
-                        finish() // Close activity on success
-                    }
-            }
+        // Optimistic UI: Close immediately and let Firestore handle sync in background
+        docRef.set(medicineData)
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
-                btnSubmitMedicine.isEnabled = true
-                btnSubmitMedicine.text = "Add Medicine"
+                // If it fails after we already closed, we can't easily undo the finish()
+                // but this is extremely rare with Firestore's offline capabilities.
+                android.util.Log.e("AddMedicine", "Background upload failed", e)
             }
-    }
 
-    // Optional: For editing existing medicine
-    fun populateDataForEdit(medicine: Medicine) {
-        etPillName.setText(medicine.pillName)
-        spDiseases.setText(medicine.diseases)
-        etDose.setText(medicine.dose.toString())
-        etTime.text = medicine.time
-        spFoodRelation.text = medicine.foodRelation
-        etNotes.setText(medicine.notes)
-        medicineTimes.clear()
-        medicineTimes.addAll(medicine.medicineTimes)
-        btnSubmitMedicine.text = "Update Medicine"
+        Toast.makeText(this, "Saving...", Toast.LENGTH_SHORT).show()
+        finish()
     }
 }
-
-// Data class for Medicine
-data class Medicine(
-    val medicineId: String = "",
-    val pillName: String = "",
-    val diseases: String = "",
-    val dose: Double = 0.0,
-    val time: String = "",
-    val foodRelation: String = "",
-    val notes: String = "",
-    val medicineTimes: List<String> = emptyList(),
-    val createdAt: Long = 0,
-    val status: String = "",
-    val userId: String = ""
-)

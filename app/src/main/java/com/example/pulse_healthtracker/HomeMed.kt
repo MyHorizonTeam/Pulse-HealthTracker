@@ -4,65 +4,43 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
 import android.widget.*
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.activity.enableEdgeToEdge
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 
 class HomeMed : AppCompatActivity() {
 
-    // UI Elements
     private lateinit var etSearch: EditText
     private lateinit var progressBar: ProgressBar
     private lateinit var tvProgressCount: TextView
     private lateinit var btnAdd: LinearLayout
+    private lateinit var rvMedicines: RecyclerView
 
-    // Date TextViews
     private lateinit var tvDate02: TextView
     private lateinit var tvDate03: TextView
     private lateinit var tvDate04: TextView
     private lateinit var tvDate05: TextView
     private lateinit var tvDate06: TextView
 
-    // Medicine Cards
-    private lateinit var card1: CardView
-    private lateinit var card2: CardView
-    private lateinit var card3: CardView
+    private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
+    private var medicineListener: ListenerRegistration? = null
 
-    // Toggles
-    private lateinit var ivToggle1: ImageView
-    private lateinit var ivToggle2: ImageView
-    private lateinit var ivToggle3: ImageView
+    private lateinit var medicineAdapter: MedicineAdapter
+    private val allMedicines = mutableListOf<Medicine>()
+    private val displayedMedicines = mutableListOf<Medicine>()
 
-    // Status TextViews
-    private lateinit var tvStatus1: TextView
-    private lateinit var tvStatus2: TextView
-    private lateinit var tvStatus3: TextView
-
-    // Indicators
-    private lateinit var indicator1: View
-    private lateinit var indicator2: View
-    private lateinit var indicator3: View
-
-    // Selected date
     private var selectedDate = "04"
 
-    // ─── Data Model ──────────────────────────────────────────────────────────
-    data class Medicine(
-        val name: String,
-        val dosage: String,
-        val time: String,
-        val date: String,
-        var isTaken: Boolean
-    )
-
-    private val allMedicines = mutableListOf<Medicine>()
-    private val filteredMedicines = mutableListOf<Medicine>()
-
-    // ─── onCreate ────────────────────────────────────────────────────────────
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -74,72 +52,81 @@ class HomeMed : AppCompatActivity() {
             insets
         }
 
+        initializeFirebase()
         initViews()
-        setupMedicineData()
+        setupRecyclerView()
         setupDateSelection()
         setupSearch()
-        setupToggleButtons()
         setupAddButton()
-        updateProgressBar()
+        fetchMedicines()
     }
 
-    // ─── 1. Init Views ───────────────────────────────────────────────────────
+    private fun initializeFirebase() {
+        auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
+    }
+
     private fun initViews() {
-        etSearch        = findViewById(R.id.etSearch)
-        progressBar     = findViewById(R.id.progressBar)
+        etSearch = findViewById(R.id.etSearch)
+        progressBar = findViewById(R.id.progressBar)
         tvProgressCount = findViewById(R.id.tvProgressCount)
-        btnAdd          = findViewById(R.id.btnAdd)
+        btnAdd = findViewById(R.id.btnAdd)
+        rvMedicines = findViewById(R.id.rvMedicines)
 
         tvDate02 = findViewById(R.id.tvDate02)
         tvDate03 = findViewById(R.id.tvDate03)
         tvDate04 = findViewById(R.id.tvDate04)
         tvDate05 = findViewById(R.id.tvDate05)
         tvDate06 = findViewById(R.id.tvDate06)
-
-        card1 = findViewById(R.id.card1)
-        card2 = findViewById(R.id.card2)
-        card3 = findViewById(R.id.card3)
-
-        ivToggle1 = findViewById(R.id.ivToggle1)
-        ivToggle2 = findViewById(R.id.ivToggle2)
-        ivToggle3 = findViewById(R.id.ivToggle3)
-
-        tvStatus1 = findViewById(R.id.tvStatus1)
-        tvStatus2 = findViewById(R.id.tvStatus2)
-        tvStatus3 = findViewById(R.id.tvStatus3)
-
-        indicator1 = findViewById(R.id.indicator1)
-        indicator2 = findViewById(R.id.indicator2)
-        indicator3 = findViewById(R.id.indicator3)
+        
+        findViewById<TextView>(R.id.btnBack).setOnClickListener { finish() }
+        findViewById<CardView>(R.id.cvProfile).setOnClickListener { finish() }
     }
 
-    // ─── 2. Medicine Data ──────────────────────────────────────────────────
-    private fun setupMedicineData() {
-        allMedicines.addAll(listOf(
-            Medicine("Paracetamol", "2 pills · After food", "09 AM", "04", true),
-            Medicine("Vitamin A",   "2 pills · After food", "11 AM", "04", false),
-            Medicine("Vitamin C",   "2 pills · After food", "08 AM", "04", true),
-            Medicine("Aspirin",     "1 pill · Before food", "08 AM", "02", true),
-            Medicine("Omega 3",     "1 pill · After food",  "09 AM", "03", false)
-        ))
-        filterByDate(selectedDate)
+    private fun setupRecyclerView() {
+        medicineAdapter = MedicineAdapter(
+            displayedMedicines,
+            onToggleClick = { toggleMedicineStatus(it) },
+            onEditClick = { editMedicine(it) },
+            onDeleteClick = { deleteMedicine(it) }
+        )
+        rvMedicines.layoutManager = LinearLayoutManager(this)
+        rvMedicines.adapter = medicineAdapter
     }
 
-    // ─── 3. Date Selection ───────────────────────────────────────────────────
+    private fun editMedicine(medicine: Medicine) {
+        val intent = Intent(this, AddMedicineActivity::class.java)
+        intent.putExtra("medicineId", medicine.medicineId)
+        startActivity(intent)
+    }
+
+    private fun deleteMedicine(medicine: Medicine) {
+        AlertDialog.Builder(this)
+            .setTitle("Delete Medicine")
+            .setMessage("Are you sure you want to delete ${medicine.pillName}?")
+            .setPositiveButton("Delete") { _, _ ->
+                firestore.collection("medications").document(medicine.medicineId).delete()
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(this, "Failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
     private fun setupDateSelection() {
         val dates = listOf(tvDate02, tvDate03, tvDate04, tvDate05, tvDate06)
-        val vals  = listOf("02", "03", "04", "05", "06")
+        val vals = listOf("02", "03", "04", "05", "06")
 
         dates.forEachIndexed { index, textView ->
             textView.setOnClickListener {
                 selectedDate = vals[index]
                 highlightDate(dates, index)
-                filterByDate(selectedDate)
-                filterBySearch(etSearch.text.toString())
             }
         }
-
-        // Default highlight — date 04
         highlightDate(dates, 2)
     }
 
@@ -155,96 +142,74 @@ class HomeMed : AppCompatActivity() {
         }
     }
 
-    private fun filterByDate(date: String) {
-        filteredMedicines.clear()
-        filteredMedicines.addAll(allMedicines.filter { it.date == date })
-        renderMedicines(filteredMedicines)
-    }
-
-    // ─── 4. Search ───────────────────────────────────────────────────────────
     private fun setupSearch() {
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, st: Int, c: Int, a: Int) {}
             override fun afterTextChanged(s: Editable?) {}
             override fun onTextChanged(s: CharSequence?, st: Int, b: Int, c: Int) {
-                filterBySearch(s.toString())
+                filterMedicines(s.toString())
             }
         })
     }
 
-    private fun filterBySearch(query: String) {
-        val list = if (query.isEmpty()) filteredMedicines
-        else filteredMedicines.filter {
-            it.name.contains(query, ignoreCase = true)
+    private fun setupAddButton() {
+        btnAdd.setOnClickListener {
+            startActivity(Intent(this, AddMedicineActivity::class.java))
         }
-        renderMedicines(list)
     }
 
-    // ─── 5. Render Medicines ───────────────────────────────────────────────
-    private fun renderMedicines(list: List<Medicine>) {
-        val cards      = listOf(card1, card2, card3)
-        val toggles    = listOf(ivToggle1, ivToggle2, ivToggle3)
-        val statuses   = listOf(tvStatus1, tvStatus2, tvStatus3)
-        val indicators = listOf(indicator1, indicator2, indicator3)
+    private fun fetchMedicines() {
+        val userId = auth.currentUser?.uid ?: return
 
-        // Hide all cards first
-        cards.forEach { it.visibility = View.GONE }
-
-        list.take(3).forEachIndexed { i, med ->
-            cards[i].visibility = View.VISIBLE
-
-            // Status text + color
-            if (med.isTaken) {
-                statuses[i].text = "✓ Taken"
-                statuses[i].setTextColor(0xFF4ECDC4.toInt())
-            } else {
-                statuses[i].text = "⏰ Pending"
-                statuses[i].setTextColor(0xFFFFB347.toInt())
+        // Fetching without ordering for maximum speed
+        medicineListener = firestore.collection("medications")
+            .whereEqualTo("userId", userId)
+            .addSnapshotListener { snapshots, e ->
+                if (e != null) return@addSnapshotListener
+                if (snapshots != null) {
+                    allMedicines.clear()
+                    for (doc in snapshots) {
+                        val medicine = doc.toObject(Medicine::class.java)
+                        medicine.medicineId = doc.id
+                        allMedicines.add(medicine)
+                    }
+                    // Sort locally to avoid needing a Firestore Index (which is slow)
+                    allMedicines.sortByDescending { it.createdAt }
+                    filterMedicines(etSearch.text.toString())
+                }
             }
+    }
 
-            // Toggle icon
-            toggles[i].setImageResource(
-                if (med.isTaken) R.drawable.toggle_green
-                else R.drawable.toggle_red
-            )
-
-            // Indicator color
-            indicators[i].setBackgroundResource(
-                if (med.isTaken) R.drawable.bg_indicator_green
-                else R.drawable.bg_indicator_orange
-            )
+    private fun filterMedicines(query: String) {
+        displayedMedicines.clear()
+        if (query.isEmpty()) {
+            displayedMedicines.addAll(allMedicines)
+        } else {
+            displayedMedicines.addAll(allMedicines.filter {
+                it.pillName.contains(query, ignoreCase = true)
+            })
         }
-
+        medicineAdapter.updateData(displayedMedicines)
         updateProgressBar()
     }
 
-    // ─── 6. Toggle ON/OFF ────────────────────────────────────────────────────
-    private fun setupToggleButtons() {
-        listOf(ivToggle1, ivToggle2, ivToggle3).forEachIndexed { index, toggle ->
-            toggle.setOnClickListener {
-                if (index < filteredMedicines.size) {
-                    filteredMedicines[index].isTaken = !filteredMedicines[index].isTaken
-                    renderMedicines(filteredMedicines)
-                }
-            }
-        }
+    private fun toggleMedicineStatus(medicine: Medicine) {
+        if (medicine.medicineId.isEmpty()) return
+        val newStatus = !medicine.isTaken
+        firestore.collection("medications").document(medicine.medicineId)
+            .update("isTaken", newStatus)
     }
 
-    // ─── 7. Progress Bar ─────────────────────────────────────────────────────
     private fun updateProgressBar() {
-        val total = filteredMedicines.size
-        val taken = filteredMedicines.count { it.isTaken }
-
-        progressBar.max      = if (total == 0) 1 else total
+        val total = displayedMedicines.size
+        val taken = displayedMedicines.count { it.isTaken }
+        progressBar.max = if (total == 0) 1 else total
         progressBar.progress = taken
         tvProgressCount.text = "$taken / $total taken"
     }
 
-    // ─── 8. Add Button → New Page ────────────────────────────────────────────
-    private fun setupAddButton() {
-        btnAdd.setOnClickListener {
-            val intent = Intent(this, AddMedicineActivity::class.java)
-            startActivity(intent)
-        }
+    override fun onDestroy() {
+        super.onDestroy()
+        medicineListener?.remove()
     }
 }
