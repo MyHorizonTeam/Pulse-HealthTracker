@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -86,6 +85,7 @@ class ProfilePg : AppCompatActivity() {
         userSwitch = findViewById(R.id.user_switch)
         docSwitch = findViewById(R.id.doc_switch)
 
+        // Navigation button function
         val toggleGroup = findViewById<MaterialButtonToggleGroup>(R.id.navgrp)
 
         toggleGroup.addOnButtonCheckedListener { group, checkedId, isChecked ->
@@ -93,17 +93,24 @@ class ProfilePg : AppCompatActivity() {
                 when (checkedId) {
                     R.id.medi_switch -> {
                         // Navigate to Medication page
-                        val intent = Intent(this, HomeActivity::class.java)
+                        val intent = Intent(this, HomeMed::class.java)
                         startActivity(intent)
                     }
-
                     R.id.user_switch -> {
                         // Navigate to Profile page
                         val intent = Intent(this, ProfilePg::class.java)
                         startActivity(intent)
                     }
                     R.id.doc_switch->{
-                        val intent = Intent(this, DashboardActivity::class.java)
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.mental_switch->{
+                        val intent = Intent(this, Home_MJ::class.java)
+                        startActivity(intent)
+                    }
+                    R.id.nut_switch->{
+                        val intent = Intent(this, DashboardActivity_Nut::class.java)
                         startActivity(intent)
                     }
                 }
@@ -112,6 +119,7 @@ class ProfilePg : AppCompatActivity() {
         val btn_edtpf = findViewById<Button>(R.id.edtpf)
         btn_edtpf.setOnClickListener {
             val intent= Intent(this, EditProfileActivity::class.java)
+            startActivity(intent)
         }
         val btn_goal = findViewById<Button>(R.id.goal)
         // Need to create page
@@ -119,10 +127,12 @@ class ProfilePg : AppCompatActivity() {
         val btn_set = findViewById<Button>(R.id.settings)
         btn_set.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
         }
         val btn_pri = findViewById<Button>(R.id.privacy)
         btn_pri.setOnClickListener {
             val intent = Intent(this, PrivacyActivity::class.java)
+            startActivity(intent)
         }
 
 

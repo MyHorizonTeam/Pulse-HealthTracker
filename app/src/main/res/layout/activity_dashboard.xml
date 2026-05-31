@@ -1,18 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0A1E3A"
-    tools:context=".DashboardActivity">
+    android:background="#14148D">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/nav_host_fragment_dashboard"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <LinearLayout
+        android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph" />
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView android:layout_width="0dp" android:layout_height="40dp" android:layout_weight="1" android:src="@drawable/medical_services" />
+        <ImageView android:layout_width="0dp" android:layout_height="40dp" android:layout_weight="1" android:src="@drawable/directions_walk" />
+        <ImageView android:layout_width="0dp" android:layout_height="40dp" android:layout_weight="1" android:src="@drawable/nutrition" />
+        <ImageView android:layout_width="0dp" android:layout_height="40dp" android:layout_weight="1" android:src="@drawable/stethoscope" />
+        <ImageView android:layout_width="0dp" android:layout_height="40dp" android:layout_weight="1" android:src="@drawable/ic_vol" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomBar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="20dp">
+                <TextView android:id="@+id/txtTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nutrition &amp; Diet" android:textColor="#FFFFFF" android:textSize="24sp" android:textStyle="bold" />
+                <ImageButton android:id="@+id/btnProfile" android:layout_width="50dp" android:layout_height="50dp" android:layout_alignParentEnd="true" android:src="@drawable/user_pro" android:background="?attr/selectableItemBackgroundBorderless" />
+            </RelativeLayout>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="#1E2A68" android:padding="5dp" android:layout_marginBottom="20dp">
+                <Button android:text="Today" android:layout_width="0dp" android:layout_weight="1" android:layout_height="40dp" />
+                <Button android:text="Week" android:layout_width="0dp" android:layout_weight="1" android:layout_height="40dp" />
+                <Button android:text="Month" android:layout_width="0dp" android:layout_weight="1" android:layout_height="40dp" />
+            </LinearLayout>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:layout_marginBottom="20dp"
+                android:alignmentMode="alignMargins"
+                android:columnOrderPreserved="false">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardBackgroundColor="#1E2A68">
+                    <TextView android:padding="15dp" android:textColor="#FFF" android:text="🔥 Calories&#10;1,250 / 2,000" android:layout_width="match_parent" android:layout_height="match_parent"/>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardBackgroundColor="#FFFFFF">
+                    <TextView android:padding="15dp" android:textColor="#000" android:text="🥩 Protein&#10;50g / 100g" android:layout_width="match_parent" android:layout_height="match_parent"/>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardBackgroundColor="#FFFFFF">
+                    <TextView android:padding="15dp" android:textColor="#000" android:text="🍞 Carbs&#10;180 / 250g" android:layout_width="match_parent" android:layout_height="match_parent"/>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardBackgroundColor="#FFFFFF">
+                    <TextView android:padding="15dp" android:textColor="#000" android:text="🥑 Fat&#10;40 / 70g" android:layout_width="match_parent" android:layout_height="match_parent"/>
+                </androidx.cardview.widget.CardView>
+
+            </GridLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:id="@+id/tvMealsTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Meals For Today"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnAddMeal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+ Add" />
+
+            </LinearLayout>
+            <androidx.cardview.widget.CardView android:id="@+id/cardBreakfast" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" app:cardCornerRadius="15dp" app:cardBackgroundColor="#1E2A68"><TextView android:text="🍳 Breakfast" android:padding="20dp" android:textColor="#FFF" android:layout_width="match_parent" android:layout_height="wrap_content"/></androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView android:id="@+id/cardLunch" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" app:cardCornerRadius="15dp" app:cardBackgroundColor="#1E2A68"><TextView android:text="🍛 Lunch" android:padding="20dp" android:textColor="#FFF" android:layout_width="match_parent" android:layout_height="wrap_content"/></androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView android:id="@+id/cardDinner" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" app:cardCornerRadius="15dp" app:cardBackgroundColor="#1E2A68"><TextView android:text="🍲 Dinner" android:padding="20dp" android:textColor="#FFF" android:layout_width="match_parent" android:layout_height="wrap_content"/></androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView android:id="@+id/cardSnack" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" app:cardCornerRadius="15dp" app:cardBackgroundColor="#1E2A68"><TextView android:text="🍎 Snack" android:padding="20dp" android:textColor="#FFF" android:layout_width="match_parent" android:layout_height="wrap_content"/></androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

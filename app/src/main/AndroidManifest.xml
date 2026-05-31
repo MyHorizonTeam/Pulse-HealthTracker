@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PulseHealthTracker">
         <activity
+            android:name=".Home_MJ"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -30,7 +33,7 @@
             android:name=".AddMedicineActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".HomeMed"
             android:exported="false" />
         <activity
             android:name=".medi_splash"
@@ -50,18 +53,47 @@
         <activity
             android:name=".ProfilePg"
             android:exported="false" />
-        <activity android:name=".DashboardActivity"
-            android:exported="false"/>
-        <activity android:name=".MainActivity"
+
+        <activity
+            android:name=".MainActivity"
             android:exported="false" />
-        <activity android:name=".Onboarding"
+        <activity
+            android:name=".Onboarding"
             android:exported="false" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="false"
             android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".ArticlesActivity"
+            android:exported="false"/>
+        <activity android:name=".LibraryActivity"
+            android:exported="false"/>
+        <activity android:name=".WebViewActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".LunchActivity"
             android:exported="false" />
+        <activity
+            android:name=".EditMealActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Breakfast"
+            android:exported="false" />
+        <activity
+            android:name=".NutStartActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".DashboardActivity_Nut"
+            android:exported="false" />
+        <activity
+            android:name=".AddMealActivity"
+            android:exported="false" />
+
+
+
     </application>
 
 </manifest>
