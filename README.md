@@ -1,4 +1,4 @@
-# 💓 Pulse - HealthTracker
+# Pulse - HealthTracker
 
 > A comprehensive health tracking Android application built with Kotlin for monitoring and managing personal wellness.
 
@@ -10,7 +10,7 @@
 
 **Pulse - HealthTracker** is a mobile application designed for health-conscious individuals who want to monitor and track their vital health metrics and wellness activities in one convenient platform. This project was developed as a MAD (Mobile Application Development) campus module miniproject.
 
-## ✨ Features
+## Features
 
 - **Health Metrics Tracking** - Monitor vital signs and health indicators
 - **Activity Logging** - Record daily activities and exercises
@@ -19,21 +19,21 @@
 - **Real-time Updates** - Instant tracking and data synchronization
 - **Personal Health Insights** - Get meaningful health analytics
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **Language**: Kotlin
 - **Platform**: Android
 - **Architecture**: Modern Android Development Best Practices
 - **UI Framework**: Android Material Design
 
-## 📋 Requirements
+## Requirements
 
 - Android Studio 4.0 or higher
 - Android SDK 21 (API Level 21) or higher
 - Kotlin 1.5 or higher
 - Gradle 7.0 or higher
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Install [Android Studio](https://developer.android.com/studio)
@@ -66,7 +66,7 @@
      ./gradlew installDebug
      ```
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Pulse-HealthTracker/
@@ -84,7 +84,7 @@ Pulse-HealthTracker/
 └── README.md
 ```
 
-## 👥 Team Members
+## Team Members
 
 - **Musharraf-mac** - Lead Developer
 - **Niroshini2002** - Developer
@@ -93,7 +93,7 @@ Pulse-HealthTracker/
 - **Sarmi14** - Developer
 - **Imashi** - Developer
 
-## 📚 Usage
+## Usage
 
 1. **Launch the App** - Open Pulse - HealthTracker on your Android device
 2. **Create a Profile** - Set up your personal health profile
@@ -101,7 +101,7 @@ Pulse-HealthTracker/
 4. **View Analytics** - Monitor your progress and health insights
 5. **Set Goals** - Create personal health targets
 
-## 🔄 Contributing
+## Contributing
 
 We welcome contributions! Here's how to get started:
 
@@ -141,19 +141,19 @@ Found a bug? We'd love to hear about it! Please:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📞 Support & Contact
+## Support & Contact
 
 For questions, suggestions, or support:
 - Open an issue on [GitHub](https://github.com/MyHorizonTeam/Pulse-HealthTracker/issues)
 - Contact the development team through the repository discussions
 
-## 🎯 Project Status
+## Project Status
 
 - Status: **Active Development**
 - Last Updated: May 2026
 - Version: 1.0.0
 
-## 📖 Additional Resources
+## Additional Resources
 
 - [Android Developer Documentation](https://developer.android.com)
 - [Kotlin Programming Language](https://kotlinlang.org)
@@ -163,6 +163,6 @@ For questions, suggestions, or support:
 
 <div align="center">
 
-**Made with ❤️ by MyHorizonTeam**
+**Made with by MyHorizonTeam**
 
 </div>
