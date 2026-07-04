@@ -129,7 +129,7 @@ We welcome contributions! Here's how to get started:
    - Describe your changes clearly
    - Reference any related issues
 
-## 🐛 Bug Reports & Issues
+## Bug Reports & Issues
 
 Found a bug? We'd love to hear about it! Please:
 - Check if the issue already exists
@@ -137,7 +137,7 @@ Found a bug? We'd love to hear about it! Please:
 - Include steps to reproduce if applicable
 - Attach screenshots if relevant
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
