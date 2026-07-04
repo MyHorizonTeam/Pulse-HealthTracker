@@ -1,0 +1,25 @@
+Index: .idea/appInsightsSettings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AppInsightsSettings\">\r\n    <option name=\"selectedTabId\" value=\"Firebase Crashlytics\" />\r\n    <option name=\"tabSettings\">\r\n      <map>\r\n        <entry key=\"Firebase Crashlytics\">\r\n          <value>\r\n            <InsightsFilterSettings>\r\n              <option name=\"connection\">\r\n                <ConnectionSetting>\r\n                  <option name=\"appId\" value=\"com.example.pulse_healthtracker\" />\r\n                  <option name=\"mobileSdkAppId\" value=\"1:949264991351:android:903204bc1b4a77a2d63272\" />\r\n                  <option name=\"projectId\" value=\"pulse-healthtracker\" />\r\n                  <option name=\"projectNumber\" value=\"949264991351\" />\r\n                </ConnectionSetting>\r\n              </option>\r\n              <option name=\"signal\" value=\"SIGNAL_UNSPECIFIED\" />\r\n              <option name=\"timeIntervalDays\" value=\"THIRTY_DAYS\" />\r\n              <option name=\"visibilityType\" value=\"ALL\" />\r\n            </InsightsFilterSettings>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/appInsightsSettings.xml b/.idea/appInsightsSettings.xml
+--- a/.idea/appInsightsSettings.xml	(revision 0bb4d7e7e934a99f217d3e0f3c78739590ab4982)
++++ b/.idea/appInsightsSettings.xml	(date 1780083242149)
+@@ -9,10 +9,10 @@
+             <InsightsFilterSettings>
+               <option name="connection">
+                 <ConnectionSetting>
+-                  <option name="appId" value="com.example.pulse_healthtracker" />
+-                  <option name="mobileSdkAppId" value="1:949264991351:android:903204bc1b4a77a2d63272" />
+-                  <option name="projectId" value="pulse-healthtracker" />
+-                  <option name="projectNumber" value="949264991351" />
++                  <option name="appId" value="PLACEHOLDER" />
++                  <option name="mobileSdkAppId" value="" />
++                  <option name="projectId" value="" />
++                  <option name="projectNumber" value="" />
+                 </ConnectionSetting>
+               </option>
+               <option name="signal" value="SIGNAL_UNSPECIFIED" />
