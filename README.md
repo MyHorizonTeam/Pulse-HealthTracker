@@ -6,7 +6,8 @@
 [![Language](https://img.shields.io/badge/language-Kotlin-blue.svg)](https://kotlinlang.org)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-## 📱 About
+### APK URL - https://1drv.ms/u/c/5c44a9fbf69a6e80/IQD9gxfRIPB6TodbnVsyD4faASSVh7cxuy6iIQoLvSSEP3c?e=y2Xlsf  
+## About
 
 **Pulse - HealthTracker** is a mobile application designed for health-conscious individuals who want to monitor and track their vital health metrics and wellness activities in one convenient platform. This project was developed as a MAD (Mobile Application Development) campus module miniproject.
 
